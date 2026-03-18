@@ -10,11 +10,21 @@ Rostyman runs entirely on your machine with no account required. Your APIs. Your
 
 Get the latest release for your platform:
 
-| Platform | Download |
-|----------|----------|
-| Windows | [Rostyman Setup (.exe)](https://github.com/amitsri/rostyman-releases/releases/latest) |
-| macOS | [Rostyman (.dmg)](https://github.com/amitsri/rostyman-releases/releases/latest) |
-| Linux | [Rostyman (.AppImage)](https://github.com/amitsri/rostyman-releases/releases/latest) |
+| Platform | Download | Install |
+|----------|----------|---------|
+| **Windows** | [Rostyman Setup (.exe)](https://github.com/amitsri/rostyman-releases/releases/latest) | Run the installer |
+| **macOS** | [Rostyman (.dmg)](https://github.com/amitsri/rostyman-releases/releases/latest) | Drag to Applications, then see note below |
+| **Linux** | [Rostyman (.AppImage)](https://github.com/amitsri/rostyman-releases/releases/latest) | `chmod +x` and run |
+
+### macOS — First Launch
+
+Rostyman is not yet code-signed. macOS will block the app on first launch with "Apple cannot check it for malicious software." Open **Terminal** and run:
+
+```bash
+xattr -cr /Applications/Rostyman.app
+```
+
+Then open Rostyman from Applications normally. You only need to do this once.
 
 ## What's New in beta.5
 
