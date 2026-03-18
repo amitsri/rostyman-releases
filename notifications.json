@@ -1,5 +1,6 @@
 {
   "id": "beta5-release",
+  "version": "beta.5",
   "message": "Rostyman v0.1.0-beta.5 is out! SSE streaming, screenshot/video capture, system tray, onboarding tour, and cross-platform fixes.",
   "type": "info",
   "url": "https://github.com/amitsri/rostyman-releases/releases"
