@@ -1,7 +1,7 @@
 {
-  "id": "beta5.1-release",
-  "version": "beta.5.1",
-  "message": "Rostyman v0.1.0-beta.5.1 — fixes multiple instance launch and notification display.",
+  "id": "beta5.2-release",
+  "version": "beta.5.2",
+  "message": "Rostyman v0.1.0-beta.5.2 — fixes Form Data empty table and update notification click.",
   "type": "info",
   "url": "https://github.com/amitsri/rostyman-releases/releases"
 }
