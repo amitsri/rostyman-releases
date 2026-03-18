@@ -4,7 +4,7 @@
 
 Rostyman runs entirely on your machine with no account required. Your APIs. Your machine. Your rules.
 
-![Rostyman](https://img.shields.io/badge/version-0.1.0--beta.5.3-blue) ![Platforms](https://img.shields.io/badge/platforms-Windows%20%7C%20macOS%20%7C%20Linux-green) ![Protocols](https://img.shields.io/badge/protocols-7-orange)
+![Rostyman](https://img.shields.io/badge/version-0.1.0--beta.5.4-blue) ![Platforms](https://img.shields.io/badge/platforms-Windows%20%7C%20macOS%20%7C%20Linux-green) ![Protocols](https://img.shields.io/badge/protocols-7-orange)
 
 ## Download
 
