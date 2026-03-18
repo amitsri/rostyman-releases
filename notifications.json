@@ -1,7 +1,7 @@
 {
-  "id": "beta5a-release",
-  "version": "beta.5a",
-  "message": "Rostyman v0.1.0-beta.5a — fixes multiple instance launch and notification display for current version.",
+  "id": "beta5.1-release",
+  "version": "beta.5.1",
+  "message": "Rostyman v0.1.0-beta.5.1 — fixes multiple instance launch and notification display.",
   "type": "info",
   "url": "https://github.com/amitsri/rostyman-releases/releases"
 }
