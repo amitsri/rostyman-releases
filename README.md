@@ -1,8 +1,10 @@
-# RostyMan
+# Rostyman
 
 **Local-first desktop API client — a powerful alternative to Postman**
 
-RostyMan runs entirely on your machine with no account required. Your APIs. Your machine. Your rules.
+Rostyman runs entirely on your machine with no account required. Your APIs. Your machine. Your rules.
+
+![Rostyman](https://img.shields.io/badge/version-0.1.0--beta.4-blue) ![Platforms](https://img.shields.io/badge/platforms-Windows%20%7C%20macOS%20%7C%20Linux-green) ![Protocols](https://img.shields.io/badge/protocols-6-orange)
 
 ## Download
 
@@ -10,31 +12,75 @@ Get the latest release for your platform:
 
 | Platform | Download |
 |----------|----------|
-| Windows | [RostyMan Setup (.exe)](https://github.com/amitsri/rostyman-releases/releases/latest) |
-| macOS | [RostyMan (.dmg)](https://github.com/amitsri/rostyman-releases/releases/latest) |
-| Linux | [RostyMan (.AppImage)](https://github.com/amitsri/rostyman-releases/releases/latest) |
+| Windows | [Rostyman Setup (.exe)](https://github.com/amitsri/rostyman-releases/releases/latest) |
+| macOS | [Rostyman (.dmg)](https://github.com/amitsri/rostyman-releases/releases/latest) |
+| Linux | [Rostyman (.AppImage)](https://github.com/amitsri/rostyman-releases/releases/latest) |
 
 ## Features
 
-- **Multi-protocol** — HTTP, GraphQL, gRPC, WebSocket
-- **20 built-in themes** — RostyMan Dark/Light + popular VS Code themes
-- **Visual Workflow Editor** — drag-and-drop API automation
-- **Mock Server** — create local API mocks with variables and LAN access
-- **Scripting** — pre-request and post-response scripts with rm.* API
-- **Collection Runner** — run collections with data files and iterations
-- **Scheduler** — local cron-based job scheduling
-- **Git Sync** — built-in Git panel for version control
-- **AI Assistant** — multi-provider (Anthropic, OpenAI, Ollama)
-- **Vault** — AES-256-GCM encrypted secret storage
+### 6 Protocols
+- **HTTP/HTTPS** — full request builder with auth, headers, body, params, scripts
+- **GraphQL** — Monaco editor, schema introspection, autocomplete, variables
+- **gRPC** — proto import, unary + streaming, auth, scripts, settings
+- **WebSocket** — connect/disconnect, send/receive, message log
+- **Socket.IO** — emit events, auto-capture, auth/query config, reconnection
+- **MQTT** — publish/subscribe, QoS 0/1/2, retain flag, topic management
+
+### AI Assistant
+- Multi-turn conversational chat with persistent history
+- 3 providers: Anthropic Claude, OpenAI, Ollama (local)
+- 7 quick actions: Generate, Explain, Tests, Fix, Mock Data, Document, Validate Schema
+- Action buttons on code blocks — apply as body, test script, or import cURL
+- Vault-secured API keys — never stored in renderer memory
+
+### Collections & Organization
+- Collections with folders and nested subfolders
+- Drag-and-drop reorder for everything
+- Collection-level auth and scripts (inherited by requests)
+- Bulk operations — multi-select, bulk delete, copy cURL
+- Request templates — save and reuse from + menu
+
+### Environments & Variables
+- Collection-scoped environments with `{{variable}}` resolution
+- Global variables and encrypted Vault (AES-256-GCM)
+- Variable hover popups with source badges (E/C/G/V)
+
+### Import & Export
+- Import from: Postman, Insomnia, OpenAPI, HAR, Thunder Client, Hoppscotch, Bruno, cURL, Rostyman
+- Export to: Rostyman JSON, Postman v2.1, and more via plugins
+- Automatic script migration on import
+
+### Visual Workflow Editor
+- Drag-and-drop canvas with 8 node types
+- Flow Tracer — live execution visualization
+- Save and manage workflows from sidebar
+
+### More
+- **20 built-in themes** + custom theme builder with 70+ CSS variables
+- **Mock Server** — local API mocks with variables, environments, LAN access
+- **Scheduler** — cron-based job scheduling with retry logic
+- **Collection Runner** — run collections with iterations and data files
+- **Git Sync** — built-in Git panel with diff viewer, conflict detection, branch management
 - **CLI Runner** — `rosty-cli` for CI/CD integration
+- **Request History** — full request + response saved, schema change detection, sparklines, filter, export CSV, pin
+- **Response Viewer** — timing waterfall, JSON table view, code snippets (30+ languages)
+- **19 keyboard shortcuts** — all cross-platform (Ctrl/Cmd)
+- **18 languages** — i18n foundation ready
 - **100% Offline** — no cloud, no account, no telemetry
 
 ## Documentation
 
-- [Wiki](https://github.com/amitsri/rostyman-releases/wiki)
+- [Wiki Home](https://github.com/amitsri/rostyman-releases/wiki)
 - [Getting Started](https://github.com/amitsri/rostyman-releases/wiki/Getting-Started)
+- [Collections & Requests](https://github.com/amitsri/rostyman-releases/wiki/Collections-and-Requests)
+- [AI Assistant](https://github.com/amitsri/rostyman-releases/wiki/AI-Assistant)
 - [Scripting API](https://github.com/amitsri/rostyman-releases/wiki/Scripting)
+- [Socket.IO](https://github.com/amitsri/rostyman-releases/wiki/Socket-IO)
+- [MQTT](https://github.com/amitsri/rostyman-releases/wiki/MQTT)
+- [Git Sync](https://github.com/amitsri/rostyman-releases/wiki/Git-Sync)
 - [Mock Server](https://github.com/amitsri/rostyman-releases/wiki/Mock-Server)
+- [Themes](https://github.com/amitsri/rostyman-releases/wiki/Themes)
+- [Data Management](https://github.com/amitsri/rostyman-releases/wiki/Data-Management)
 - [Keyboard Shortcuts](https://github.com/amitsri/rostyman-releases/wiki/Keyboard-Shortcuts)
 
 ## Report Issues
