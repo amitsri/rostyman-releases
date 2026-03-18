@@ -1,7 +1,7 @@
 {
-  "id": "beta5.2-release",
-  "version": "beta.5.2",
-  "message": "Rostyman v0.1.0-beta.5.2 — fixes Form Data empty table and update notification click.",
+  "id": "beta5.3-release",
+  "version": "beta.5.3",
+  "message": "Rostyman v0.1.0-beta.5.3 — macOS tray icon, close behavior, and updater fixes.",
   "type": "info",
   "url": "https://github.com/amitsri/rostyman-releases/releases"
 }
