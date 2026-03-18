@@ -1,7 +1,7 @@
 {
-  "id": "beta5.3-release",
-  "version": "beta.5.3",
-  "message": "Rostyman v0.1.0-beta.5.3 — macOS tray icon, close behavior, and updater fixes.",
+  "id": "beta5.4-release",
+  "version": "beta.5.4",
+  "message": "Rostyman v0.1.0-beta.5.4 — macOS menu bar now has all items (Changelog, What's New, AI Assistant).",
   "type": "info",
   "url": "https://github.com/amitsri/rostyman-releases/releases"
 }
