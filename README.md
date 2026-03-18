@@ -4,7 +4,7 @@
 
 Rostyman runs entirely on your machine with no account required. Your APIs. Your machine. Your rules.
 
-![Rostyman](https://img.shields.io/badge/version-0.1.0--beta.4-blue) ![Platforms](https://img.shields.io/badge/platforms-Windows%20%7C%20macOS%20%7C%20Linux-green) ![Protocols](https://img.shields.io/badge/protocols-6-orange)
+![Rostyman](https://img.shields.io/badge/version-0.1.0--beta.5-blue) ![Platforms](https://img.shields.io/badge/platforms-Windows%20%7C%20macOS%20%7C%20Linux-green) ![Protocols](https://img.shields.io/badge/protocols-7-orange)
 
 ## Download
 
@@ -16,15 +16,26 @@ Get the latest release for your platform:
 | macOS | [Rostyman (.dmg)](https://github.com/amitsri/rostyman-releases/releases/latest) |
 | Linux | [Rostyman (.AppImage)](https://github.com/amitsri/rostyman-releases/releases/latest) |
 
+## What's New in beta.5
+
+- **SSE Streaming** — Postman-style Server-Sent Events with real-time event log, POST+body, auto-detect
+- **Screenshot & Video Capture** — built-in screen capture with media sidebar, in-app viewer, and sharing
+- **System Tray** — minimize to tray on close, tray icon with restore/quit
+- **Onboarding Tour** — 8-step first-run tour + What's New dialog after updates
+- **System Notifications** — native OS notification when app update is ready
+- **Theme Polish** — improved text visibility across all 20 themes
+- **Cross-Platform Fixes** — macOS localized paths, VP9 codec fallback, Linux tray safety
+
 ## Features
 
-### 6 Protocols
+### 7 Protocols
 - **HTTP/HTTPS** — full request builder with auth, headers, body, params, scripts
 - **GraphQL** — Monaco editor, schema introspection, autocomplete, variables
 - **gRPC** — proto import, unary + streaming, auth, scripts, settings
 - **WebSocket** — connect/disconnect, send/receive, message log
 - **Socket.IO** — emit events, auto-capture, auth/query config, reconnection
 - **MQTT** — publish/subscribe, QoS 0/1/2, retain flag, topic management
+- **SSE** — Server-Sent Events with real-time event log, POST+body, auto-detect, search
 
 ### AI Assistant
 - Multi-turn conversational chat with persistent history
@@ -32,6 +43,12 @@ Get the latest release for your platform:
 - 7 quick actions: Generate, Explain, Tests, Fix, Mock Data, Document, Validate Schema
 - Action buttons on code blocks — apply as body, test script, or import cURL
 - Vault-secured API keys — never stored in renderer memory
+
+### Screenshot & Video Capture
+- Capture screenshots or record video directly from the app
+- Media sidebar panel with grid view and thumbnails
+- In-app viewer tab for screenshots and videos
+- Share to clipboard, open in folder, delete to trash with undo
 
 ### Collections & Organization
 - Collections with folders and nested subfolders
@@ -64,6 +81,8 @@ Get the latest release for your platform:
 - **CLI Runner** — `rosty-cli` for CI/CD integration
 - **Request History** — full request + response saved, schema change detection, sparklines, filter, export CSV, pin
 - **Response Viewer** — timing waterfall, JSON table view, code snippets (30+ languages)
+- **System Tray** — minimize to tray, close prevention for active operations
+- **Onboarding Tour** — 8-step first-run tour with feature discovery tips
 - **19 keyboard shortcuts** — all cross-platform (Ctrl/Cmd)
 - **18 languages** — i18n foundation ready
 - **100% Offline** — no cloud, no account, no telemetry
