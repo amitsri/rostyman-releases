@@ -1,7 +1,7 @@
 {
-  "id": "beta5.4-release",
-  "version": "beta.5.4",
-  "message": "Rostyman v0.1.0-beta.5.4 — macOS menu bar now has all items (Changelog, What's New, AI Assistant).",
+  "id": "beta6-release",
+  "version": "beta.6",
+  "message": "Rostyman v0.1.0-beta.6 — Folder settings with auth/script inheritance, 18 languages fully translated, sub-tab state retention.",
   "type": "info",
   "url": "https://github.com/amitsri/rostyman-releases/releases"
 }
