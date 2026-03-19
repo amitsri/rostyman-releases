@@ -4,7 +4,7 @@
 
 Rostyman runs entirely on your machine with no account required. Your APIs. Your machine. Your rules.
 
-![Rostyman](https://img.shields.io/badge/version-0.1.0--beta.5.4-blue) ![Platforms](https://img.shields.io/badge/platforms-Windows%20%7C%20macOS%20%7C%20Linux-green) ![Protocols](https://img.shields.io/badge/protocols-7-orange)
+![Rostyman](https://img.shields.io/badge/version-0.1.0--beta.6-blue) ![Platforms](https://img.shields.io/badge/platforms-Windows%20%7C%20macOS%20%7C%20Linux-green) ![Protocols](https://img.shields.io/badge/protocols-7-orange)
 
 ## Download
 
@@ -26,15 +26,14 @@ xattr -cr /Applications/Rostyman.app
 
 Then open Rostyman from Applications normally. You only need to do this once.
 
-## What's New in beta.5
+## What's New in beta.6
 
-- **SSE Streaming** — Postman-style Server-Sent Events with real-time event log, POST+body, auto-detect
-- **Screenshot & Video Capture** — built-in screen capture with media sidebar, in-app viewer, and sharing
-- **System Tray** — minimize to tray on close, tray icon with restore/quit
-- **Onboarding Tour** — 8-step first-run tour + What's New dialog after updates
-- **System Notifications** — native OS notification when app update is ready
-- **Theme Polish** — improved text visibility across all 20 themes
-- **Cross-Platform Fixes** — macOS localized paths, VP9 codec fallback, Linux tray safety
+- **Folder-Level Settings** — click any folder to open its dedicated settings tab with Authorization and Scripts
+- **Auth Inheritance** — requests inherit auth from parent folder chain up to collection. Set it once, all child requests inherit it
+- **Script Execution Chain** — Collection → Folder → Request → SEND → Request → Folder → Collection
+- **18 Languages Fully Translated** — 1,138 strings in each of 18 languages: English, Hindi, Chinese, Japanese, Korean, Spanish, French, German, Portuguese, Russian, Arabic, Bengali, Tamil, Telugu, Kannada, Marathi, Malayalam, Gujarati
+- **Sub-Tab State Retention** — tabs remember which sub-tab you were on when switching away and back
+- **UI Improvements** — Send arrow icon for HTTP tabs, folder icon in tab bar
 
 ## Features
 
@@ -54,16 +53,11 @@ Then open Rostyman from Applications normally. You only need to do this once.
 - Action buttons on code blocks — apply as body, test script, or import cURL
 - Vault-secured API keys — never stored in renderer memory
 
-### Screenshot & Video Capture
-- Capture screenshots or record video directly from the app
-- Media sidebar panel with grid view and thumbnails
-- In-app viewer tab for screenshots and videos
-- Share to clipboard, open in folder, delete to trash with undo
-
-### Collections & Organization
-- Collections with folders and nested subfolders
-- Drag-and-drop reorder for everything
-- Collection-level auth and scripts (inherited by requests)
+### Collections & Folders
+- Collections with folders, nested subfolders, drag-and-drop
+- **Folder-level auth & scripts** — set once, inherited by all child requests
+- **Auth inheritance chain** — Request → Folder → Parent Folder → Collection
+- Collection-level auth and scripts
 - Bulk operations — multi-select, bulk delete, copy cURL
 - Request templates — save and reuse from + menu
 
@@ -89,12 +83,13 @@ Then open Rostyman from Applications normally. You only need to do this once.
 - **Collection Runner** — run collections with iterations and data files
 - **Git Sync** — built-in Git panel with diff viewer, conflict detection, branch management
 - **CLI Runner** — `rosty-cli` for CI/CD integration
+- **Screenshot & Video Capture** — built-in screen capture with media sidebar
 - **Request History** — full request + response saved, schema change detection, sparklines, filter, export CSV, pin
 - **Response Viewer** — timing waterfall, JSON table view, code snippets (30+ languages)
 - **System Tray** — minimize to tray, close prevention for active operations
 - **Onboarding Tour** — 8-step first-run tour with feature discovery tips
 - **19 keyboard shortcuts** — all cross-platform (Ctrl/Cmd)
-- **18 languages** — i18n foundation ready
+- **18 languages** — fully translated (1,138 strings each)
 - **100% Offline** — no cloud, no account, no telemetry
 
 ## Documentation
