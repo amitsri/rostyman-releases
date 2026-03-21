@@ -1,7 +1,1 @@
-{
-  "id": "beta6-release",
-  "version": "beta.6",
-  "message": "Rostyman v0.1.0-beta.6 — Folder settings with auth/script inheritance, 18 languages fully translated, sub-tab state retention.",
-  "type": "info",
-  "url": "https://github.com/amitsri/rostyman-releases/releases"
-}
+{"id":"beta7-release","version":"beta.7","message":"Rostyman v0.1.0-beta.7 — Language Manager, new request grid dialog, sidebar labels, full i18n sweep.","type":"info","url":"https://github.com/amitsri/rostyman-releases/releases"}
