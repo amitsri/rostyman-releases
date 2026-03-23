@@ -4,7 +4,7 @@
 
 Rostyman runs entirely on your machine with no account required. Your APIs. Your machine. Your rules.
 
-![Rostyman](https://img.shields.io/badge/version-0.1.0--beta.7-blue) ![Platforms](https://img.shields.io/badge/platforms-Windows%20%7C%20macOS%20%7C%20Linux-green) ![Protocols](https://img.shields.io/badge/protocols-7-orange)
+![Rostyman](https://img.shields.io/badge/version-0.1.0--beta.8-blue) ![Platforms](https://img.shields.io/badge/platforms-Windows%20%7C%20macOS%20%7C%20Linux-green) ![Protocols](https://img.shields.io/badge/protocols-7-orange)
 
 ## Download
 
@@ -26,16 +26,15 @@ xattr -cr /Applications/Rostyman.app
 
 Then open Rostyman from Applications normally. You only need to do this once.
 
-## What's New in beta.7
+## What's New in beta.8
 
-- **Language Manager** — import, export, and create custom `.rostyman-lang` language packs. In-app translation editor with validation, completion tracking, and protected keys. The only API client with community-driven localization
-- **New Request Dialog** — Postman-style centered grid with colored icons for all 13 request/utility types, hover descriptions, and pin-to-top support
-- **Sidebar Labels** — navigation icons now show text labels below for easier discoverability (like Postman)
-- **Language Picker Reorder** — international languages on top, Indian languages in collapsible sub-menu
-- **Full i18n Sweep** — all tab titles, toast messages, and dialogs now update when switching languages
-- **Auth Inherit Preview** — "Inherit from Parent" now shows actual inherited auth details with masked secrets
-- **Crisp Tray Icons** — pre-rendered platform-specific icons (macOS Retina @2x, Windows DPI-aware, Linux 24px)
-- **Bug Fixes** — duplicate media tabs, inner tab state, duplicate delete toasts
+- **Set as Variable** — right-click any text in a response body to save it as an environment, collection, or global variable with a searchable picker
+- **Import Source Sync** — collections and environments remember their source file. Re-sync anytime with one click — new items are added, changed ones updated, your manual additions kept
+- **Variable Autocomplete in Auth** — typing `{{` in collection or folder auth fields now shows your variables with autocomplete
+- **Resolved Code Snippets** — cURL, fetch, and all 17 code snippets now show actual values instead of raw `{{variable}}` placeholders, with full auth headers
+- **Reveal & Copy Inherited Auth** — eye icon and copy button for tokens and passwords in the "Inherit from Parent" preview
+- **Environment Sync** — creating, deleting, or renaming environments in sidebar or collection tab now reflects instantly everywhere
+- **Bug Fixes** — inherited auth now works in API calls (#7), undo-deleted environments reappear immediately, Copy as cURL includes full auth
 
 ## Features
 
