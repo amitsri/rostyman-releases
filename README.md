@@ -4,7 +4,7 @@
 
 Rostyman runs entirely on your machine with no account required. Your APIs. Your machine. Your rules.
 
-![Rostyman](https://img.shields.io/badge/version-0.1.0--beta.8-blue) ![Platforms](https://img.shields.io/badge/platforms-Windows%20%7C%20macOS%20%7C%20Linux-green) ![Protocols](https://img.shields.io/badge/protocols-7-orange)
+![Rostyman](https://img.shields.io/badge/version-0.1.0--beta.8.1-blue) ![Platforms](https://img.shields.io/badge/platforms-Windows%20%7C%20macOS%20%7C%20Linux-green) ![Protocols](https://img.shields.io/badge/protocols-7-orange)
 
 ## Download
 
@@ -26,15 +26,11 @@ xattr -cr /Applications/Rostyman.app
 
 Then open Rostyman from Applications normally. You only need to do this once.
 
-## What's New in beta.8
+## What's New in beta.8.1
 
-- **Set as Variable** — right-click any text in a response body to save it as an environment, collection, or global variable with a searchable picker
-- **Import Source Sync** — collections and environments remember their source file. Re-sync anytime with one click — new items are added, changed ones updated, your manual additions kept
-- **Variable Autocomplete in Auth** — typing `{{` in collection or folder auth fields now shows your variables with autocomplete
-- **Resolved Code Snippets** — cURL, fetch, and all 17 code snippets now show actual values instead of raw `{{variable}}` placeholders, with full auth headers
-- **Reveal & Copy Inherited Auth** — eye icon and copy button for tokens and passwords in the "Inherit from Parent" preview
-- **Environment Sync** — creating, deleting, or renaming environments in sidebar or collection tab now reflects instantly everywhere
-- **Bug Fixes** — inherited auth now works in API calls (#7), undo-deleted environments reappear immediately, Copy as cURL includes full auth
+- **Pre-request script variables in auth** — `rm.variables.set()` in pre-request scripts now properly sets tokens used by Bearer and other auth types. Previously, variables set this way were silently ignored when building auth headers.
+
+See [beta.8 release notes](https://github.com/amitsri/rostyman-releases/releases/tag/v0.1.0-beta.8) for the full feature list including Set as Variable, Import Source Sync, and auth inheritance fixes.
 
 ## Features
 

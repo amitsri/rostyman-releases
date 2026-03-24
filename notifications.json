@@ -1,1 +1,1 @@
-{"id":"beta8-release","version":"beta.8","message":"Rostyman v0.1.0-beta.8 — Set as Variable, import source sync, auth inheritance fixes, resolved code snippets.","type":"info","url":"https://github.com/amitsri/rostyman-releases/releases"}
+{"id":"beta8.1-release","version":"beta.8.1","message":"Rostyman v0.1.0-beta.8.1 — Hotfix: pre-request script rm.variables.set() now works for auth tokens.","type":"info","url":"https://github.com/amitsri/rostyman-releases/releases"}
