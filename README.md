@@ -4,7 +4,7 @@
 
 Rostyman runs entirely on your machine with no account required. Your APIs. Your machine. Your rules.
 
-![Rostyman](https://img.shields.io/badge/version-0.1.0--beta.8.1-blue) ![Platforms](https://img.shields.io/badge/platforms-Windows%20%7C%20macOS%20%7C%20Linux-green) ![Protocols](https://img.shields.io/badge/protocols-7-orange)
+![Rostyman](https://img.shields.io/badge/version-0.1.0--beta.9-blue) ![Platforms](https://img.shields.io/badge/platforms-Windows%20%7C%20macOS%20%7C%20Linux-green) ![Protocols](https://img.shields.io/badge/protocols-7-orange)
 
 ## Download
 
@@ -26,11 +26,25 @@ xattr -cr /Applications/Rostyman.app
 
 Then open Rostyman from Applications normally. You only need to do this once.
 
-## What's New in beta.8.1
+## What's New in beta.9
 
-- **Pre-request script variables in auth** — `rm.variables.set()` in pre-request scripts now properly sets tokens used by Bearer and other auth types. Previously, variables set this way were silently ignored when building auth headers.
+### Bug Fixes
+- **#10 URL/Params Sync** — URL bar and Params tab now stay in sync bidirectionally. No more duplicate query parameters when sending.
+- **#9 Address Bar Context Menu** — Right-click for Cut, Copy, Paste, Set as Variable, EncodeURIComponent, DecodeURIComponent.
+- **#8 Response Body Lag** — Memoized JSON parsing eliminates redundant parsing on every render.
 
-See [beta.8 release notes](https://github.com/amitsri/rostyman-releases/releases/tag/v0.1.0-beta.8) for the full feature list including Set as Variable, Import Source Sync, and auth inheritance fixes.
+### New Features
+- **Network Info Popup** — Globe icon in response status bar shows HTTP version, TLS protocol, cipher, and certificate details with a copy button.
+- **Response History Dropdown** — Clock icon next to response tabs shows last 10 responses with timestamps and status codes.
+- **Generate Tests** — One-click test generation on empty Test Results, runs immediately against the current response.
+- **Resolved Auth Preview** — Inherited auth now shows resolved variable values instead of raw `{{variables}}`.
+- **Hoverable Popups** — Status, size, and network popups stay open when you move the mouse to them.
+
+### Performance
+- **HTTP Connection Pooling** — Keep-alive agents reuse TCP/TLS connections across requests (major speed improvement).
+- **Optimized Rendering** — Memoized size calculations, search matching, and test result accumulation.
+
+See [full release notes](https://github.com/amitsri/rostyman-releases/releases/tag/v0.1.0-beta.9) for details.
 
 ## Features
 

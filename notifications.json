@@ -1,1 +1,1 @@
-{"id":"beta8.1-release","version":"beta.8.1","message":"Rostyman v0.1.0-beta.8.1 — Hotfix: pre-request script rm.variables.set() now works for auth tokens.","type":"info","url":"https://github.com/amitsri/rostyman-releases/releases"}
+{"id":"beta9-release","version":"beta.9","message":"Rostyman v0.1.0-beta.9 — GitHub issues fixed, network info popup, response history, connection pooling performance boost.","type":"info","url":"https://github.com/amitsri/rostyman-releases/releases"}
