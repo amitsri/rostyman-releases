@@ -4,7 +4,7 @@
 
 Rostyman runs entirely on your machine with no account required. Your APIs. Your machine. Your rules.
 
-![Rostyman](https://img.shields.io/badge/version-0.1.0--beta.9-blue) ![Platforms](https://img.shields.io/badge/platforms-Windows%20%7C%20macOS%20%7C%20Linux-green) ![Protocols](https://img.shields.io/badge/protocols-7-orange)
+![Rostyman](https://img.shields.io/badge/version-0.1.0--beta.10-blue) ![Platforms](https://img.shields.io/badge/platforms-Windows%20%7C%20macOS%20%7C%20Linux-green) ![Protocols](https://img.shields.io/badge/protocols-7-orange)
 
 ## Download
 
@@ -26,25 +26,33 @@ xattr -cr /Applications/Rostyman.app
 
 Then open Rostyman from Applications normally. You only need to do this once.
 
-## What's New in beta.9
+## What's New in beta.10
+
+### SSE Event Viewer (Postman-style)
+- **Connected/Disconnected status lines** with timestamps and newest-first ordering
+- **Monaco editor** for expanded event detail with theme-matched syntax highlighting
+- **Info icon, copy, search** — full toolbar in expanded view
+
+### Sidebar Tab Synchronization
+- **Automatic sync** — sidebar panel and item follow the active tab (click, close, keyboard, restore)
+- **Auto-expand** folders, **scroll into view**, and **session restore** on app startup
+
+### Scheduler Improvements
+- **Variable resolution** — resolves `{{variables}}` from globals, collection vars, and environment vars
+- **Environment picker** — choose which environment for scheduled jobs
+- **Searchable tree picker** — collection/folder/request hierarchy replaces flat dropdown
+- **Console integration** — scheduler runs appear in Console with filter tabs
+
+### UI State Persistence
+- Window position/size/maximized, right panel, console, settings sub-tab, sidebar selections all restored on restart
 
 ### Bug Fixes
-- **#10 URL/Params Sync** — URL bar and Params tab now stay in sync bidirectionally. No more duplicate query parameters when sending.
-- **#9 Address Bar Context Menu** — Right-click for Cut, Copy, Paste, Set as Variable, EncodeURIComponent, DecodeURIComponent.
-- **#8 Response Body Lag** — Memoized JSON parsing eliminates redundant parsing on every render.
+- **#11 Run folder picks parent** — now correctly filters to selected subfolder
+- **#12 Middle-click close tab** — standard browser-style tab close
+- **Theme fixes** — Solarized Dark/Light, Nord, Night Owl border visibility
+- **Response performance** — memoized Monaco, cached search, stable options objects
 
-### New Features
-- **Network Info Popup** — Globe icon in response status bar shows HTTP version, TLS protocol, cipher, and certificate details with a copy button.
-- **Response History Dropdown** — Clock icon next to response tabs shows last 10 responses with timestamps and status codes.
-- **Generate Tests** — One-click test generation on empty Test Results, runs immediately against the current response.
-- **Resolved Auth Preview** — Inherited auth now shows resolved variable values instead of raw `{{variables}}`.
-- **Hoverable Popups** — Status, size, and network popups stay open when you move the mouse to them.
-
-### Performance
-- **HTTP Connection Pooling** — Keep-alive agents reuse TCP/TLS connections across requests (major speed improvement).
-- **Optimized Rendering** — Memoized size calculations, search matching, and test result accumulation.
-
-See [full release notes](https://github.com/amitsri/rostyman-releases/releases/tag/v0.1.0-beta.9) for details.
+See [full release notes](https://github.com/amitsri/rostyman-releases/releases/tag/v0.1.0-beta.10) for details.
 
 ## Features
 
