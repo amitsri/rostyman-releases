@@ -1,0 +1,449 @@
+{
+  "_type": "rostyman_collection",
+  "_version": "1.0",
+  "info": {
+    "name": "Rostyman Demo",
+    "description": "A showcase collection of popular public APIs. Use this to explore Rostyman's features — variables, auth, scripts, and all HTTP methods.",
+    "exportedAt": "2026-03-29T00:00:00Z",
+    "exportedFrom": "Rostyman v0.1.0-beta.10"
+  },
+  "auth": {
+    "type": "none"
+  },
+  "preScript": "",
+  "testScript": "",
+  "variables": [
+    {
+      "key": "jsonPlaceholderUrl",
+      "value": "https://jsonplaceholder.typicode.com",
+      "type": "text",
+      "enabled": true,
+      "description": "JSONPlaceholder base URL"
+    },
+    {
+      "key": "githubApiUrl",
+      "value": "https://api.github.com",
+      "type": "text",
+      "enabled": true,
+      "description": "GitHub REST API base URL"
+    },
+    {
+      "key": "httpbinUrl",
+      "value": "https://httpbin.org",
+      "type": "text",
+      "enabled": true,
+      "description": "httpbin base URL"
+    },
+    {
+      "key": "countriesUrl",
+      "value": "https://restcountries.com/v3.1",
+      "type": "text",
+      "enabled": true,
+      "description": "REST Countries API base URL"
+    }
+  ],
+  "environments": [
+    {
+      "name": "Default",
+      "variables": [
+        { "key": "githubUser", "value": "octocat", "enabled": true, "description": "GitHub username for demo requests" },
+        { "key": "githubRepo", "value": "Hello-World", "enabled": true, "description": "GitHub repo for demo requests" },
+        { "key": "postId", "value": "1", "enabled": true, "description": "Sample post ID" },
+        { "key": "country", "value": "canada", "enabled": true, "description": "Country name for lookup" }
+      ]
+    }
+  ],
+  "items": [
+    {
+      "type": "folder",
+      "name": "JSONPlaceholder",
+      "description": "Free fake REST API for testing — jsonplaceholder.typicode.com",
+      "items": [
+        {
+          "type": "request",
+          "name": "Get All Posts",
+          "description": "Fetch all 100 posts",
+          "method": "GET",
+          "url": "{{jsonPlaceholderUrl}}/posts",
+          "params": [],
+          "headers": [
+            { "key": "Accept", "value": "application/json", "enabled": true }
+          ],
+          "auth": { "type": "none" },
+          "body": { "mode": "none" },
+          "preScript": "",
+          "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});\n\nrm.test('Returns array of posts', () => {\n  const data = rm.response.json();\n  rm.expect(Array.isArray(data)).to.be.true;\n  rm.expect(data.length).to.equal(100);\n});"
+        },
+        {
+          "type": "request",
+          "name": "Get Single Post",
+          "description": "Fetch a post by ID using an environment variable",
+          "method": "GET",
+          "url": "{{jsonPlaceholderUrl}}/posts/{{postId}}",
+          "params": [],
+          "headers": [
+            { "key": "Accept", "value": "application/json", "enabled": true }
+          ],
+          "auth": { "type": "none" },
+          "body": { "mode": "none" },
+          "preScript": "",
+          "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});\n\nrm.test('Post has required fields', () => {\n  const post = rm.response.json();\n  rm.expect(post).to.have.property('id');\n  rm.expect(post).to.have.property('title');\n  rm.expect(post).to.have.property('body');\n  rm.expect(post).to.have.property('userId');\n});"
+        },
+        {
+          "type": "request",
+          "name": "Get Post Comments",
+          "description": "Fetch comments for a specific post",
+          "method": "GET",
+          "url": "{{jsonPlaceholderUrl}}/posts/{{postId}}/comments",
+          "params": [],
+          "headers": [
+            { "key": "Accept", "value": "application/json", "enabled": true }
+          ],
+          "auth": { "type": "none" },
+          "body": { "mode": "none" },
+          "preScript": "",
+          "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});\n\nrm.test('Comments have email field', () => {\n  const comments = rm.response.json();\n  comments.forEach(c => {\n    rm.expect(c).to.have.property('email');\n  });\n});"
+        },
+        {
+          "type": "request",
+          "name": "Create Post",
+          "description": "Create a new post (simulated — returns 201 with generated ID)",
+          "method": "POST",
+          "url": "{{jsonPlaceholderUrl}}/posts",
+          "params": [],
+          "headers": [
+            { "key": "Content-Type", "value": "application/json", "enabled": true }
+          ],
+          "auth": { "type": "none" },
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"title\": \"Rostyman is awesome\",\n  \"body\": \"A powerful Postman alternative that runs 100% offline.\",\n  \"userId\": 1\n}",
+            "language": "json"
+          },
+          "preScript": "",
+          "testScript": "rm.test('Status is 201 Created', () => {\n  rm.expect(rm.response.code).to.equal(201);\n});\n\nrm.test('Response has generated ID', () => {\n  const data = rm.response.json();\n  rm.expect(data).to.have.property('id');\n  rm.expect(data.id).to.equal(101);\n});"
+        },
+        {
+          "type": "request",
+          "name": "Update Post",
+          "description": "Update an existing post by ID",
+          "method": "PUT",
+          "url": "{{jsonPlaceholderUrl}}/posts/{{postId}}",
+          "params": [],
+          "headers": [
+            { "key": "Content-Type", "value": "application/json", "enabled": true }
+          ],
+          "auth": { "type": "none" },
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"id\": 1,\n  \"title\": \"Updated title\",\n  \"body\": \"Updated body content\",\n  \"userId\": 1\n}",
+            "language": "json"
+          },
+          "preScript": "",
+          "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});\n\nrm.test('Title was updated', () => {\n  const data = rm.response.json();\n  rm.expect(data.title).to.equal('Updated title');\n});"
+        },
+        {
+          "type": "request",
+          "name": "Patch Post",
+          "description": "Partially update a post — only change the title",
+          "method": "PATCH",
+          "url": "{{jsonPlaceholderUrl}}/posts/{{postId}}",
+          "params": [],
+          "headers": [
+            { "key": "Content-Type", "value": "application/json", "enabled": true }
+          ],
+          "auth": { "type": "none" },
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"title\": \"Patched title only\"\n}",
+            "language": "json"
+          },
+          "preScript": "",
+          "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});"
+        },
+        {
+          "type": "request",
+          "name": "Delete Post",
+          "description": "Delete a post by ID (simulated — returns 200 with empty body)",
+          "method": "DELETE",
+          "url": "{{jsonPlaceholderUrl}}/posts/{{postId}}",
+          "params": [],
+          "headers": [],
+          "auth": { "type": "none" },
+          "body": { "mode": "none" },
+          "preScript": "",
+          "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});"
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "GitHub API",
+      "description": "GitHub REST API v3 — public endpoints (no auth required)",
+      "items": [
+        {
+          "type": "request",
+          "name": "Get User Profile",
+          "description": "Fetch a GitHub user's public profile",
+          "method": "GET",
+          "url": "{{githubApiUrl}}/users/{{githubUser}}",
+          "params": [],
+          "headers": [
+            { "key": "Accept", "value": "application/vnd.github.v3+json", "enabled": true },
+            { "key": "User-Agent", "value": "Rostyman", "enabled": true }
+          ],
+          "auth": { "type": "none" },
+          "body": { "mode": "none" },
+          "preScript": "",
+          "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});\n\nrm.test('Has login and avatar', () => {\n  const user = rm.response.json();\n  rm.expect(user).to.have.property('login');\n  rm.expect(user).to.have.property('avatar_url');\n  rm.expect(user).to.have.property('public_repos');\n});"
+        },
+        {
+          "type": "request",
+          "name": "Get Repository",
+          "description": "Fetch repository details",
+          "method": "GET",
+          "url": "{{githubApiUrl}}/repos/{{githubUser}}/{{githubRepo}}",
+          "params": [],
+          "headers": [
+            { "key": "Accept", "value": "application/vnd.github.v3+json", "enabled": true },
+            { "key": "User-Agent", "value": "Rostyman", "enabled": true }
+          ],
+          "auth": { "type": "none" },
+          "body": { "mode": "none" },
+          "preScript": "",
+          "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});\n\nrm.test('Repo has expected fields', () => {\n  const repo = rm.response.json();\n  rm.expect(repo).to.have.property('full_name');\n  rm.expect(repo).to.have.property('stargazers_count');\n  rm.expect(repo).to.have.property('language');\n});"
+        },
+        {
+          "type": "request",
+          "name": "List Repo Commits",
+          "description": "Fetch recent commits for a repository",
+          "method": "GET",
+          "url": "{{githubApiUrl}}/repos/{{githubUser}}/{{githubRepo}}/commits",
+          "params": [
+            { "key": "per_page", "value": "5", "enabled": true, "description": "Limit to 5 commits" }
+          ],
+          "headers": [
+            { "key": "Accept", "value": "application/vnd.github.v3+json", "enabled": true },
+            { "key": "User-Agent", "value": "Rostyman", "enabled": true }
+          ],
+          "auth": { "type": "none" },
+          "body": { "mode": "none" },
+          "preScript": "",
+          "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});\n\nrm.test('Returns array of commits', () => {\n  const commits = rm.response.json();\n  rm.expect(Array.isArray(commits)).to.be.true;\n  rm.expect(commits.length).to.be.at.most(5);\n});"
+        },
+        {
+          "type": "request",
+          "name": "Search Repositories",
+          "description": "Search GitHub repositories by keyword",
+          "method": "GET",
+          "url": "{{githubApiUrl}}/search/repositories",
+          "params": [
+            { "key": "q", "value": "api client language:typescript", "enabled": true, "description": "Search query" },
+            { "key": "sort", "value": "stars", "enabled": true, "description": "Sort by stars" },
+            { "key": "per_page", "value": "5", "enabled": true, "description": "Limit results" }
+          ],
+          "headers": [
+            { "key": "Accept", "value": "application/vnd.github.v3+json", "enabled": true },
+            { "key": "User-Agent", "value": "Rostyman", "enabled": true }
+          ],
+          "auth": { "type": "none" },
+          "body": { "mode": "none" },
+          "preScript": "",
+          "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});\n\nrm.test('Has total_count and items', () => {\n  const data = rm.response.json();\n  rm.expect(data).to.have.property('total_count');\n  rm.expect(data).to.have.property('items');\n});"
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "httpbin",
+      "description": "HTTP testing service — httpbin.org. Mirrors your request back to you.",
+      "items": [
+        {
+          "type": "request",
+          "name": "GET — Echo Request",
+          "description": "Returns your request details (headers, args, origin IP)",
+          "method": "GET",
+          "url": "{{httpbinUrl}}/get",
+          "params": [
+            { "key": "foo", "value": "bar", "enabled": true, "description": "Sample query param" },
+            { "key": "framework", "value": "electron", "enabled": true, "description": "Another param" }
+          ],
+          "headers": [
+            { "key": "X-Custom-Header", "value": "Rostyman-Demo", "enabled": true }
+          ],
+          "auth": { "type": "none" },
+          "body": { "mode": "none" },
+          "preScript": "",
+          "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});\n\nrm.test('Echoes our custom header', () => {\n  const data = rm.response.json();\n  rm.expect(data.headers['X-Custom-Header']).to.equal('Rostyman-Demo');\n});"
+        },
+        {
+          "type": "request",
+          "name": "POST — Echo Body",
+          "description": "POST with JSON body — httpbin echoes it back",
+          "method": "POST",
+          "url": "{{httpbinUrl}}/post",
+          "params": [],
+          "headers": [
+            { "key": "Content-Type", "value": "application/json", "enabled": true },
+            { "key": "X-Request-ID", "value": "{{$guid}}", "enabled": true, "description": "Auto-generated GUID" }
+          ],
+          "auth": { "type": "none" },
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"app\": \"Rostyman\",\n  \"version\": \"0.1.0-beta.10\",\n  \"features\": [\n    \"HTTP\", \"GraphQL\", \"gRPC\",\n    \"WebSocket\", \"Socket.IO\", \"MQTT\", \"SSE\"\n  ],\n  \"local_first\": true\n}",
+            "language": "json"
+          },
+          "preScript": "",
+          "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});\n\nrm.test('Body was echoed back', () => {\n  const data = rm.response.json();\n  const body = JSON.parse(data.data);\n  rm.expect(body.app).to.equal('Rostyman');\n  rm.expect(body.local_first).to.be.true;\n});"
+        },
+        {
+          "type": "request",
+          "name": "Basic Auth Test",
+          "description": "Test Basic Authentication — returns 200 if credentials match",
+          "method": "GET",
+          "url": "{{httpbinUrl}}/basic-auth/demo/password123",
+          "params": [],
+          "headers": [],
+          "auth": {
+            "type": "basic",
+            "basic": { "username": "demo", "password": "password123" }
+          },
+          "body": { "mode": "none" },
+          "preScript": "",
+          "testScript": "rm.test('Auth successful', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});\n\nrm.test('Authenticated as demo user', () => {\n  const data = rm.response.json();\n  rm.expect(data.authenticated).to.be.true;\n  rm.expect(data.user).to.equal('demo');\n});"
+        },
+        {
+          "type": "request",
+          "name": "Status Codes",
+          "description": "Returns whatever HTTP status you request — try 200, 404, 500",
+          "method": "GET",
+          "url": "{{httpbinUrl}}/status/418",
+          "params": [],
+          "headers": [],
+          "auth": { "type": "none" },
+          "body": { "mode": "none" },
+          "preScript": "",
+          "testScript": "rm.test('Returns 418 I\\'m a teapot', () => {\n  rm.expect(rm.response.code).to.equal(418);\n});"
+        },
+        {
+          "type": "request",
+          "name": "Response Headers",
+          "description": "Returns custom response headers that you specify",
+          "method": "GET",
+          "url": "{{httpbinUrl}}/response-headers",
+          "params": [
+            { "key": "X-Powered-By", "value": "Rostyman", "enabled": true },
+            { "key": "X-Version", "value": "beta.10", "enabled": true }
+          ],
+          "headers": [],
+          "auth": { "type": "none" },
+          "body": { "mode": "none" },
+          "preScript": "",
+          "testScript": "rm.test('Custom headers in response', () => {\n  rm.expect(rm.response.headers['x-powered-by']).to.equal('Rostyman');\n});"
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "REST Countries",
+      "description": "Free API for country data — restcountries.com",
+      "items": [
+        {
+          "type": "request",
+          "name": "Search by Name",
+          "description": "Find a country by name — returns flag, capital, population, currencies",
+          "method": "GET",
+          "url": "{{countriesUrl}}/name/{{country}}",
+          "params": [],
+          "headers": [
+            { "key": "Accept", "value": "application/json", "enabled": true }
+          ],
+          "auth": { "type": "none" },
+          "body": { "mode": "none" },
+          "preScript": "",
+          "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});\n\nrm.test('Country has capital and population', () => {\n  const countries = rm.response.json();\n  const country = countries[0];\n  rm.expect(country).to.have.property('capital');\n  rm.expect(country).to.have.property('population');\n  rm.expect(country).to.have.property('flags');\n});"
+        },
+        {
+          "type": "request",
+          "name": "Get All Countries",
+          "description": "Fetch all 250 countries — large response, great for testing performance",
+          "method": "GET",
+          "url": "{{countriesUrl}}/all",
+          "params": [
+            { "key": "fields", "value": "name,capital,population,flags,region", "enabled": true, "description": "Limit fields for smaller response" }
+          ],
+          "headers": [
+            { "key": "Accept", "value": "application/json", "enabled": true }
+          ],
+          "auth": { "type": "none" },
+          "body": { "mode": "none" },
+          "preScript": "",
+          "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});\n\nrm.test('Returns 250 countries', () => {\n  const data = rm.response.json();\n  rm.expect(data.length).to.equal(250);\n});"
+        },
+        {
+          "type": "request",
+          "name": "Filter by Region",
+          "description": "Get all countries in a specific region",
+          "method": "GET",
+          "url": "{{countriesUrl}}/region/asia",
+          "params": [
+            { "key": "fields", "value": "name,capital,population,languages", "enabled": true }
+          ],
+          "headers": [
+            { "key": "Accept", "value": "application/json", "enabled": true }
+          ],
+          "auth": { "type": "none" },
+          "body": { "mode": "none" },
+          "preScript": "",
+          "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});\n\nrm.test('All countries are in Asia', () => {\n  const data = rm.response.json();\n  rm.expect(data.length).to.be.greaterThan(0);\n});"
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "Fun APIs",
+      "description": "Lightweight APIs that return interesting data",
+      "items": [
+        {
+          "type": "request",
+          "name": "Random Dog Image",
+          "description": "Get a random dog image URL from Dog CEO API",
+          "method": "GET",
+          "url": "https://dog.ceo/api/breeds/image/random",
+          "params": [],
+          "headers": [],
+          "auth": { "type": "none" },
+          "body": { "mode": "none" },
+          "preScript": "",
+          "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});\n\nrm.test('Returns image URL', () => {\n  const data = rm.response.json();\n  rm.expect(data.status).to.equal('success');\n  rm.expect(data.message).to.include('https://');\n});"
+        },
+        {
+          "type": "request",
+          "name": "Random Activity",
+          "description": "Get a random activity suggestion from Bored API",
+          "method": "GET",
+          "url": "https://bored-api.appbrewery.com/random",
+          "params": [],
+          "headers": [],
+          "auth": { "type": "none" },
+          "body": { "mode": "none" },
+          "preScript": "",
+          "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});\n\nrm.test('Has activity and type', () => {\n  const data = rm.response.json();\n  rm.expect(data).to.have.property('activity');\n  rm.expect(data).to.have.property('type');\n});"
+        },
+        {
+          "type": "request",
+          "name": "IP Geolocation",
+          "description": "Get your public IP and geolocation data",
+          "method": "GET",
+          "url": "https://ipapi.co/json/",
+          "params": [],
+          "headers": [],
+          "auth": { "type": "none" },
+          "body": { "mode": "none" },
+          "preScript": "",
+          "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});\n\nrm.test('Has IP and location', () => {\n  const data = rm.response.json();\n  rm.expect(data).to.have.property('ip');\n  rm.expect(data).to.have.property('city');\n  rm.expect(data).to.have.property('country_name');\n});"
+        }
+      ]
+    }
+  ]
+}
