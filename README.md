@@ -4,7 +4,7 @@
 
 Rostyman runs entirely on your machine with no account required. Your APIs. Your machine. Your rules.
 
-![Rostyman](https://img.shields.io/badge/version-0.1.0--beta.10-blue) ![Platforms](https://img.shields.io/badge/platforms-Windows%20%7C%20macOS%20%7C%20Linux-green) ![Protocols](https://img.shields.io/badge/protocols-7-orange)
+![Rostyman](https://img.shields.io/badge/version-0.1.0--beta.11-blue) ![Platforms](https://img.shields.io/badge/platforms-Windows%20%7C%20macOS%20%7C%20Linux-green) ![Protocols](https://img.shields.io/badge/protocols-7-orange)
 
 ## Download
 
@@ -26,33 +26,33 @@ xattr -cr /Applications/Rostyman.app
 
 Then open Rostyman from Applications normally. You only need to do this once.
 
-## What's New in beta.10
+## What's New in beta.11
 
-### SSE Event Viewer (Postman-style)
-- **Connected/Disconnected status lines** with timestamps and newest-first ordering
-- **Monaco editor** for expanded event detail with theme-matched syntax highlighting
-- **Info icon, copy, search** — full toolbar in expanded view
+### Share to Cloud
+- **Connect Google Drive or Dropbox** in Settings, right-click a collection, and share it to the cloud
+- Your teammate imports the shared link — the collection stays in sync automatically
+- Your data stays in your own cloud account
 
-### Sidebar Tab Synchronization
-- **Automatic sync** — sidebar panel and item follow the active tab (click, close, keyboard, restore)
-- **Auto-expand** folders, **scroll into view**, and **session restore** on app startup
+### Drag & Drop Import
+- **Drop any file** onto the app window to import — supports Postman, Insomnia, OpenAPI, HAR, Bruno, Thunder Client, Hoppscotch, cURL, and Rostyman formats
+- If the collection already exists, choose to sync or import as a new copy
 
-### Scheduler Improvements
-- **Variable resolution** — resolves `{{variables}}` from globals, collection vars, and environment vars
-- **Environment picker** — choose which environment for scheduled jobs
-- **Searchable tree picker** — collection/folder/request hierarchy replaces flat dropdown
-- **Console integration** — scheduler runs appear in Console with filter tabs
+### Source Watching & URL Sync
+- Rostyman **watches linked files and URLs** for changes and notifies you when something is updated
+- One click to sync the latest version — configure the check interval in Settings
 
-### UI State Persistence
-- Window position/size/maximized, right panel, console, settings sub-tab, sidebar selections all restored on restart
+### .rostyman File Association
+- **Double-click** any `.rostyman` file to open it directly in Rostyman (Windows, macOS, Linux)
 
-### Bug Fixes
-- **#11 Run folder picks parent** — now correctly filters to selected subfolder
-- **#12 Middle-click close tab** — standard browser-style tab close
-- **Theme fixes** — Solarized Dark/Light, Nord, Night Owl border visibility
-- **Response performance** — memoized Monaco, cached search, stable options objects
+### Redesigned Right Panel
+- **VS Code-style vertical tabs** on the right edge — pin to keep panels open, unpin to auto-hide
+- Panels: Variables, AI Assistant, Git Sync, and Notifications
 
-See [full release notes](https://github.com/amitsri/rostyman-releases/releases/tag/v0.1.0-beta.10) for details.
+### Notifications Center
+- All notifications in one searchable panel — dismiss, clear all, or sync directly
+- **Native OS notifications** when the app is in the background
+
+See [full release notes](https://github.com/amitsri/rostyman-releases/releases/tag/v0.1.0-beta.11) for details.
 
 ## Features
 
@@ -72,11 +72,12 @@ See [full release notes](https://github.com/amitsri/rostyman-releases/releases/t
 - Action buttons on code blocks — apply as body, test script, or import cURL
 - Vault-secured API keys — never stored in renderer memory
 
-### Collections & Folders
+### Collections & Sharing
 - Collections with folders, nested subfolders, drag-and-drop
 - **Folder-level auth & scripts** — set once, inherited by all child requests
-- **Auth inheritance chain** — Request → Folder → Parent Folder → Collection
-- Collection-level auth and scripts
+- **Cloud sharing** — connect Google Drive or Dropbox, share collections via link
+- **Drag & drop import** — drop files to import, auto-detect format
+- **Source watching** — auto-detect when linked files or URLs change
 - Bulk operations — multi-select, bulk delete, copy cURL
 - Request templates — save and reuse from + menu
 
@@ -88,7 +89,8 @@ See [full release notes](https://github.com/amitsri/rostyman-releases/releases/t
 ### Import & Export
 - Import from: Postman, Insomnia, OpenAPI, HAR, Thunder Client, Hoppscotch, Bruno, cURL, Rostyman
 - Export to: Rostyman JSON, Postman v2.1, and more via plugins
-- Automatic script migration on import
+- Import from URL — paste any link, auto-sync when content changes
+- `.rostyman` file association — double-click to open on any OS
 
 ### Visual Workflow Editor
 - Drag-and-drop canvas with 8 node types
@@ -102,6 +104,7 @@ See [full release notes](https://github.com/amitsri/rostyman-releases/releases/t
 - **Collection Runner** — run collections with iterations and data files
 - **Git Sync** — built-in Git panel with diff viewer, conflict detection, branch management
 - **CLI Runner** — `rosty-cli` for CI/CD integration
+- **Notifications Center** — searchable panel with native OS alerts
 - **Screenshot & Video Capture** — built-in screen capture with media sidebar
 - **Request History** — full request + response saved, schema change detection, sparklines, filter, export CSV, pin
 - **Response Viewer** — timing waterfall, JSON table view, code snippets (30+ languages)
@@ -114,6 +117,7 @@ See [full release notes](https://github.com/amitsri/rostyman-releases/releases/t
 
 ## Documentation
 
+- [Docs Site](https://rostyman.com)
 - [Wiki Home](https://github.com/amitsri/rostyman-releases/wiki)
 - [Getting Started](https://github.com/amitsri/rostyman-releases/wiki/Getting-Started)
 - [Collections & Requests](https://github.com/amitsri/rostyman-releases/wiki/Collections-and-Requests)
