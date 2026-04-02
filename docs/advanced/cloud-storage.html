@@ -18,10 +18,10 @@
 <meta name="twitter:image" content="https://rostyman.com/img/social-card.png">
 <meta name="keywords" content="API client, Postman alternative, REST client, GraphQL client, gRPC client, WebSocket client, MQTT client, Socket.IO, SSE, desktop app, offline API testing, free API tool, developer tools, API testing, HTTP client">
 <meta name="author" content="Rostyman Team">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Rostyman","description":"A powerful Postman alternative that runs 100% offline. HTTP, GraphQL, gRPC, WebSocket, Socket.IO, MQTT, SSE — all in one desktop app. No account required.","url":"https://rostyman.com","applicationCategory":"DeveloperApplication","operatingSystem":"Windows, macOS, Linux","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"softwareVersion":"0.1.0-beta.11","downloadUrl":"https://github.com/amitsri/rostyman-releases/releases","screenshot":"https://rostyman.com/img/screenshots/app-overview.png","featureList":"HTTP, GraphQL, gRPC, WebSocket, Socket.IO, MQTT, SSE, AI Assistant, Git Sync, Mock Server, Visual Workflows, Collection Runner, 20+ Themes"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Rostyman","description":"A powerful Postman alternative that runs 100% offline. HTTP, GraphQL, gRPC, WebSocket, Socket.IO, MQTT, SSE — all in one desktop app. No account required.","url":"https://rostyman.com","applicationCategory":"DeveloperApplication","operatingSystem":"Windows, macOS, Linux","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"softwareVersion":"0.1.0-beta.12","downloadUrl":"https://github.com/amitsri/rostyman-releases/releases","screenshot":"https://rostyman.com/img/screenshots/app-overview.png","featureList":"HTTP, GraphQL, gRPC, WebSocket, Socket.IO, MQTT, SSE, AI Assistant, Git Sync, Mock Server, Visual Workflows, Collection Runner, 20+ Themes"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Rostyman","url":"https://rostyman.com","logo":"https://rostyman.com/img/logo.png"}</script><link rel="stylesheet" href="/assets/css/styles.57833008.css">
-<script src="/assets/js/runtime~main.4f2a883c.js" defer="defer"></script>
-<script src="/assets/js/main.b53743af.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.f4251ae9.js" defer="defer"></script>
+<script src="/assets/js/main.27e1c503.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -39,14 +39,22 @@
 <p>You can connect both providers simultaneously. Each connection is independent. Tokens are stored encrypted and refreshed automatically.</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="sharing-a-collection">Sharing a Collection<a href="#sharing-a-collection" class="hash-link" aria-label="Direct link to Sharing a Collection" title="Direct link to Sharing a Collection" translate="no">​</a></h2>
 <p>Once a provider is connected, you can share any collection:</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="from-the-sidebar">From the Sidebar<a href="#from-the-sidebar" class="hash-link" aria-label="Direct link to From the Sidebar" title="Direct link to From the Sidebar" translate="no">​</a></h3>
 <ol>
 <li class="">Right-click a collection in the sidebar</li>
 <li class="">Select <strong>Share to Cloud</strong></li>
 <li class="">Choose your connected provider (Google Drive or Dropbox)</li>
 <li class="">Rostyman uploads the collection as a <code>.rostyman</code> file to a <code>Rostyman</code> folder in your cloud drive</li>
-<li class="">A <strong>shareable link</strong> is automatically generated and copied to your clipboard</li>
+<li class="">A <strong>shareable link</strong> is automatically generated</li>
 </ol>
-<p>Send this link to any teammate who uses Rostyman.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="from-the-collection-view">From the Collection View<a href="#from-the-collection-view" class="hash-link" aria-label="Direct link to From the Collection View" title="Direct link to From the Collection View" translate="no">​</a></h3>
+<ol>
+<li class="">Open the collection by clicking it in the sidebar</li>
+<li class="">In the <strong>Overview</strong> tab, find the <strong>Share Sources</strong> section</li>
+<li class="">Click <strong>Share to Cloud...</strong></li>
+<li class="">Choose your provider</li>
+</ol>
+<p>Send the generated link to any teammate who uses Rostyman.</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="what-gets-shared">What Gets Shared<a href="#what-gets-shared" class="hash-link" aria-label="Direct link to What Gets Shared" title="Direct link to What Gets Shared" translate="no">​</a></h3>
 <ul>
 <li class="">All requests (method, URL, headers, params, body, auth)</li>
@@ -61,47 +69,69 @@
 <li class=""><strong>Request history</strong> — stays local to each user</li>
 <li class=""><strong>Personal settings</strong> — themes, editor preferences, etc.</li>
 </ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="publishing-updates">Publishing Updates<a href="#publishing-updates" class="hash-link" aria-label="Direct link to Publishing Updates" title="Direct link to Publishing Updates" translate="no">​</a></h2>
+<p>After sharing, you can push changes to the cloud without creating a new link:</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="from-the-collection-view-1">From the Collection View<a href="#from-the-collection-view-1" class="hash-link" aria-label="Direct link to From the Collection View" title="Direct link to From the Collection View" translate="no">​</a></h3>
+<ol>
+<li class="">Open the collection&#x27;s <strong>Overview</strong> tab</li>
+<li class="">In the <strong>Share Sources</strong> section, click the <strong>Publish</strong> button on your cloud share</li>
+<li class="">The existing cloud file is updated — the shareable link stays the same</li>
+</ol>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="from-the-share-dialog">From the Share Dialog<a href="#from-the-share-dialog" class="hash-link" aria-label="Direct link to From the Share Dialog" title="Direct link to From the Share Dialog" translate="no">​</a></h3>
+<ol>
+<li class="">Right-click &gt; <strong>Share to Cloud</strong> (or click <strong>Share to Cloud...</strong> in the Overview tab)</li>
+<li class="">The dialog shows <strong>Currently shared</strong> with the provider name, URL, and last published date</li>
+<li class="">Click <strong>Update shared file</strong> to push the latest version</li>
+</ol>
+<p>The <strong>last published date</strong> is shown on each cloud share so you know when it was last updated.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="share-sources-panel">Share Sources Panel<a href="#share-sources-panel" class="hash-link" aria-label="Direct link to Share Sources Panel" title="Direct link to Share Sources Panel" translate="no">​</a></h2>
+<p>The collection <strong>Overview</strong> tab shows all linked sources in the <strong>Share Sources</strong> section:</p>
+<table><thead><tr><th>Source Type</th><th>Description</th></tr></thead><tbody><tr><td><strong>File</strong></td><td>A local file linked via import (with format badge like POSTMAN, OPENAPI)</td></tr><tr><td><strong>Cloud</strong></td><td>A Google Drive or Dropbox share (with provider badge)</td></tr></tbody></table>
+<p>For each source, you can:</p>
+<table><thead><tr><th>Action</th><th>Icon</th><th>Description</th></tr></thead><tbody><tr><td><strong>Publish</strong></td><td>Send icon</td><td>Update cloud file with latest changes (cloud only)</td></tr><tr><td><strong>Copy</strong></td><td>Copy icon</td><td>Copy the URL or file path to clipboard</td></tr><tr><td><strong>Open</strong></td><td>External link icon</td><td>Open cloud link in browser (cloud only)</td></tr><tr><td><strong>Remove</strong></td><td>Trash icon</td><td>Remove source (with confirmation, moves to Trash)</td></tr></tbody></table>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="cloud-share-link-validation">Cloud Share Link Validation<a href="#cloud-share-link-validation" class="hash-link" aria-label="Direct link to Cloud Share Link Validation" title="Direct link to Cloud Share Link Validation" translate="no">​</a></h2>
+<p>Rostyman automatically checks if your cloud share links are still valid:</p>
+<ul>
+<li class="">Runs on <strong>app startup</strong> (3-second delay) and at the source check interval (default: every 5 minutes)</li>
+<li class="">If a link returns an error (e.g., file deleted from cloud), a <strong>warning notification</strong> appears in the Notifications panel</li>
+<li class="">Temporary network errors are skipped — no false alarms</li>
+</ul>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="how-teammates-import-shared-links">How Teammates Import Shared Links<a href="#how-teammates-import-shared-links" class="hash-link" aria-label="Direct link to How Teammates Import Shared Links" title="Direct link to How Teammates Import Shared Links" translate="no">​</a></h2>
 <p>When a teammate receives your shared link:</p>
 <ol>
-<li class=""><strong>Click the link</strong> — if Rostyman is installed, it opens the app and starts the import automatically</li>
-<li class=""><strong>Or paste the link</strong> — go to <strong>File &gt; Import</strong>, select the <strong>URL</strong> tab, paste the link, and click <strong>Import</strong></li>
+<li class="">Go to <strong>File &gt; Import</strong>, select the <strong>URL</strong> tab, paste the link, and click <strong>Import</strong></li>
 <li class="">The collection appears in their sidebar, ready to use</li>
+<li class="">Enable <a class="" href="/docs/advanced/notifications">Source Watching</a> to get notified when you publish updates</li>
 </ol>
-<p>If the teammate doesn&#x27;t have Rostyman installed, the link opens the cloud provider&#x27;s download page where they can save the <code>.rostyman</code> file and import it manually.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="auto-sync">Auto-Sync<a href="#auto-sync" class="hash-link" aria-label="Direct link to Auto-Sync" title="Direct link to Auto-Sync" translate="no">​</a></h2>
-<p>After sharing a collection to the cloud, Rostyman keeps it synchronized:</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="removing-a-cloud-share">Removing a Cloud Share<a href="#removing-a-cloud-share" class="hash-link" aria-label="Direct link to Removing a Cloud Share" title="Direct link to Removing a Cloud Share" translate="no">​</a></h2>
+<p>You can remove a cloud share from:</p>
 <ul>
-<li class=""><strong>Automatic upload</strong> — when you save changes to a shared collection, the cloud copy is updated</li>
-<li class=""><strong>Sync status</strong> — visible in the collection&#x27;s right-click menu (Synced, Syncing, or Conflict)</li>
-<li class=""><strong>Notifications</strong> — you receive a notification when sync completes or encounters an issue</li>
+<li class="">The <strong>Share Sources</strong> section in the collection view (trash icon)</li>
+<li class="">The <strong>Share to Cloud</strong> dialog (<strong>Remove</strong> button)</li>
 </ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="conflict-resolution">Conflict Resolution<a href="#conflict-resolution" class="hash-link" aria-label="Direct link to Conflict Resolution" title="Direct link to Conflict Resolution" translate="no">​</a></h3>
-<p>If the cloud copy has been modified by another user while you also made local changes:</p>
+<p>A <strong>confirmation dialog</strong> appears before removal. Removing a share:</p>
+<ul>
+<li class="">Unlinks the share reference from Rostyman&#x27;s database</li>
+<li class="">Does <strong>not</strong> delete the file from your cloud storage</li>
+<li class="">The removed share goes to <strong>Trash</strong> and can be restored</li>
+<li class="">The shareable link remains valid until the file is manually deleted from your cloud drive</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="preventing-duplicate-shares">Preventing Duplicate Shares<a href="#preventing-duplicate-shares" class="hash-link" aria-label="Direct link to Preventing Duplicate Shares" title="Direct link to Preventing Duplicate Shares" translate="no">​</a></h2>
+<p>You cannot share the same collection to the same provider twice. If a collection is already shared to Dropbox, the Dropbox option is hidden in the share dialog. To switch providers:</p>
 <ol>
-<li class="">A notification alerts you to the conflict</li>
-<li class="">Open the collection&#x27;s context menu and choose <strong>Resolve Conflict</strong></li>
-<li class="">Pick whether to keep your local version or accept the cloud version</li>
+<li class="">Remove the existing share</li>
+<li class="">Share to the new provider</li>
 </ol>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="managing-connections">Managing Connections<a href="#managing-connections" class="hash-link" aria-label="Direct link to Managing Connections" title="Direct link to Managing Connections" translate="no">​</a></h2>
 <p>In <strong>Settings &gt; Cloud Storage</strong>, you can:</p>
-<table><thead><tr><th>Action</th><th>Description</th></tr></thead><tbody><tr><td><strong>Connect</strong></td><td>Link a new Google Drive or Dropbox account</td></tr><tr><td><strong>Disconnect</strong></td><td>Remove the connection (shared collections remain in the cloud)</td></tr><tr><td><strong>View synced collections</strong></td><td>See which collections are currently shared to each provider</td></tr><tr><td><strong>Revoke access</strong></td><td>Remove Rostyman&#x27;s permissions from your cloud account entirely</td></tr><tr><td><strong>Check quota</strong></td><td>See available storage space on the connected provider</td></tr></tbody></table>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="sharing-workflow-example">Sharing Workflow Example<a href="#sharing-workflow-example" class="hash-link" aria-label="Direct link to Sharing Workflow Example" title="Direct link to Sharing Workflow Example" translate="no">​</a></h2>
-<p>Here&#x27;s a typical workflow for sharing with a teammate:</p>
-<ol>
-<li class="">You create and test a collection of API requests</li>
-<li class="">Right-click the collection &gt; <strong>Share to Cloud</strong> &gt; Google Drive</li>
-<li class="">Copy the generated link and send it via Slack, email, or any messenger</li>
-<li class="">Your teammate clicks the link — the collection appears in their Rostyman</li>
-<li class="">You update a request and save — the cloud copy updates automatically</li>
-<li class="">Your teammate gets a <a class="" href="/docs/advanced/notifications">Source Watching</a> notification and clicks <strong>Sync Now</strong></li>
-</ol>
+<table><thead><tr><th>Action</th><th>Description</th></tr></thead><tbody><tr><td><strong>Connect</strong></td><td>Link a new Google Drive or Dropbox account</td></tr><tr><td><strong>Disconnect</strong></td><td>Remove the connection (shared files remain in the cloud)</td></tr></tbody></table>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="tips">Tips<a href="#tips" class="hash-link" aria-label="Direct link to Tips" title="Direct link to Tips" translate="no">​</a></h2>
 <ul>
 <li class="">Cloud Storage is completely optional — Rostyman works fully offline without it</li>
-<li class="">You can share the same collection to multiple providers</li>
+<li class="">One active cloud share per collection</li>
 <li class="">For version-controlled collaboration, consider <a class="" href="/docs/advanced/git-sync">Git-Native Storage</a> instead</li>
-<li class="">Shared collections work alongside local collections — no migration needed</li>
-</ul></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href="https://github.com/amitsri/rostyman-releases/edit/main/docs/advanced/cloud-storage.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"><span class="theme-last-updated">Last updated<!-- --> on <b><time datetime="2026-04-01T09:19:48.000Z" itemprop="dateModified">Apr 1, 2026</time></b></span></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#connecting-a-provider" class="table-of-contents__link toc-highlight">Connecting a Provider</a></li><li><a href="#sharing-a-collection" class="table-of-contents__link toc-highlight">Sharing a Collection</a><ul><li><a href="#what-gets-shared" class="table-of-contents__link toc-highlight">What Gets Shared</a></li><li><a href="#what-does-not-get-shared" class="table-of-contents__link toc-highlight">What Does NOT Get Shared</a></li></ul></li><li><a href="#how-teammates-import-shared-links" class="table-of-contents__link toc-highlight">How Teammates Import Shared Links</a></li><li><a href="#auto-sync" class="table-of-contents__link toc-highlight">Auto-Sync</a><ul><li><a href="#conflict-resolution" class="table-of-contents__link toc-highlight">Conflict Resolution</a></li></ul></li><li><a href="#managing-connections" class="table-of-contents__link toc-highlight">Managing Connections</a></li><li><a href="#sharing-workflow-example" class="table-of-contents__link toc-highlight">Sharing Workflow Example</a></li><li><a href="#tips" class="table-of-contents__link toc-highlight">Tips</a></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Documentation</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/intro">Getting Started</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/sending-requests/basics">Sending Requests</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/scripting/overview">Scripting (rm.*)</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/advanced/ai-assistant">AI Assistant</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Protocols</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/advanced/graphql">GraphQL</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/advanced/grpc">gRPC</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/advanced/websocket">WebSocket</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/advanced/socketio">Socket.IO</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/advanced/mqtt">MQTT</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/advanced/sse">SSE</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Resources</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/amitsri/rostyman-releases/releases" target="_blank" rel="noopener noreferrer" class="footer__link-item">Releases<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://github.com/amitsri/rostyman-releases/issues" target="_blank" rel="noopener noreferrer" class="footer__link-item">Report a Bug<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 Rostyman. Built with Docusaurus.</div></div></div></footer></div>
+<li class="">The shareable link is permanent as long as the file exists in your cloud storage</li>
+<li class="">Vault secrets are never uploaded — only non-secret variables are included</li>
+</ul></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href="https://github.com/amitsri/rostyman-releases/edit/main/docs/advanced/cloud-storage.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"><span class="theme-last-updated">Last updated<!-- --> on <b><time datetime="2026-04-02T20:52:51.000Z" itemprop="dateModified">Apr 2, 2026</time></b></span></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#connecting-a-provider" class="table-of-contents__link toc-highlight">Connecting a Provider</a></li><li><a href="#sharing-a-collection" class="table-of-contents__link toc-highlight">Sharing a Collection</a><ul><li><a href="#from-the-sidebar" class="table-of-contents__link toc-highlight">From the Sidebar</a></li><li><a href="#from-the-collection-view" class="table-of-contents__link toc-highlight">From the Collection View</a></li><li><a href="#what-gets-shared" class="table-of-contents__link toc-highlight">What Gets Shared</a></li><li><a href="#what-does-not-get-shared" class="table-of-contents__link toc-highlight">What Does NOT Get Shared</a></li></ul></li><li><a href="#publishing-updates" class="table-of-contents__link toc-highlight">Publishing Updates</a><ul><li><a href="#from-the-collection-view-1" class="table-of-contents__link toc-highlight">From the Collection View</a></li><li><a href="#from-the-share-dialog" class="table-of-contents__link toc-highlight">From the Share Dialog</a></li></ul></li><li><a href="#share-sources-panel" class="table-of-contents__link toc-highlight">Share Sources Panel</a></li><li><a href="#cloud-share-link-validation" class="table-of-contents__link toc-highlight">Cloud Share Link Validation</a></li><li><a href="#how-teammates-import-shared-links" class="table-of-contents__link toc-highlight">How Teammates Import Shared Links</a></li><li><a href="#removing-a-cloud-share" class="table-of-contents__link toc-highlight">Removing a Cloud Share</a></li><li><a href="#preventing-duplicate-shares" class="table-of-contents__link toc-highlight">Preventing Duplicate Shares</a></li><li><a href="#managing-connections" class="table-of-contents__link toc-highlight">Managing Connections</a></li><li><a href="#tips" class="table-of-contents__link toc-highlight">Tips</a></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Documentation</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/intro">Getting Started</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/sending-requests/basics">Sending Requests</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/scripting/overview">Scripting (rm.*)</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/advanced/ai-assistant">AI Assistant</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Protocols</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/advanced/graphql">GraphQL</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/advanced/grpc">gRPC</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/advanced/websocket">WebSocket</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/advanced/socketio">Socket.IO</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/advanced/mqtt">MQTT</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/advanced/sse">SSE</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Resources</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/amitsri/rostyman-releases/releases" target="_blank" rel="noopener noreferrer" class="footer__link-item">Releases<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://github.com/amitsri/rostyman-releases/issues" target="_blank" rel="noopener noreferrer" class="footer__link-item">Report a Bug<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 Rostyman. Built with Docusaurus.</div></div></div></footer></div>
 </body>
 </html>

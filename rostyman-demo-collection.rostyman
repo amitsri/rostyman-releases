@@ -3,9 +3,9 @@
   "_version": "1.0",
   "info": {
     "name": "Rostyman Demo",
-    "description": "A showcase collection of popular public APIs. Use this to explore Rostyman's features — variables, auth, scripts, and all HTTP methods.",
-    "exportedAt": "2026-03-29T00:00:00Z",
-    "exportedFrom": "Rostyman v0.1.0-beta.10"
+    "description": "A showcase collection of popular public APIs and MCP servers. Explore HTTP, variables, auth, scripts, and Model Context Protocol (MCP) — all features in one place.",
+    "exportedAt": "2026-04-02T00:00:00Z",
+    "exportedFrom": "Rostyman v0.1.0-beta.11"
   },
   "auth": {
     "type": "none"
@@ -40,6 +40,34 @@
       "type": "text",
       "enabled": true,
       "description": "REST Countries API base URL"
+    },
+    {
+      "key": "mcpServerUrl",
+      "value": "http://localhost:3100/mcp",
+      "type": "text",
+      "enabled": true,
+      "description": "Rostyman built-in MCP server MCP endpoint (default port 3100 — enable in Settings > Integrations)"
+    },
+    {
+      "key": "mcpAuthToken",
+      "value": "",
+      "type": "secret",
+      "enabled": true,
+      "description": "Auth token for MCP server — leave blank if auth is disabled"
+    },
+    {
+      "key": "mcpWorkdir",
+      "value": ".",
+      "type": "text",
+      "enabled": true,
+      "description": "Working directory exposed by the local filesystem MCP server"
+    },
+    {
+      "key": "mcpCustomUrl",
+      "value": "http://localhost:8080/mcp",
+      "type": "text",
+      "enabled": true,
+      "description": "URL of a custom MCP-compatible HTTP server"
     }
   ],
   "environments": [
@@ -51,9 +79,81 @@
         { "key": "postId", "value": "1", "enabled": true, "description": "Sample post ID" },
         { "key": "country", "value": "canada", "enabled": true, "description": "Country name for lookup" }
       ]
+    },
+    {
+      "name": "MCP — Local Dev",
+      "variables": [
+        { "key": "mcpServerUrl", "value": "http://localhost:3100/mcp", "enabled": true, "description": "Rostyman's built-in MCP server MCP endpoint (must be running)" },
+        { "key": "mcpAuthToken", "value": "", "enabled": true, "description": "Leave blank if auth token is not configured" },
+        { "key": "mcpWorkdir", "value": ".", "enabled": true, "description": "Folder to expose via filesystem MCP server" },
+        { "key": "mcpCustomUrl", "value": "http://localhost:8080/mcp", "enabled": true, "description": "Custom MCP server URL" }
+      ]
     }
   ],
   "items": [
+    {
+      "type": "folder",
+      "name": "MCP Requests",
+      "description": "Model Context Protocol (MCP) server connections. MCP lets AI agents like Claude interact with your APIs. Connect, discover tools, and call them interactively.",
+      "items": [
+        {
+          "type": "mcp",
+          "name": "Rostyman Built-in MCP Server",
+          "description": "Connect to Rostyman's own MCP server running at localhost:3100. It exposes all your collections as MCP tools so Claude and other AI agents can browse and call your APIs. Enable it in Settings > Integrations > MCP Server, then hit Connect.",
+          "transport": "http",
+          "input": "{{mcpServerUrl}}",
+          "authToken": "{{mcpAuthToken}}",
+          "timeout": 30000
+        },
+        {
+          "type": "mcp",
+          "name": "Local Filesystem Server (stdio)",
+          "description": "Access your local files via MCP using the official @modelcontextprotocol/server-filesystem package. Requires Node.js and npx. Change the mcpWorkdir collection variable to the folder you want to expose. Tools: read_file, write_file, list_directory, search_files, get_file_info.",
+          "transport": "stdio",
+          "input": "{\"command\":\"npx\",\"args\":[\"-y\",\"@modelcontextprotocol/server-filesystem\",\"{{mcpWorkdir}}\"]}",
+          "timeout": 60000
+        },
+        {
+          "type": "mcp",
+          "name": "GitHub MCP Server (stdio)",
+          "description": "Access GitHub via MCP. Requires Node.js, npx, and a GitHub Personal Access Token set as GITHUB_TOKEN in the env vars below. Tools: search_repositories, get_file_contents, create_issue, list_commits, create_pull_request, and more.",
+          "transport": "stdio",
+          "input": "{\"command\":\"npx\",\"args\":[\"-y\",\"@modelcontextprotocol/server-github\"]}",
+          "envVars": [
+            { "key": "GITHUB_TOKEN", "value": "{{githubToken}}", "enabled": true }
+          ],
+          "timeout": 60000
+        },
+        {
+          "type": "mcp",
+          "name": "Brave Search MCP Server (stdio)",
+          "description": "Real-time web search via MCP using Brave Search API. Requires Node.js, npx, and a Brave Search API key (free tier available at api.search.brave.com). Tools: brave_web_search, brave_local_search.",
+          "transport": "stdio",
+          "input": "{\"command\":\"npx\",\"args\":[\"-y\",\"@modelcontextprotocol/server-brave-search\"]}",
+          "envVars": [
+            { "key": "BRAVE_API_KEY", "value": "{{braveApiKey}}", "enabled": true }
+          ],
+          "timeout": 30000
+        },
+        {
+          "type": "mcp",
+          "name": "SQLite MCP Server (stdio)",
+          "description": "Query a local SQLite database via MCP. Requires Python (uvx). Change the database path in the args to point to your .db file. Tools: read_query, write_query, list_tables, describe_table, create_table.",
+          "transport": "stdio",
+          "input": "{\"command\":\"uvx\",\"args\":[\"mcp-server-sqlite\",\"--db-path\",\"{{mcpWorkdir}}/demo.db\"]}",
+          "timeout": 30000
+        },
+        {
+          "type": "mcp",
+          "name": "Custom HTTP Server",
+          "description": "Connect to any MCP-compatible HTTP server. Set the mcpCustomUrl collection variable to your server's MCP endpoint (e.g. http://my-server:8080/sse). Optionally set mcpAuthToken if your server requires bearer auth.",
+          "transport": "http",
+          "input": "{{mcpCustomUrl}}",
+          "authToken": "{{mcpAuthToken}}",
+          "timeout": 30000
+        }
+      ]
+    },
     {
       "type": "folder",
       "name": "JSONPlaceholder",
@@ -290,7 +390,7 @@
           "auth": { "type": "none" },
           "body": {
             "mode": "raw",
-            "raw": "{\n  \"app\": \"Rostyman\",\n  \"version\": \"0.1.0-beta.10\",\n  \"features\": [\n    \"HTTP\", \"GraphQL\", \"gRPC\",\n    \"WebSocket\", \"Socket.IO\", \"MQTT\", \"SSE\"\n  ],\n  \"local_first\": true\n}",
+            "raw": "{\n  \"app\": \"Rostyman\",\n  \"version\": \"0.1.0-beta.11\",\n  \"features\": [\n    \"HTTP\", \"GraphQL\", \"gRPC\",\n    \"WebSocket\", \"Socket.IO\", \"MQTT\", \"SSE\", \"MCP\"\n  ],\n  \"local_first\": true\n}",
             "language": "json"
           },
           "preScript": "",
@@ -333,7 +433,7 @@
           "url": "{{httpbinUrl}}/response-headers",
           "params": [
             { "key": "X-Powered-By", "value": "Rostyman", "enabled": true },
-            { "key": "X-Version", "value": "beta.10", "enabled": true }
+            { "key": "X-Version", "value": "beta.11", "enabled": true }
           ],
           "headers": [],
           "auth": { "type": "none" },
