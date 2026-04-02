@@ -1,6 +1,6 @@
 # Rostyman
 
-**Local-first desktop API client — a powerful alternative to Postman**
+**Local-first desktop API client — powerful, private, and free**
 
 Rostyman runs entirely on your machine with no account required. Your APIs. Your machine. Your rules.
 
