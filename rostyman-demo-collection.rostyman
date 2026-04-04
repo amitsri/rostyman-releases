@@ -3,9 +3,9 @@
   "_version": "1.0",
   "info": {
     "name": "Rostyman Demo",
-    "description": "A showcase collection of popular public APIs and MCP servers. Explore HTTP, variables, auth, scripts, and Model Context Protocol (MCP) — all features in one place.",
-    "exportedAt": "2026-04-02T00:00:00Z",
-    "exportedFrom": "Rostyman v0.1.0-beta.11"
+    "description": "A comprehensive showcase of Rostyman features. Explore HTTP CRUD, binary responses (images, PDF, CSV, audio, video), auth types, scripts, variables, XML, redirects, cookies, and MCP — all in one collection.",
+    "exportedAt": "2026-04-03T00:00:00Z",
+    "exportedFrom": "Rostyman v0.1.0-beta.12"
   },
   "auth": {
     "type": "none"
@@ -68,25 +68,79 @@
       "type": "text",
       "enabled": true,
       "description": "URL of a custom MCP-compatible HTTP server"
+    },
+    {
+      "key": "githubToken",
+      "value": "",
+      "type": "secret",
+      "enabled": true,
+      "description": "GitHub Personal Access Token — required for GitHub MCP Server"
+    },
+    {
+      "key": "braveApiKey",
+      "value": "",
+      "type": "secret",
+      "enabled": true,
+      "description": "Brave Search API key — get free tier at api.search.brave.com"
     }
   ],
   "environments": [
     {
       "name": "Default",
       "variables": [
-        { "key": "githubUser", "value": "octocat", "enabled": true, "description": "GitHub username for demo requests" },
-        { "key": "githubRepo", "value": "Hello-World", "enabled": true, "description": "GitHub repo for demo requests" },
-        { "key": "postId", "value": "1", "enabled": true, "description": "Sample post ID" },
-        { "key": "country", "value": "canada", "enabled": true, "description": "Country name for lookup" }
+        {
+          "key": "githubUser",
+          "value": "octocat",
+          "enabled": true,
+          "description": "GitHub username for demo requests"
+        },
+        {
+          "key": "githubRepo",
+          "value": "Hello-World",
+          "enabled": true,
+          "description": "GitHub repo for demo requests"
+        },
+        {
+          "key": "postId",
+          "value": "1",
+          "enabled": true,
+          "description": "Sample post ID"
+        },
+        {
+          "key": "country",
+          "value": "canada",
+          "enabled": true,
+          "description": "Country name for lookup"
+        }
       ]
     },
     {
       "name": "MCP — Local Dev",
       "variables": [
-        { "key": "mcpServerUrl", "value": "http://localhost:3100/mcp", "enabled": true, "description": "Rostyman's built-in MCP server MCP endpoint (must be running)" },
-        { "key": "mcpAuthToken", "value": "", "enabled": true, "description": "Leave blank if auth token is not configured" },
-        { "key": "mcpWorkdir", "value": ".", "enabled": true, "description": "Folder to expose via filesystem MCP server" },
-        { "key": "mcpCustomUrl", "value": "http://localhost:8080/mcp", "enabled": true, "description": "Custom MCP server URL" }
+        {
+          "key": "mcpServerUrl",
+          "value": "http://localhost:3100/mcp",
+          "enabled": true,
+          "description": "Rostyman's built-in MCP server MCP endpoint (must be running)"
+        },
+        {
+          "key": "mcpAuthToken",
+          "value": "",
+          "enabled": true,
+          "description": "Leave blank if auth token is not configured"
+        },
+        {
+          "key": "mcpWorkdir",
+          "value": ".",
+          "enabled": true,
+          "description": "Folder to expose via filesystem MCP server"
+        },
+        {
+          "key": "mcpCustomUrl",
+          "value": "http://localhost:8080/mcp",
+          "enabled": true,
+          "description": "Custom MCP server URL"
+        }
       ]
     }
   ],
@@ -120,7 +174,11 @@
           "transport": "stdio",
           "input": "{\"command\":\"npx\",\"args\":[\"-y\",\"@modelcontextprotocol/server-github\"]}",
           "envVars": [
-            { "key": "GITHUB_TOKEN", "value": "{{githubToken}}", "enabled": true }
+            {
+              "key": "GITHUB_TOKEN",
+              "value": "{{githubToken}}",
+              "enabled": true
+            }
           ],
           "timeout": 60000
         },
@@ -131,7 +189,11 @@
           "transport": "stdio",
           "input": "{\"command\":\"npx\",\"args\":[\"-y\",\"@modelcontextprotocol/server-brave-search\"]}",
           "envVars": [
-            { "key": "BRAVE_API_KEY", "value": "{{braveApiKey}}", "enabled": true }
+            {
+              "key": "BRAVE_API_KEY",
+              "value": "{{braveApiKey}}",
+              "enabled": true
+            }
           ],
           "timeout": 30000
         },
@@ -167,10 +229,18 @@
           "url": "{{jsonPlaceholderUrl}}/posts",
           "params": [],
           "headers": [
-            { "key": "Accept", "value": "application/json", "enabled": true }
+            {
+              "key": "Accept",
+              "value": "application/json",
+              "enabled": true
+            }
           ],
-          "auth": { "type": "none" },
-          "body": { "mode": "none" },
+          "auth": {
+            "type": "none"
+          },
+          "body": {
+            "mode": "none"
+          },
           "preScript": "",
           "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});\n\nrm.test('Returns array of posts', () => {\n  const data = rm.response.json();\n  rm.expect(Array.isArray(data)).to.be.true;\n  rm.expect(data.length).to.equal(100);\n});"
         },
@@ -182,10 +252,18 @@
           "url": "{{jsonPlaceholderUrl}}/posts/{{postId}}",
           "params": [],
           "headers": [
-            { "key": "Accept", "value": "application/json", "enabled": true }
+            {
+              "key": "Accept",
+              "value": "application/json",
+              "enabled": true
+            }
           ],
-          "auth": { "type": "none" },
-          "body": { "mode": "none" },
+          "auth": {
+            "type": "none"
+          },
+          "body": {
+            "mode": "none"
+          },
           "preScript": "",
           "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});\n\nrm.test('Post has required fields', () => {\n  const post = rm.response.json();\n  rm.expect(post).to.have.property('id');\n  rm.expect(post).to.have.property('title');\n  rm.expect(post).to.have.property('body');\n  rm.expect(post).to.have.property('userId');\n});"
         },
@@ -197,10 +275,18 @@
           "url": "{{jsonPlaceholderUrl}}/posts/{{postId}}/comments",
           "params": [],
           "headers": [
-            { "key": "Accept", "value": "application/json", "enabled": true }
+            {
+              "key": "Accept",
+              "value": "application/json",
+              "enabled": true
+            }
           ],
-          "auth": { "type": "none" },
-          "body": { "mode": "none" },
+          "auth": {
+            "type": "none"
+          },
+          "body": {
+            "mode": "none"
+          },
           "preScript": "",
           "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});\n\nrm.test('Comments have email field', () => {\n  const comments = rm.response.json();\n  comments.forEach(c => {\n    rm.expect(c).to.have.property('email');\n  });\n});"
         },
@@ -212,9 +298,15 @@
           "url": "{{jsonPlaceholderUrl}}/posts",
           "params": [],
           "headers": [
-            { "key": "Content-Type", "value": "application/json", "enabled": true }
+            {
+              "key": "Content-Type",
+              "value": "application/json",
+              "enabled": true
+            }
           ],
-          "auth": { "type": "none" },
+          "auth": {
+            "type": "none"
+          },
           "body": {
             "mode": "raw",
             "raw": "{\n  \"title\": \"Rostyman is awesome\",\n  \"body\": \"A powerful Postman alternative that runs 100% offline.\",\n  \"userId\": 1\n}",
@@ -231,9 +323,15 @@
           "url": "{{jsonPlaceholderUrl}}/posts/{{postId}}",
           "params": [],
           "headers": [
-            { "key": "Content-Type", "value": "application/json", "enabled": true }
+            {
+              "key": "Content-Type",
+              "value": "application/json",
+              "enabled": true
+            }
           ],
-          "auth": { "type": "none" },
+          "auth": {
+            "type": "none"
+          },
           "body": {
             "mode": "raw",
             "raw": "{\n  \"id\": 1,\n  \"title\": \"Updated title\",\n  \"body\": \"Updated body content\",\n  \"userId\": 1\n}",
@@ -250,9 +348,15 @@
           "url": "{{jsonPlaceholderUrl}}/posts/{{postId}}",
           "params": [],
           "headers": [
-            { "key": "Content-Type", "value": "application/json", "enabled": true }
+            {
+              "key": "Content-Type",
+              "value": "application/json",
+              "enabled": true
+            }
           ],
-          "auth": { "type": "none" },
+          "auth": {
+            "type": "none"
+          },
           "body": {
             "mode": "raw",
             "raw": "{\n  \"title\": \"Patched title only\"\n}",
@@ -269,8 +373,12 @@
           "url": "{{jsonPlaceholderUrl}}/posts/{{postId}}",
           "params": [],
           "headers": [],
-          "auth": { "type": "none" },
-          "body": { "mode": "none" },
+          "auth": {
+            "type": "none"
+          },
+          "body": {
+            "mode": "none"
+          },
           "preScript": "",
           "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});"
         }
@@ -289,11 +397,23 @@
           "url": "{{githubApiUrl}}/users/{{githubUser}}",
           "params": [],
           "headers": [
-            { "key": "Accept", "value": "application/vnd.github.v3+json", "enabled": true },
-            { "key": "User-Agent", "value": "Rostyman", "enabled": true }
+            {
+              "key": "Accept",
+              "value": "application/vnd.github.v3+json",
+              "enabled": true
+            },
+            {
+              "key": "User-Agent",
+              "value": "Rostyman",
+              "enabled": true
+            }
           ],
-          "auth": { "type": "none" },
-          "body": { "mode": "none" },
+          "auth": {
+            "type": "none"
+          },
+          "body": {
+            "mode": "none"
+          },
           "preScript": "",
           "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});\n\nrm.test('Has login and avatar', () => {\n  const user = rm.response.json();\n  rm.expect(user).to.have.property('login');\n  rm.expect(user).to.have.property('avatar_url');\n  rm.expect(user).to.have.property('public_repos');\n});"
         },
@@ -305,11 +425,23 @@
           "url": "{{githubApiUrl}}/repos/{{githubUser}}/{{githubRepo}}",
           "params": [],
           "headers": [
-            { "key": "Accept", "value": "application/vnd.github.v3+json", "enabled": true },
-            { "key": "User-Agent", "value": "Rostyman", "enabled": true }
+            {
+              "key": "Accept",
+              "value": "application/vnd.github.v3+json",
+              "enabled": true
+            },
+            {
+              "key": "User-Agent",
+              "value": "Rostyman",
+              "enabled": true
+            }
           ],
-          "auth": { "type": "none" },
-          "body": { "mode": "none" },
+          "auth": {
+            "type": "none"
+          },
+          "body": {
+            "mode": "none"
+          },
           "preScript": "",
           "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});\n\nrm.test('Repo has expected fields', () => {\n  const repo = rm.response.json();\n  rm.expect(repo).to.have.property('full_name');\n  rm.expect(repo).to.have.property('stargazers_count');\n  rm.expect(repo).to.have.property('language');\n});"
         },
@@ -320,14 +452,31 @@
           "method": "GET",
           "url": "{{githubApiUrl}}/repos/{{githubUser}}/{{githubRepo}}/commits",
           "params": [
-            { "key": "per_page", "value": "5", "enabled": true, "description": "Limit to 5 commits" }
+            {
+              "key": "per_page",
+              "value": "5",
+              "enabled": true,
+              "description": "Limit to 5 commits"
+            }
           ],
           "headers": [
-            { "key": "Accept", "value": "application/vnd.github.v3+json", "enabled": true },
-            { "key": "User-Agent", "value": "Rostyman", "enabled": true }
+            {
+              "key": "Accept",
+              "value": "application/vnd.github.v3+json",
+              "enabled": true
+            },
+            {
+              "key": "User-Agent",
+              "value": "Rostyman",
+              "enabled": true
+            }
           ],
-          "auth": { "type": "none" },
-          "body": { "mode": "none" },
+          "auth": {
+            "type": "none"
+          },
+          "body": {
+            "mode": "none"
+          },
           "preScript": "",
           "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});\n\nrm.test('Returns array of commits', () => {\n  const commits = rm.response.json();\n  rm.expect(Array.isArray(commits)).to.be.true;\n  rm.expect(commits.length).to.be.at.most(5);\n});"
         },
@@ -338,16 +487,43 @@
           "method": "GET",
           "url": "{{githubApiUrl}}/search/repositories",
           "params": [
-            { "key": "q", "value": "api client language:typescript", "enabled": true, "description": "Search query" },
-            { "key": "sort", "value": "stars", "enabled": true, "description": "Sort by stars" },
-            { "key": "per_page", "value": "5", "enabled": true, "description": "Limit results" }
+            {
+              "key": "q",
+              "value": "api client language:typescript",
+              "enabled": true,
+              "description": "Search query"
+            },
+            {
+              "key": "sort",
+              "value": "stars",
+              "enabled": true,
+              "description": "Sort by stars"
+            },
+            {
+              "key": "per_page",
+              "value": "5",
+              "enabled": true,
+              "description": "Limit results"
+            }
           ],
           "headers": [
-            { "key": "Accept", "value": "application/vnd.github.v3+json", "enabled": true },
-            { "key": "User-Agent", "value": "Rostyman", "enabled": true }
+            {
+              "key": "Accept",
+              "value": "application/vnd.github.v3+json",
+              "enabled": true
+            },
+            {
+              "key": "User-Agent",
+              "value": "Rostyman",
+              "enabled": true
+            }
           ],
-          "auth": { "type": "none" },
-          "body": { "mode": "none" },
+          "auth": {
+            "type": "none"
+          },
+          "body": {
+            "mode": "none"
+          },
           "preScript": "",
           "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});\n\nrm.test('Has total_count and items', () => {\n  const data = rm.response.json();\n  rm.expect(data).to.have.property('total_count');\n  rm.expect(data).to.have.property('items');\n});"
         }
@@ -365,14 +541,32 @@
           "method": "GET",
           "url": "{{httpbinUrl}}/get",
           "params": [
-            { "key": "foo", "value": "bar", "enabled": true, "description": "Sample query param" },
-            { "key": "framework", "value": "electron", "enabled": true, "description": "Another param" }
+            {
+              "key": "foo",
+              "value": "bar",
+              "enabled": true,
+              "description": "Sample query param"
+            },
+            {
+              "key": "framework",
+              "value": "electron",
+              "enabled": true,
+              "description": "Another param"
+            }
           ],
           "headers": [
-            { "key": "X-Custom-Header", "value": "Rostyman-Demo", "enabled": true }
+            {
+              "key": "X-Custom-Header",
+              "value": "Rostyman-Demo",
+              "enabled": true
+            }
           ],
-          "auth": { "type": "none" },
-          "body": { "mode": "none" },
+          "auth": {
+            "type": "none"
+          },
+          "body": {
+            "mode": "none"
+          },
           "preScript": "",
           "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});\n\nrm.test('Echoes our custom header', () => {\n  const data = rm.response.json();\n  rm.expect(data.headers['X-Custom-Header']).to.equal('Rostyman-Demo');\n});"
         },
@@ -384,13 +578,24 @@
           "url": "{{httpbinUrl}}/post",
           "params": [],
           "headers": [
-            { "key": "Content-Type", "value": "application/json", "enabled": true },
-            { "key": "X-Request-ID", "value": "{{$guid}}", "enabled": true, "description": "Auto-generated GUID" }
+            {
+              "key": "Content-Type",
+              "value": "application/json",
+              "enabled": true
+            },
+            {
+              "key": "X-Request-ID",
+              "value": "{{$guid}}",
+              "enabled": true,
+              "description": "Auto-generated GUID"
+            }
           ],
-          "auth": { "type": "none" },
+          "auth": {
+            "type": "none"
+          },
           "body": {
             "mode": "raw",
-            "raw": "{\n  \"app\": \"Rostyman\",\n  \"version\": \"0.1.0-beta.11\",\n  \"features\": [\n    \"HTTP\", \"GraphQL\", \"gRPC\",\n    \"WebSocket\", \"Socket.IO\", \"MQTT\", \"SSE\", \"MCP\"\n  ],\n  \"local_first\": true\n}",
+            "raw": "{\n  \"app\": \"Rostyman\",\n  \"version\": \"0.1.0-beta.12\",\n  \"features\": [\n    \"HTTP\", \"GraphQL\", \"gRPC\",\n    \"WebSocket\", \"Socket.IO\", \"MQTT\", \"SSE\", \"MCP\"\n  ],\n  \"local_first\": true\n}",
             "language": "json"
           },
           "preScript": "",
@@ -406,9 +611,14 @@
           "headers": [],
           "auth": {
             "type": "basic",
-            "basic": { "username": "demo", "password": "password123" }
+            "basic": {
+              "username": "demo",
+              "password": "password123"
+            }
           },
-          "body": { "mode": "none" },
+          "body": {
+            "mode": "none"
+          },
           "preScript": "",
           "testScript": "rm.test('Auth successful', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});\n\nrm.test('Authenticated as demo user', () => {\n  const data = rm.response.json();\n  rm.expect(data.authenticated).to.be.true;\n  rm.expect(data.user).to.equal('demo');\n});"
         },
@@ -420,8 +630,12 @@
           "url": "{{httpbinUrl}}/status/418",
           "params": [],
           "headers": [],
-          "auth": { "type": "none" },
-          "body": { "mode": "none" },
+          "auth": {
+            "type": "none"
+          },
+          "body": {
+            "mode": "none"
+          },
           "preScript": "",
           "testScript": "rm.test('Returns 418 I\\'m a teapot', () => {\n  rm.expect(rm.response.code).to.equal(418);\n});"
         },
@@ -432,12 +646,24 @@
           "method": "GET",
           "url": "{{httpbinUrl}}/response-headers",
           "params": [
-            { "key": "X-Powered-By", "value": "Rostyman", "enabled": true },
-            { "key": "X-Version", "value": "beta.11", "enabled": true }
+            {
+              "key": "X-Powered-By",
+              "value": "Rostyman",
+              "enabled": true
+            },
+            {
+              "key": "X-Version",
+              "value": "beta.11",
+              "enabled": true
+            }
           ],
           "headers": [],
-          "auth": { "type": "none" },
-          "body": { "mode": "none" },
+          "auth": {
+            "type": "none"
+          },
+          "body": {
+            "mode": "none"
+          },
           "preScript": "",
           "testScript": "rm.test('Custom headers in response', () => {\n  rm.expect(rm.response.headers['x-powered-by']).to.equal('Rostyman');\n});"
         }
@@ -456,10 +682,18 @@
           "url": "{{countriesUrl}}/name/{{country}}",
           "params": [],
           "headers": [
-            { "key": "Accept", "value": "application/json", "enabled": true }
+            {
+              "key": "Accept",
+              "value": "application/json",
+              "enabled": true
+            }
           ],
-          "auth": { "type": "none" },
-          "body": { "mode": "none" },
+          "auth": {
+            "type": "none"
+          },
+          "body": {
+            "mode": "none"
+          },
           "preScript": "",
           "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});\n\nrm.test('Country has capital and population', () => {\n  const countries = rm.response.json();\n  const country = countries[0];\n  rm.expect(country).to.have.property('capital');\n  rm.expect(country).to.have.property('population');\n  rm.expect(country).to.have.property('flags');\n});"
         },
@@ -470,13 +704,26 @@
           "method": "GET",
           "url": "{{countriesUrl}}/all",
           "params": [
-            { "key": "fields", "value": "name,capital,population,flags,region", "enabled": true, "description": "Limit fields for smaller response" }
+            {
+              "key": "fields",
+              "value": "name,capital,population,flags,region",
+              "enabled": true,
+              "description": "Limit fields for smaller response"
+            }
           ],
           "headers": [
-            { "key": "Accept", "value": "application/json", "enabled": true }
+            {
+              "key": "Accept",
+              "value": "application/json",
+              "enabled": true
+            }
           ],
-          "auth": { "type": "none" },
-          "body": { "mode": "none" },
+          "auth": {
+            "type": "none"
+          },
+          "body": {
+            "mode": "none"
+          },
           "preScript": "",
           "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});\n\nrm.test('Returns 250 countries', () => {\n  const data = rm.response.json();\n  rm.expect(data.length).to.equal(250);\n});"
         },
@@ -487,13 +734,25 @@
           "method": "GET",
           "url": "{{countriesUrl}}/region/asia",
           "params": [
-            { "key": "fields", "value": "name,capital,population,languages", "enabled": true }
+            {
+              "key": "fields",
+              "value": "name,capital,population,languages",
+              "enabled": true
+            }
           ],
           "headers": [
-            { "key": "Accept", "value": "application/json", "enabled": true }
+            {
+              "key": "Accept",
+              "value": "application/json",
+              "enabled": true
+            }
           ],
-          "auth": { "type": "none" },
-          "body": { "mode": "none" },
+          "auth": {
+            "type": "none"
+          },
+          "body": {
+            "mode": "none"
+          },
           "preScript": "",
           "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});\n\nrm.test('All countries are in Asia', () => {\n  const data = rm.response.json();\n  rm.expect(data.length).to.be.greaterThan(0);\n});"
         }
@@ -512,8 +771,12 @@
           "url": "https://dog.ceo/api/breeds/image/random",
           "params": [],
           "headers": [],
-          "auth": { "type": "none" },
-          "body": { "mode": "none" },
+          "auth": {
+            "type": "none"
+          },
+          "body": {
+            "mode": "none"
+          },
           "preScript": "",
           "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});\n\nrm.test('Returns image URL', () => {\n  const data = rm.response.json();\n  rm.expect(data.status).to.equal('success');\n  rm.expect(data.message).to.include('https://');\n});"
         },
@@ -525,8 +788,12 @@
           "url": "https://bored-api.appbrewery.com/random",
           "params": [],
           "headers": [],
-          "auth": { "type": "none" },
-          "body": { "mode": "none" },
+          "auth": {
+            "type": "none"
+          },
+          "body": {
+            "mode": "none"
+          },
           "preScript": "",
           "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});\n\nrm.test('Has activity and type', () => {\n  const data = rm.response.json();\n  rm.expect(data).to.have.property('activity');\n  rm.expect(data).to.have.property('type');\n});"
         },
@@ -538,10 +805,1019 @@
           "url": "https://ipapi.co/json/",
           "params": [],
           "headers": [],
-          "auth": { "type": "none" },
-          "body": { "mode": "none" },
+          "auth": {
+            "type": "none"
+          },
+          "body": {
+            "mode": "none"
+          },
           "preScript": "",
           "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});\n\nrm.test('Has IP and location', () => {\n  const data = rm.response.json();\n  rm.expect(data).to.have.property('ip');\n  rm.expect(data).to.have.property('city');\n  rm.expect(data).to.have.property('country_name');\n});"
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "Binary Responses",
+      "description": "APIs that return binary data — images, PDF, CSV, audio, video. Rostyman previews them inline with zoom, playback, and Save File.",
+      "items": [
+        {
+          "type": "folder",
+          "name": "Images",
+          "description": "Image APIs — Rostyman renders PNG, JPEG, GIF, WebP, SVG, BMP inline with zoom controls",
+          "items": [
+            {
+              "type": "request",
+              "name": "PNG — Random Placeholder",
+              "description": "Returns a 300x200 PNG placeholder image. View it in the Visual tab.",
+              "method": "GET",
+              "url": "https://placehold.co/300x200/png",
+              "params": [],
+              "headers": [],
+              "auth": {
+                "type": "none"
+              },
+              "body": {
+                "mode": "none"
+              },
+              "preScript": "",
+              "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});\n\nrm.test('Content-Type is PNG', () => {\n  rm.expect(rm.response.headers['content-type']).to.include('image/png');\n});"
+            },
+            {
+              "type": "request",
+              "name": "JPEG — Random Photo",
+              "description": "Returns a random 400x300 JPEG photo from picsum.photos",
+              "method": "GET",
+              "url": "https://picsum.photos/400/300",
+              "params": [],
+              "headers": [],
+              "auth": {
+                "type": "none"
+              },
+              "body": {
+                "mode": "none"
+              },
+              "preScript": "",
+              "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});\n\nrm.test('Content-Type is JPEG', () => {\n  rm.expect(rm.response.headers['content-type']).to.include('image/jpeg');\n});"
+            },
+            {
+              "type": "request",
+              "name": "SVG — httpbin",
+              "description": "Returns an SVG image from httpbin. Rostyman renders SVG natively with zoom.",
+              "method": "GET",
+              "url": "{{httpbinUrl}}/image/svg",
+              "params": [],
+              "headers": [
+                {
+                  "key": "Accept",
+                  "value": "image/svg+xml",
+                  "enabled": true
+                }
+              ],
+              "auth": {
+                "type": "none"
+              },
+              "body": {
+                "mode": "none"
+              },
+              "preScript": "",
+              "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});"
+            },
+            {
+              "type": "request",
+              "name": "WebP — httpbin",
+              "description": "Returns a WebP image from httpbin",
+              "method": "GET",
+              "url": "{{httpbinUrl}}/image/webp",
+              "params": [],
+              "headers": [
+                {
+                  "key": "Accept",
+                  "value": "image/webp",
+                  "enabled": true
+                }
+              ],
+              "auth": {
+                "type": "none"
+              },
+              "body": {
+                "mode": "none"
+              },
+              "preScript": "",
+              "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});"
+            },
+            {
+              "type": "request",
+              "name": "JPEG — httpbin",
+              "description": "Returns a JPEG image from httpbin",
+              "method": "GET",
+              "url": "{{httpbinUrl}}/image/jpeg",
+              "params": [],
+              "headers": [
+                {
+                  "key": "Accept",
+                  "value": "image/jpeg",
+                  "enabled": true
+                }
+              ],
+              "auth": {
+                "type": "none"
+              },
+              "body": {
+                "mode": "none"
+              },
+              "preScript": "",
+              "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});"
+            },
+            {
+              "type": "request",
+              "name": "PNG — httpbin",
+              "description": "Returns a PNG image from httpbin",
+              "method": "GET",
+              "url": "{{httpbinUrl}}/image/png",
+              "params": [],
+              "headers": [
+                {
+                  "key": "Accept",
+                  "value": "image/png",
+                  "enabled": true
+                }
+              ],
+              "auth": {
+                "type": "none"
+              },
+              "body": {
+                "mode": "none"
+              },
+              "preScript": "",
+              "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});"
+            },
+            {
+              "type": "request",
+              "name": "GIF — HTTP Status Cat",
+              "description": "Returns a cat image for any HTTP status code. Try changing the number in the URL (200, 404, 500, 418, 301).",
+              "method": "GET",
+              "url": "https://http.cat/200",
+              "params": [],
+              "headers": [],
+              "auth": {
+                "type": "none"
+              },
+              "body": {
+                "mode": "none"
+              },
+              "preScript": "",
+              "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});"
+            }
+          ]
+        },
+        {
+          "type": "request",
+          "name": "PDF — Sample Document",
+          "description": "Downloads a sample PDF. Rostyman renders it inline with the built-in PDF viewer.",
+          "method": "GET",
+          "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+          "params": [],
+          "headers": [],
+          "auth": {
+            "type": "none"
+          },
+          "body": {
+            "mode": "none"
+          },
+          "preScript": "",
+          "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});\n\nrm.test('Content-Type is PDF', () => {\n  rm.expect(rm.response.headers['content-type']).to.include('application/pdf');\n});"
+        },
+        {
+          "type": "request",
+          "name": "CSV — Sample Data",
+          "description": "Downloads sample CSV data. Rostyman shows it as a sortable table in the Table view.",
+          "method": "GET",
+          "url": "https://people.sc.fsu.edu/~jburkardt/data/csv/airtravel.csv",
+          "params": [],
+          "headers": [],
+          "auth": {
+            "type": "none"
+          },
+          "body": {
+            "mode": "none"
+          },
+          "preScript": "",
+          "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});"
+        },
+        {
+          "type": "request",
+          "name": "Audio — MP3 Sample",
+          "description": "Downloads a short MP3 audio file. Rostyman plays it with built-in audio controls.",
+          "method": "GET",
+          "url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+          "params": [],
+          "headers": [],
+          "auth": {
+            "type": "none"
+          },
+          "body": {
+            "mode": "none"
+          },
+          "preScript": "",
+          "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});\n\nrm.test('Content-Type is audio', () => {\n  rm.expect(rm.response.headers['content-type']).to.include('audio');\n});"
+        },
+        {
+          "type": "request",
+          "name": "ZIP Archive — GitHub gitignore repo",
+          "description": "Downloads the GitHub gitignore repository as a real ZIP archive (~100 KB). Demonstrates binary response: shows in the Visual viewer with a Save button.",
+          "method": "GET",
+          "url": "https://codeload.github.com/github/gitignore/zip/refs/heads/main",
+          "params": [],
+          "headers": [
+            {
+              "key": "Accept",
+              "value": "application/zip",
+              "enabled": true,
+              "description": ""
+            }
+          ],
+          "auth": {
+            "type": "none"
+          },
+          "body": {
+            "mode": "none"
+          },
+          "preScript": "",
+          "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});"
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "Auth Types",
+      "description": "Demonstrates different authentication methods supported by Rostyman",
+      "items": [
+        {
+          "type": "request",
+          "name": "Bearer Token",
+          "description": "Test Bearer token auth — httpbin echoes the Authorization header back",
+          "method": "GET",
+          "url": "{{httpbinUrl}}/bearer",
+          "params": [],
+          "headers": [],
+          "auth": {
+            "type": "bearer",
+            "bearer": {
+              "token": "my-demo-token-12345"
+            }
+          },
+          "body": {
+            "mode": "none"
+          },
+          "preScript": "",
+          "testScript": "rm.test('Auth successful', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});\n\nrm.test('Token was sent', () => {\n  const data = rm.response.json();\n  rm.expect(data.authenticated).to.be.true;\n  rm.expect(data.token).to.equal('my-demo-token-12345');\n});"
+        },
+        {
+          "type": "request",
+          "name": "Basic Auth",
+          "description": "Test Basic Authentication — returns 200 if credentials match",
+          "method": "GET",
+          "url": "{{httpbinUrl}}/basic-auth/admin/secret",
+          "params": [],
+          "headers": [],
+          "auth": {
+            "type": "basic",
+            "basic": {
+              "username": "admin",
+              "password": "secret"
+            }
+          },
+          "body": {
+            "mode": "none"
+          },
+          "preScript": "",
+          "testScript": "rm.test('Auth successful', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});\n\nrm.test('Authenticated user', () => {\n  const data = rm.response.json();\n  rm.expect(data.authenticated).to.be.true;\n  rm.expect(data.user).to.equal('admin');\n});"
+        },
+        {
+          "type": "request",
+          "name": "Digest Auth",
+          "description": "Test Digest Authentication — Rostyman handles the 401 challenge automatically",
+          "method": "GET",
+          "url": "{{httpbinUrl}}/digest-auth/auth/user/pass/MD5",
+          "params": [],
+          "headers": [],
+          "auth": {
+            "type": "digest",
+            "digest": {
+              "username": "user",
+              "password": "pass"
+            }
+          },
+          "body": {
+            "mode": "none"
+          },
+          "preScript": "",
+          "testScript": "rm.test('Auth successful', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});\n\nrm.test('Authenticated', () => {\n  const data = rm.response.json();\n  rm.expect(data.authenticated).to.be.true;\n});"
+        },
+        {
+          "type": "request",
+          "name": "API Key (Header)",
+          "description": "Send API key as a custom header — httpbin echoes all headers back",
+          "method": "GET",
+          "url": "{{httpbinUrl}}/headers",
+          "params": [],
+          "headers": [],
+          "auth": {
+            "type": "apikey",
+            "apikey": {
+              "key": "X-API-Key",
+              "value": "demo-api-key-xyz",
+              "in": "header"
+            }
+          },
+          "body": {
+            "mode": "none"
+          },
+          "preScript": "",
+          "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});\n\nrm.test('API key header sent', () => {\n  const data = rm.response.json();\n  rm.expect(data.headers['X-Api-Key']).to.equal('demo-api-key-xyz');\n});"
+        },
+        {
+          "type": "request",
+          "name": "API Key (Query Param)",
+          "description": "Send API key as a query parameter — httpbin echoes args back",
+          "method": "GET",
+          "url": "{{httpbinUrl}}/get",
+          "params": [],
+          "headers": [],
+          "auth": {
+            "type": "apikey",
+            "apikey": {
+              "key": "api_key",
+              "value": "demo-key-query",
+              "in": "query"
+            }
+          },
+          "body": {
+            "mode": "none"
+          },
+          "preScript": "",
+          "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});\n\nrm.test('API key in query args', () => {\n  const data = rm.response.json();\n  rm.expect(data.args['api_key']).to.equal('demo-key-query');\n});"
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "XML & HTML Responses",
+      "description": "APIs that return XML and HTML — Rostyman formats and syntax-highlights these in Pretty view",
+      "items": [
+        {
+          "type": "request",
+          "name": "XML Response",
+          "description": "Returns an XML response — view it in Pretty mode with syntax highlighting",
+          "method": "GET",
+          "url": "{{httpbinUrl}}/xml",
+          "params": [],
+          "headers": [],
+          "auth": {
+            "type": "none"
+          },
+          "body": {
+            "mode": "none"
+          },
+          "preScript": "",
+          "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});\n\nrm.test('Content-Type is XML', () => {\n  rm.expect(rm.response.headers['content-type']).to.include('xml');\n});"
+        },
+        {
+          "type": "request",
+          "name": "HTML Response",
+          "description": "Returns an HTML page — view it rendered in Preview mode or as source in Pretty mode",
+          "method": "GET",
+          "url": "{{httpbinUrl}}/html",
+          "params": [],
+          "headers": [],
+          "auth": {
+            "type": "none"
+          },
+          "body": {
+            "mode": "none"
+          },
+          "preScript": "",
+          "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});\n\nrm.test('Content-Type is HTML', () => {\n  rm.expect(rm.response.headers['content-type']).to.include('html');\n});"
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "Redirects & Cookies",
+      "description": "Test HTTP redirects and cookie handling",
+      "items": [
+        {
+          "type": "request",
+          "name": "Follow Redirects (3 hops)",
+          "description": "Follows 3 redirects before reaching the final destination",
+          "method": "GET",
+          "url": "{{httpbinUrl}}/redirect/3",
+          "params": [],
+          "headers": [],
+          "auth": {
+            "type": "none"
+          },
+          "body": {
+            "mode": "none"
+          },
+          "preScript": "",
+          "testScript": "rm.test('Final status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});"
+        },
+        {
+          "type": "request",
+          "name": "Absolute Redirect",
+          "description": "Redirects with absolute URL",
+          "method": "GET",
+          "url": "{{httpbinUrl}}/absolute-redirect/2",
+          "params": [],
+          "headers": [],
+          "auth": {
+            "type": "none"
+          },
+          "body": {
+            "mode": "none"
+          },
+          "preScript": "",
+          "testScript": "rm.test('Final status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});"
+        },
+        {
+          "type": "request",
+          "name": "Set Cookies",
+          "description": "Sets cookies via response headers — check the Cookies tab",
+          "method": "GET",
+          "url": "{{httpbinUrl}}/cookies/set",
+          "params": [
+            {
+              "key": "session_id",
+              "value": "abc123",
+              "enabled": true
+            },
+            {
+              "key": "theme",
+              "value": "dark",
+              "enabled": true
+            }
+          ],
+          "headers": [],
+          "auth": {
+            "type": "none"
+          },
+          "body": {
+            "mode": "none"
+          },
+          "preScript": "",
+          "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});"
+        },
+        {
+          "type": "request",
+          "name": "Get Cookies",
+          "description": "Returns cookies that were previously set",
+          "method": "GET",
+          "url": "{{httpbinUrl}}/cookies",
+          "params": [],
+          "headers": [],
+          "auth": {
+            "type": "none"
+          },
+          "body": {
+            "mode": "none"
+          },
+          "preScript": "",
+          "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});"
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "Scripting & Variables",
+      "description": "Demonstrates pre-request scripts, dynamic variables, and test assertions",
+      "items": [
+        {
+          "type": "request",
+          "name": "Dynamic Variables",
+          "description": "Uses built-in dynamic variables like {{$randomUUID}}, {{$timestamp}}, {{$randomEmail}} — check the echoed headers",
+          "method": "GET",
+          "url": "{{httpbinUrl}}/headers",
+          "params": [],
+          "headers": [
+            {
+              "key": "X-Request-ID",
+              "value": "{{$randomUUID}}",
+              "enabled": true,
+              "description": "Auto-generated UUID"
+            },
+            {
+              "key": "X-Timestamp",
+              "value": "{{$timestamp}}",
+              "enabled": true,
+              "description": "Unix timestamp"
+            },
+            {
+              "key": "X-User-Email",
+              "value": "{{$randomEmail}}",
+              "enabled": true,
+              "description": "Random email"
+            },
+            {
+              "key": "X-Random-Int",
+              "value": "{{$randomInt}}",
+              "enabled": true,
+              "description": "Random integer 0-999"
+            }
+          ],
+          "auth": {
+            "type": "none"
+          },
+          "body": {
+            "mode": "none"
+          },
+          "preScript": "",
+          "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});\n\nrm.test('Dynamic headers were resolved', () => {\n  const h = rm.response.json().headers;\n  rm.expect(h['X-Request-Id']).to.match(/^[0-9a-f-]{36}$/);\n  rm.expect(h['X-User-Email']).to.include('@');\n});"
+        },
+        {
+          "type": "request",
+          "name": "Pre-Request Script",
+          "description": "Sets a variable in the pre-request script, then uses it in the request body",
+          "method": "POST",
+          "url": "{{httpbinUrl}}/post",
+          "params": [],
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json",
+              "enabled": true
+            }
+          ],
+          "auth": {
+            "type": "none"
+          },
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"generatedAt\": \"{{generatedTimestamp}}\",\n  \"requestId\": \"{{requestId}}\"\n}",
+            "language": "json"
+          },
+          "preScript": "// Pre-request script sets variables before the request is sent\nrm.collectionVariables.set('generatedTimestamp', new Date().toISOString());\nrm.collectionVariables.set('requestId', 'REQ-' + Math.random().toString(36).slice(2, 8).toUpperCase());",
+          "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});\n\nrm.test('Script-generated values were sent', () => {\n  const data = rm.response.json();\n  const body = JSON.parse(data.data);\n  rm.expect(body.generatedAt).to.match(/^\\d{4}-/);\n  rm.expect(body.requestId).to.match(/^REQ-/);\n});"
+        },
+        {
+          "type": "request",
+          "name": "Response Time Test",
+          "description": "Delays the response by 2 seconds — test script verifies timing",
+          "method": "GET",
+          "url": "{{httpbinUrl}}/delay/2",
+          "params": [],
+          "headers": [],
+          "auth": {
+            "type": "none"
+          },
+          "body": {
+            "mode": "none"
+          },
+          "preScript": "",
+          "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});\n\nrm.test('Response took ~2 seconds', () => {\n  rm.expect(rm.response.responseTime).to.be.greaterThan(1500);\n  rm.expect(rm.response.responseTime).to.be.lessThan(5000);\n});"
+        },
+        {
+          "type": "request",
+          "name": "Chained Variables",
+          "description": "Test script extracts data from the response and stores it as a collection variable for use in subsequent requests",
+          "method": "GET",
+          "url": "{{githubApiUrl}}/users/octocat",
+          "params": [],
+          "headers": [
+            {
+              "key": "User-Agent",
+              "value": "Rostyman",
+              "enabled": true
+            }
+          ],
+          "auth": {
+            "type": "none"
+          },
+          "body": {
+            "mode": "none"
+          },
+          "preScript": "",
+          "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});\n\nconst user = rm.response.json();\nrm.collectionVariables.set('extractedLogin', user.login);\nrm.collectionVariables.set('extractedRepos', String(user.public_repos));\n\nrm.test('Extracted and saved login', () => {\n  rm.expect(user.login).to.equal('octocat');\n});"
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "Request Body Types",
+      "description": "Demonstrates different body modes — JSON, form-data, URL-encoded, raw text",
+      "items": [
+        {
+          "type": "request",
+          "name": "JSON Body",
+          "description": "POST with JSON body",
+          "method": "POST",
+          "url": "{{httpbinUrl}}/post",
+          "params": [],
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json",
+              "enabled": true
+            }
+          ],
+          "auth": {
+            "type": "none"
+          },
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"name\": \"Rostyman\",\n  \"type\": \"API Client\",\n  \"features\": [\"HTTP\", \"GraphQL\", \"gRPC\", \"WebSocket\", \"MCP\"],\n  \"offline\": true\n}",
+            "language": "json"
+          },
+          "preScript": "",
+          "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});"
+        },
+        {
+          "type": "request",
+          "name": "Form URL-Encoded",
+          "description": "POST with URL-encoded form data",
+          "method": "POST",
+          "url": "{{httpbinUrl}}/post",
+          "params": [],
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/x-www-form-urlencoded",
+              "enabled": true
+            }
+          ],
+          "auth": {
+            "type": "none"
+          },
+          "body": {
+            "mode": "raw",
+            "raw": "username=demo&password=test123&remember=true",
+            "language": "text"
+          },
+          "preScript": "",
+          "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});\n\nrm.test('Form data received', () => {\n  const data = rm.response.json();\n  rm.expect(data.form.username).to.equal('demo');\n  rm.expect(data.form.password).to.equal('test123');\n});"
+        },
+        {
+          "type": "request",
+          "name": "XML Body",
+          "description": "POST with XML body — useful for SOAP APIs",
+          "method": "POST",
+          "url": "{{httpbinUrl}}/post",
+          "params": [],
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/xml",
+              "enabled": true
+            }
+          ],
+          "auth": {
+            "type": "none"
+          },
+          "body": {
+            "mode": "raw",
+            "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<request>\n  <method>CreateUser</method>\n  <params>\n    <name>John Doe</name>\n    <email>john@example.com</email>\n    <role>admin</role>\n  </params>\n</request>",
+            "language": "xml"
+          },
+          "preScript": "",
+          "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});"
+        },
+        {
+          "type": "request",
+          "name": "Raw Text Body",
+          "description": "POST with plain text body",
+          "method": "POST",
+          "url": "{{httpbinUrl}}/post",
+          "params": [],
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "text/plain",
+              "enabled": true
+            }
+          ],
+          "auth": {
+            "type": "none"
+          },
+          "body": {
+            "mode": "raw",
+            "raw": "This is a plain text body.\nIt can contain multiple lines.\nUseful for log submission APIs.",
+            "language": "text"
+          },
+          "preScript": "",
+          "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});\n\nrm.test('Text body was sent', () => {\n  const data = rm.response.json();\n  rm.expect(data.data).to.include('plain text body');\n});"
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "GraphQL",
+      "description": "GraphQL queries and mutations using public APIs. Rostyman has a dedicated GraphQL body mode with schema introspection.",
+      "items": [
+        {
+          "type": "request",
+          "name": "Countries — List All",
+          "description": "GraphQL query to fetch all countries with their codes, names, and capitals",
+          "method": "POST",
+          "url": "https://countries.trevorblades.com/graphql",
+          "params": [],
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json",
+              "enabled": true
+            }
+          ],
+          "auth": {
+            "type": "none"
+          },
+          "body": {
+            "mode": "graphql",
+            "graphql": {
+              "query": "query {\n  countries {\n    code\n    name\n    capital\n    currency\n    emoji\n    continent {\n      name\n    }\n  }\n}",
+              "variables": "{}"
+            }
+          },
+          "preScript": "",
+          "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});\n\nrm.test('Returns countries array', () => {\n  const data = rm.response.json();\n  rm.expect(data.data.countries.length).to.be.greaterThan(0);\n  rm.expect(data.data.countries[0]).to.have.property('name');\n});"
+        },
+        {
+          "type": "request",
+          "name": "Countries — Filter by Continent",
+          "description": "GraphQL query with variables — filter countries by continent code",
+          "method": "POST",
+          "url": "https://countries.trevorblades.com/graphql",
+          "params": [],
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json",
+              "enabled": true
+            }
+          ],
+          "auth": {
+            "type": "none"
+          },
+          "body": {
+            "mode": "graphql",
+            "graphql": {
+              "query": "query CountriesByContinent($code: String!) {\n  continent(code: $code) {\n    name\n    countries {\n      code\n      name\n      capital\n      emoji\n      languages {\n        name\n      }\n    }\n  }\n}",
+              "variables": "{\n  \"code\": \"EU\"\n}"
+            }
+          },
+          "preScript": "",
+          "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});\n\nrm.test('Returns European countries', () => {\n  const data = rm.response.json();\n  rm.expect(data.data.continent.name).to.equal('Europe');\n  rm.expect(data.data.continent.countries.length).to.be.greaterThan(0);\n});"
+        },
+        {
+          "type": "request",
+          "name": "Countries — Get Single Country",
+          "description": "Fetch a single country by code with nested continent and languages",
+          "method": "POST",
+          "url": "https://countries.trevorblades.com/graphql",
+          "params": [],
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json",
+              "enabled": true
+            }
+          ],
+          "auth": {
+            "type": "none"
+          },
+          "body": {
+            "mode": "graphql",
+            "graphql": {
+              "query": "query GetCountry($code: ID!) {\n  country(code: $code) {\n    name\n    native\n    capital\n    currency\n    phone\n    emoji\n    emojiU\n    continent {\n      name\n    }\n    languages {\n      code\n      name\n      native\n    }\n    states {\n      name\n    }\n  }\n}",
+              "variables": "{\n  \"code\": \"IN\"\n}"
+            }
+          },
+          "preScript": "",
+          "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});\n\nrm.test('Returns India', () => {\n  const data = rm.response.json();\n  rm.expect(data.data.country.name).to.equal('India');\n});"
+        },
+        {
+          "type": "request",
+          "name": "SpaceX — Latest Launches",
+          "description": "Query SpaceX GraphQL API for recent launches",
+          "method": "POST",
+          "url": "https://spacex-production.up.railway.app/graphql",
+          "params": [],
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json",
+              "enabled": true
+            }
+          ],
+          "auth": {
+            "type": "none"
+          },
+          "body": {
+            "mode": "graphql",
+            "graphql": {
+              "query": "query {\n  launchesPast(limit: 5) {\n    mission_name\n    launch_date_local\n    launch_success\n    rocket {\n      rocket_name\n    }\n    links {\n      article_link\n      video_link\n    }\n  }\n}",
+              "variables": "{}"
+            }
+          },
+          "preScript": "",
+          "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});"
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "WebSocket",
+      "description": "WebSocket connections for real-time communication. Open these requests in Rostyman — they'll open as WebSocket tabs with Connect/Disconnect and message sending.",
+      "items": [
+        {
+          "type": "websocket",
+          "name": "Echo WebSocket",
+          "description": "Connects to a WebSocket echo server. Send any message and it echoes back. Great for testing.",
+          "url": "wss://echo.websocket.org"
+        },
+        {
+          "type": "websocket",
+          "name": "Binance Ticker (BTC/USDT)",
+          "description": "Real-time cryptocurrency price ticker from Binance. Streams BTC/USDT mini ticker data.",
+          "url": "wss://stream.binance.com:9443/ws/btcusdt@miniTicker"
+        },
+        {
+          "type": "websocket",
+          "name": "Coinbase Matches",
+          "description": "Coinbase WebSocket feed. After connecting, subscribe to channels by sending a JSON message.",
+          "url": "wss://ws-feed.exchange.coinbase.com"
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "Socket.IO",
+      "description": "Socket.IO real-time connections. These open as Socket.IO tabs with event-based emit/listen.",
+      "items": [
+        {
+          "type": "socketio",
+          "name": "Socket.IO Test Server",
+          "description": "Connect to a local Socket.IO server at localhost:3000. Start your own server or use the Mock Server to simulate one.",
+          "url": "http://localhost:3000"
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "MQTT",
+      "description": "MQTT broker connections for IoT messaging. These open as MQTT tabs with publish/subscribe.",
+      "items": [
+        {
+          "type": "mqtt",
+          "name": "Public MQTT Broker (HiveMQ)",
+          "description": "Connect to HiveMQ's free public MQTT broker. Subscribe to 'rostyman/demo/#' and publish test messages.",
+          "url": "wss://broker.hivemq.com:8884/mqtt"
+        },
+        {
+          "type": "mqtt",
+          "name": "Eclipse Mosquitto (Public)",
+          "description": "Connect to Eclipse's public test broker. Subscribe to topics and publish messages.",
+          "url": "wss://test.mosquitto.org:8081"
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "gRPC",
+      "description": "gRPC remote procedure calls. These open as gRPC tabs. Load a .proto file, select a service method, and invoke.",
+      "items": [
+        {
+          "type": "grpc",
+          "name": "gRPC Demo Server",
+          "description": "Connect to a local gRPC server at localhost:50051. Start your own gRPC server or use the grpcb.in test service.",
+          "url": "localhost:50051"
+        },
+        {
+          "type": "grpc",
+          "name": "gRPC Test Service (grpcb.in)",
+          "description": "Public gRPC test service. Load the proto from grpcb.in and invoke methods.",
+          "url": "grpcb.in:9000"
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "Feature Guide",
+      "description": "Quick guides to Rostyman features that aren't request-based. Each request description explains how to use the feature.",
+      "items": [
+        {
+          "type": "request",
+          "name": "Mock Server",
+          "description": "Create a Mock Server: Sidebar → + button → Mock Server. Define routes (GET /api/users → JSON response). Start it on any port. Use collection variables for dynamic responses. Mock servers are saved to the database and persist across sessions.",
+          "method": "GET",
+          "url": "http://localhost:8080/api/users",
+          "params": [],
+          "headers": [],
+          "auth": {
+            "type": "none"
+          },
+          "body": {
+            "mode": "none"
+          },
+          "preScript": "",
+          "testScript": ""
+        },
+        {
+          "type": "request",
+          "name": "Collection Runner",
+          "description": "Run all requests in a collection sequentially: Sidebar → right-click collection → Run Collection (or Ctrl+Shift+R). Supports iterations, CSV/JSON data files, delays, and parallel execution. Exports results as HTML or JUnit XML for CI/CD.",
+          "method": "GET",
+          "url": "{{jsonPlaceholderUrl}}/posts/1",
+          "params": [],
+          "headers": [],
+          "auth": {
+            "type": "none"
+          },
+          "body": {
+            "mode": "none"
+          },
+          "preScript": "",
+          "testScript": "rm.test('Runner demo — Status 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});"
+        },
+        {
+          "type": "request",
+          "name": "Visual Workflow Editor",
+          "description": "Build automation flows: Sidebar → Workflows icon. Drag nodes (Request, Condition, Loop, Transform, Delay, Set Variable) onto the canvas, connect them, and run. The Flow Tracer shows real-time execution with data at each node.",
+          "method": "GET",
+          "url": "{{jsonPlaceholderUrl}}/posts",
+          "params": [
+            {
+              "key": "_limit",
+              "value": "3",
+              "enabled": true
+            }
+          ],
+          "headers": [],
+          "auth": {
+            "type": "none"
+          },
+          "body": {
+            "mode": "none"
+          },
+          "preScript": "",
+          "testScript": ""
+        },
+        {
+          "type": "request",
+          "name": "Scheduler (Cron Jobs)",
+          "description": "Schedule requests to run automatically: Sidebar → Scheduler icon. Create a job with a cron expression (e.g. '*/5 * * * *' for every 5 minutes), link it to a request or workflow, and Rostyman runs it in the background. View last run status and next run time.",
+          "method": "GET",
+          "url": "{{jsonPlaceholderUrl}}/posts/1",
+          "params": [],
+          "headers": [],
+          "auth": {
+            "type": "none"
+          },
+          "body": {
+            "mode": "none"
+          },
+          "preScript": "",
+          "testScript": ""
+        },
+        {
+          "type": "request",
+          "name": "AI Assistant",
+          "description": "Open with Ctrl+Alt+P or the AI icon in the right panel. Generate requests from natural language, write test scripts, explain responses, fix errors, generate mock data, and more. Supports Ollama (local/offline), OpenAI, Anthropic, or BYOK.",
+          "method": "GET",
+          "url": "{{jsonPlaceholderUrl}}/posts/1",
+          "params": [],
+          "headers": [],
+          "auth": {
+            "type": "none"
+          },
+          "body": {
+            "mode": "none"
+          },
+          "preScript": "",
+          "testScript": ""
+        },
+        {
+          "type": "request",
+          "name": "SSE (Server-Sent Events)",
+          "description": "Rostyman auto-detects SSE responses. When a server returns 'text/event-stream' content-type, events are displayed in a real-time log. Try any SSE endpoint and watch events stream in.",
+          "method": "GET",
+          "url": "https://sse.dev/test",
+          "params": [],
+          "headers": [
+            {
+              "key": "Accept",
+              "value": "text/event-stream",
+              "enabled": true
+            }
+          ],
+          "auth": {
+            "type": "none"
+          },
+          "body": {
+            "mode": "none"
+          },
+          "preScript": "",
+          "testScript": ""
         }
       ]
     }
