@@ -1034,12 +1034,19 @@
             },
             {
               "type": "request",
-              "name": "ZIP Archive — httpbin gzip",
-              "description": "Returns gzip-compressed data. Shows as binary file with Save button.",
+              "name": "ZIP Archive — GitHub gitignore repo",
+              "description": "Downloads the GitHub gitignore repository as a real ZIP archive (~100 KB). Demonstrates binary response: shows in the Visual viewer with a Save button.",
               "method": "GET",
-              "url": "{{httpbinUrl}}/gzip",
+              "url": "https://codeload.github.com/github/gitignore/zip/refs/heads/main",
               "params": [],
-              "headers": [],
+              "headers": [
+                {
+                  "key": "Accept",
+                  "value": "application/zip",
+                  "enabled": true,
+                  "description": ""
+                }
+              ],
               "auth": {
                 "type": "none"
               },
