@@ -1055,6 +1055,23 @@
               },
               "preScript": "",
               "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});"
+            },
+            {
+              "type": "request",
+              "name": "Unrecognized Content Type — Random Bytes",
+              "description": "Returns 200 random bytes with content-type: application/octet-stream. Rostyman detects it cannot be previewed and shows a notice card with a Save File button instead of garbled text.",
+              "method": "GET",
+              "url": "https://httpbin.org/bytes/200",
+              "params": [],
+              "headers": [],
+              "auth": {
+                "type": "none"
+              },
+              "body": {
+                "mode": "none"
+              },
+              "preScript": "",
+              "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});\n\nrm.test('Content-Type is octet-stream', () => {\n  rm.expect(rm.response.headers['content-type']).to.include('application/octet-stream');\n});"
             }
           ]
         },
