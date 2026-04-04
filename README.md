@@ -4,7 +4,7 @@
 
 Rostyman runs entirely on your machine with no account required. Your APIs. Your machine. Your rules.
 
-![Rostyman](https://img.shields.io/badge/version-0.1.0--beta.12-blue) ![Platforms](https://img.shields.io/badge/platforms-Windows%20%7C%20macOS%20%7C%20Linux-green) ![Protocols](https://img.shields.io/badge/protocols-8-orange)
+![Rostyman](https://img.shields.io/badge/version-0.1.0--beta.13-blue) ![Platforms](https://img.shields.io/badge/platforms-Windows%20%7C%20macOS%20%7C%20Linux-green) ![Protocols](https://img.shields.io/badge/protocols-8-orange)
 
 ## Download
 
@@ -26,31 +26,38 @@ xattr -cr /Applications/Rostyman.app
 
 Then open Rostyman from Applications normally. You only need to do this once.
 
-## What's New in beta.12
+## What's New in beta.13
 
-### Video Recording with Audio
-- **Record the app** with optional microphone audio for creating demos and tutorials
-- Choose resolution, frame rate, quality, and mic device before recording
-- Mute/unmute the mic during recording
+### Workspace Management
+- **Multiple workspaces** — separate projects with their own collections, environments, globals, vault, mock servers, workflows, and jobs
+- **Workspace switcher** in the title bar — search, switch, create, rename, export, and import workspaces
+- **Per-workspace settings** — HTTP timeout, SSL, redirects, and proxy settings per workspace
+- **Tab persistence** — open tabs are saved and restored when switching workspaces
+- **Export / import** as `.rostyman-workspace` files
 
-### MCP Server — TLS & Tunnels
-- **HTTPS support** via mkcert for secure MCP connections
-- **Tunnel support** — auto-detects ngrok and cloudflared for remote AI agent access
-- **Connected Clients** — see which AI agents are connected, disconnect individually
-- **Tools dialog** — browse all 13 MCP tools with search
+### Binary Response Viewer
+- **Images** (PNG/JPG/GIF/WebP/SVG) with zoom controls
+- **Video** (MP4/WebM) with native player
+- **Audio** (MP3/WAV/OGG) inline player
+- **PDF** embedded viewer, **CSV** as table
+- Triggered automatically — no configuration needed
 
-### Cloud Sharing — Publish
-- **Publish button** — update your cloud share with the latest collection data (same URL)
-- **Share Sources panel** — view all linked sources in the collection overview
-- **Link validation** — automatic checks on startup for invalid cloud links
-- **Trash recovery** — deleted shares can be restored from Trash
+### Update Manager
+- Silent background updates every 4 hours
+- Status bar badge when a new version is ready — restart on your schedule
+- Full release history in Settings → About → Updates
+
+### Full Interface Translations
+- Scheduler, MCP, WebSocket, Socket.IO, MQTT, gRPC tabs now fully translated in all 18 languages
+- No more English strings in non-English modes
 
 ### More
-- Collection descriptions (auto-saved)
-- Slimmer scrollbars, Linux taskbar icon fix
-- Production build passes 100%, security hardening
+- Environment selector on all protocol tabs (WS, gRPC, Socket.IO, MQTT, SSE, MCP)
+- Multi-select in collection tree (Ctrl+Click, Shift+Click)
+- Screenshot to clipboard (Ctrl+Shift+P)
+- First-run welcome dialog + demo workspace
 
-See [full release notes](https://github.com/amitsri/rostyman-releases/releases/tag/v0.1.0-beta.12) for details.
+See [full release notes](https://github.com/amitsri/rostyman-releases/releases/tag/v0.1.0-beta.13) for details.
 
 ## Features
 
@@ -62,7 +69,7 @@ See [full release notes](https://github.com/amitsri/rostyman-releases/releases/t
 - **Socket.IO** — emit events, auto-capture, auth/query config
 - **MQTT** — publish/subscribe, QoS 0/1/2, retain flag, topic management
 - **SSE** — Server-Sent Events with real-time event log
-- **MCP** — Model Context Protocol server (13 tools) + client (stdio + HTTP)
+- **MCP** — Model Context Protocol server (18 tools) + client (stdio + HTTP)
 
 ### AI Assistant
 - Multi-turn conversational chat with persistent history
@@ -72,7 +79,7 @@ See [full release notes](https://github.com/amitsri/rostyman-releases/releases/t
 
 ### MCP Support
 - **MCP Server** — expose collections to AI agents (Claude, Cursor, Windsurf, VS Code)
-- **13 tools** for reading, executing, and creating API resources
+- **18 tools** for reading, executing, and creating API resources
 - **TLS/HTTPS** support via mkcert, tunnel support (ngrok, cloudflared)
 - **Connected clients tracking** with disconnect capability
 - **MCP Client** — connect to external MCP servers (stdio + HTTP)
