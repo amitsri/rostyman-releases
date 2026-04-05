@@ -4,7 +4,7 @@
 
 Rostyman runs entirely on your machine with no account required. Your APIs. Your machine. Your rules.
 
-![Rostyman](https://img.shields.io/badge/version-0.1.0--beta.14-blue) ![Platforms](https://img.shields.io/badge/platforms-Windows%20%7C%20macOS%20%7C%20Linux-green) ![Protocols](https://img.shields.io/badge/protocols-8-orange)
+![Rostyman](https://img.shields.io/badge/version-0.1.0--beta.14.1-blue) ![Platforms](https://img.shields.io/badge/platforms-Windows%20%7C%20macOS%20%7C%20Linux-green) ![Protocols](https://img.shields.io/badge/protocols-8-orange)
 
 ## Download
 
@@ -25,6 +25,11 @@ xattr -cr /Applications/Rostyman.app
 ```
 
 Then open Rostyman from Applications normally. You only need to do this once.
+
+## What's New in beta.14.1
+
+### Bug Fix
+- **Workflow Editor**: The ReactFlow attribution badge no longer appears in the bottom-right corner of the canvas.
 
 ## What's New in beta.14
 
