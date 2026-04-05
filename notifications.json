@@ -1,1 +1,7 @@
-{"id":"beta13-release","version":"beta.13","message":"Rostyman v0.1.0-beta.13 — Workspace management, binary response viewer, update manager, full i18n for all protocol tabs.","type":"info","url":"https://github.com/amitsri/rostyman-releases/releases"}
+{
+  "id": "beta14-release",
+  "version": "beta.14",
+  "message": "Rostyman v0.1.0-beta.14 — Workflow editor redesign, retry logic, response assertions, error handling edges, run history, comment nodes, sub-workflow, import/export, 5 templates.",
+  "type": "info",
+  "url": "https://github.com/amitsri/rostyman-releases/releases"
+}
