@@ -4,7 +4,7 @@
 
 Rostyman runs entirely on your machine with no account required. Your APIs. Your machine. Your rules.
 
-![Rostyman](https://img.shields.io/badge/version-0.1.0--beta.13-blue) ![Platforms](https://img.shields.io/badge/platforms-Windows%20%7C%20macOS%20%7C%20Linux-green) ![Protocols](https://img.shields.io/badge/protocols-8-orange)
+![Rostyman](https://img.shields.io/badge/version-0.1.0--beta.14-blue) ![Platforms](https://img.shields.io/badge/platforms-Windows%20%7C%20macOS%20%7C%20Linux-green) ![Protocols](https://img.shields.io/badge/protocols-8-orange)
 
 ## Download
 
@@ -26,38 +26,49 @@ xattr -cr /Applications/Rostyman.app
 
 Then open Rostyman from Applications normally. You only need to do this once.
 
-## What's New in beta.13
+## What's New in beta.14
 
-### Workspace Management
-- **Multiple workspaces** — separate projects with their own collections, environments, globals, vault, mock servers, workflows, and jobs
-- **Workspace switcher** in the title bar — search, switch, create, rename, export, and import workspaces
-- **Per-workspace settings** — HTTP timeout, SSL, redirects, and proxy settings per workspace
-- **Tab persistence** — open tabs are saved and restored when switching workspaces
-- **Export / import** as `.rostyman-workspace` files
+### Workflow Editor Redesign
+- **Rich node cards** — each node shows its type icon, a live status badge (idle/running/passed/failed/skipped), and a step number during execution
+- **Layout direction picker** — switch between Left→Right, Top→Bottom, Right→Left, and Bottom→Top with a single click; **Auto-Layout** repositions all nodes instantly
+- **Undo / Redo** — full undo history (up to 50 steps) with Ctrl+Z / Ctrl+Y
+- **Zoom controls** — zoom slider in the toolbar plus a fit-to-view button
+- **Snap to grid** — nodes align to a 20 px dot grid by default; toggle between dot and line backgrounds
+- **Save canvas to image** — export the workflow diagram as PNG, SVG, or JSON from the toolbar
+- **Collapsible node palette** — drag nodes from a collapsible left panel; hover any node type to see a description popup
 
-### Binary Response Viewer
-- **Images** (PNG/JPG/GIF/WebP/SVG) with zoom controls
-- **Video** (MP4/WebM) with native player
-- **Audio** (MP3/WAV/OGG) inline player
-- **PDF** embedded viewer, **CSV** as table
-- Triggered automatically — no configuration needed
+### Retry Logic (Free)
+- Any HTTP Request node can automatically retry on failure — set retry count (up to 5), backoff strategy (Fixed, Linear, or Exponential), delay, and which status codes trigger a retry (e.g. `429, 500, 503`)
 
-### Update Manager
-- Silent background updates every 4 hours
-- Status bar badge when a new version is ready — restart on your schedule
-- Full release history in Settings → About → Updates
+### Response Assertions (Free)
+- Add pass/fail checks to any request node without writing scripts — check status code, JSON body fields (JSONPath), response headers, or response time using operators like eq, contains, inRange, and more
 
-### Full Interface Translations
-- Scheduler, MCP, WebSocket, Socket.IO, MQTT, gRPC tabs now fully translated in all 18 languages
-- No more English strings in non-English modes
+### Error Handling Edges (Free)
+- Every node now has an error handle. Connect it to any downstream node to route failures gracefully. `$error.message`, `$error.status`, and `$error.nodeId` are available on the error path
 
-### More
-- Environment selector on all protocol tabs (WS, gRPC, Socket.IO, MQTT, SSE, MCP)
-- Multi-select in collection tree (Ctrl+Click, Shift+Click)
-- Screenshot to clipboard (Ctrl+Shift+P)
-- First-run welcome dialog + demo workspace
+### Run History (Free)
+- Every workflow execution is automatically saved. Open the History tab in the palette to replay any past run — full trace, timings, and variable snapshots
 
-See [full release notes](https://github.com/amitsri/rostyman-releases/releases/tag/v0.1.0-beta.13) for details.
+### New Node Types (Free)
+- **Comment node** — sticky-note annotations for documenting workflows; does not affect execution
+- **Sub-Workflow node** — call another saved workflow as a single step; circular references are automatically blocked
+
+### Auth Inheritance on Request Nodes (Free)
+- HTTP Request nodes can now inherit auth from a parent collection — choose Bearer, Basic, API Key, or Inherit
+
+### Import / Export Workflows (Free)
+- Export any workflow as a `.rostyman-workflow` file to share or back up; import restores all nodes, edges, and configuration
+
+### 5 Built-in Templates (Free)
+- Start a new workflow from a template: API Health Check, Data Pipeline, Auth Flow, CRUD Suite, or Retry Resilience
+
+### Pencil Edit Icon on All Tabs
+- Every tab title now shows a pencil icon on hover — click it to rename the tab inline with the cursor placed at the end
+
+### Protocol Translations
+- WebSocket, Socket.IO, MQTT, gRPC, and GraphQL status and system messages are now fully translated in all 18 languages
+
+See [full release notes](https://github.com/amitsri/rostyman-releases/releases/tag/v0.1.0-beta.14) for details.
 
 ## Features
 
@@ -105,9 +116,13 @@ See [full release notes](https://github.com/amitsri/rostyman-releases/releases/t
 - `.rostyman` file association — double-click to open on any OS
 
 ### Visual Workflow Editor
-- Drag-and-drop canvas with 8 node types
-- Flow Tracer — execution event log with node tracking
-- Save and manage workflows from sidebar
+- Drag-and-drop canvas with 10 node types (Start, End, HTTP Request, Condition, Loop, Transform, Delay, Set Variable, Comment, Sub-Workflow)
+- **Retry logic** — automatic retries with fixed/linear/exponential backoff
+- **Response assertions** — pass/fail checks on status, body, headers, and response time
+- **Error handling edges** — route failures to any downstream node
+- **Run history** — replay any past execution with full trace and timings
+- **5 built-in templates** — Health Check, Data Pipeline, Auth Flow, CRUD Suite, Retry Resilience
+- Flow Tracer — live execution log with node tracking
 
 ### More
 - **20 built-in themes** + custom theme builder
@@ -135,6 +150,7 @@ See [full release notes](https://github.com/amitsri/rostyman-releases/releases/t
 - [AI Assistant](https://github.com/amitsri/rostyman-releases/wiki/AI-Assistant)
 - [Scripting API](https://github.com/amitsri/rostyman-releases/wiki/Scripting)
 - [Cloud Storage](https://github.com/amitsri/rostyman-releases/wiki/Cloud-Storage)
+- [Visual Workflows](https://github.com/amitsri/rostyman-releases/wiki/Visual-Workflows)
 
 ## Report Issues
 
