@@ -2031,13 +2031,13 @@
   "workflows": [
     {
       "name": "Health Check Pipeline",
-      "description": "Checks multiple API endpoints and reports their health status. Demonstrates request chains with conditions.",
+      "description": "Checks two API endpoints for a healthy 200 response. Uses assertions to validate status codes and an error edge to route failures to a log step.",
       "nodes": [
         {
-          "id": "start-1",
-          "type": "default",
+          "id": "s1",
+          "type": "start",
           "position": {
-            "x": 50,
+            "x": 60,
             "y": 200
           },
           "data": {
@@ -2046,69 +2046,45 @@
           }
         },
         {
-          "id": "req-1",
-          "type": "default",
+          "id": "c1",
+          "type": "comment",
           "position": {
-            "x": 250,
+            "x": 60,
+            "y": 360
+          },
+          "data": {
+            "label": "About this workflow",
+            "nodeType": "comment",
+            "text": "Checks two public APIs. Assertions verify the response status is 200. The error edge on each request routes failures to a logging step."
+          }
+        },
+        {
+          "id": "r1",
+          "type": "request",
+          "position": {
+            "x": 380,
             "y": 200
           },
           "data": {
-            "label": "Check Pet Store",
+            "label": "Check Posts API",
             "nodeType": "request",
             "method": "GET",
             "url": "https://jsonplaceholder.typicode.com/posts/1",
-            "headers": {},
-            "body": ""
+            "assertions": [
+              {
+                "id": "a1",
+                "type": "status",
+                "operator": "eq",
+                "value": "200"
+              }
+            ]
           }
         },
         {
-          "id": "cond-1",
-          "type": "default",
+          "id": "r2",
+          "type": "request",
           "position": {
-            "x": 500,
-            "y": 200
-          },
-          "data": {
-            "label": "Status OK?",
-            "nodeType": "condition",
-            "condition": "output.status === 200"
-          }
-        },
-        {
-          "id": "var-1",
-          "type": "default",
-          "position": {
-            "x": 750,
-            "y": 100
-          },
-          "data": {
-            "label": "Set Healthy",
-            "nodeType": "setVariable",
-            "varName": "healthStatus",
-            "varValue": "healthy",
-            "varScope": "global"
-          }
-        },
-        {
-          "id": "var-2",
-          "type": "default",
-          "position": {
-            "x": 750,
-            "y": 300
-          },
-          "data": {
-            "label": "Set Unhealthy",
-            "nodeType": "setVariable",
-            "varName": "healthStatus",
-            "varValue": "unhealthy",
-            "varScope": "global"
-          }
-        },
-        {
-          "id": "req-2",
-          "type": "default",
-          "position": {
-            "x": 1000,
+            "x": 700,
             "y": 200
           },
           "data": {
@@ -2116,19 +2092,58 @@
             "nodeType": "request",
             "method": "GET",
             "url": "https://jsonplaceholder.typicode.com/users/1",
-            "headers": {},
-            "body": ""
+            "assertions": [
+              {
+                "id": "a2",
+                "type": "status",
+                "operator": "eq",
+                "value": "200"
+              },
+              {
+                "id": "a3",
+                "type": "responseTime",
+                "operator": "lt",
+                "value": "3000"
+              }
+            ]
           }
         },
         {
-          "id": "end-1",
-          "type": "default",
+          "id": "sv1",
+          "type": "setVariable",
           "position": {
-            "x": 1250,
-            "y": 200
+            "x": 1020,
+            "y": 340
           },
           "data": {
-            "label": "End",
+            "label": "Log Error",
+            "nodeType": "setVariable",
+            "varName": "healthError",
+            "varValue": "{{$error.message}}",
+            "varScope": "env"
+          }
+        },
+        {
+          "id": "end1",
+          "type": "end",
+          "position": {
+            "x": 1020,
+            "y": 100
+          },
+          "data": {
+            "label": "All Healthy",
+            "nodeType": "end"
+          }
+        },
+        {
+          "id": "end2",
+          "type": "end",
+          "position": {
+            "x": 1340,
+            "y": 340
+          },
+          "data": {
+            "label": "Check Failed",
             "nodeType": "end"
           }
         }
@@ -2136,42 +2151,37 @@
       "edges": [
         {
           "id": "e1",
-          "source": "start-1",
-          "target": "req-1"
+          "source": "s1",
+          "target": "r1"
         },
         {
           "id": "e2",
-          "source": "req-1",
-          "target": "cond-1"
+          "source": "r1",
+          "target": "r2"
         },
         {
           "id": "e3",
-          "source": "cond-1",
-          "target": "var-1",
-          "sourceHandle": "true",
-          "label": "Yes"
+          "source": "r2",
+          "target": "end1"
         },
         {
           "id": "e4",
-          "source": "cond-1",
-          "target": "var-2",
-          "sourceHandle": "false",
-          "label": "No"
+          "source": "r1",
+          "target": "sv1",
+          "sourceHandle": "onError",
+          "label": "on error"
         },
         {
           "id": "e5",
-          "source": "var-1",
-          "target": "req-2"
+          "source": "r2",
+          "target": "sv1",
+          "sourceHandle": "onError",
+          "label": "on error"
         },
         {
           "id": "e6",
-          "source": "var-2",
-          "target": "req-2"
-        },
-        {
-          "id": "e7",
-          "source": "req-2",
-          "target": "end-1"
+          "source": "sv1",
+          "target": "end2"
         }
       ],
       "viewport": {
@@ -2186,7 +2196,7 @@
       "nodes": [
         {
           "id": "start-2",
-          "type": "default",
+          "type": "start",
           "position": {
             "x": 50,
             "y": 200
@@ -2198,7 +2208,7 @@
         },
         {
           "id": "req-3",
-          "type": "default",
+          "type": "request",
           "position": {
             "x": 250,
             "y": 200
@@ -2214,7 +2224,7 @@
         },
         {
           "id": "transform-1",
-          "type": "default",
+          "type": "transform",
           "position": {
             "x": 500,
             "y": 200
@@ -2228,7 +2238,7 @@
         },
         {
           "id": "loop-1",
-          "type": "default",
+          "type": "loop",
           "position": {
             "x": 750,
             "y": 200
@@ -2241,7 +2251,7 @@
         },
         {
           "id": "delay-1",
-          "type": "default",
+          "type": "delay",
           "position": {
             "x": 1000,
             "y": 200
@@ -2254,7 +2264,7 @@
         },
         {
           "id": "end-2",
-          "type": "default",
+          "type": "end",
           "position": {
             "x": 1250,
             "y": 200
@@ -2304,7 +2314,7 @@
       "nodes": [
         {
           "id": "start-3",
-          "type": "default",
+          "type": "start",
           "position": {
             "x": 50,
             "y": 200
@@ -2316,7 +2326,7 @@
         },
         {
           "id": "req-4",
-          "type": "default",
+          "type": "request",
           "position": {
             "x": 300,
             "y": 200
@@ -2334,7 +2344,7 @@
         },
         {
           "id": "transform-2",
-          "type": "default",
+          "type": "transform",
           "position": {
             "x": 600,
             "y": 200
@@ -2348,7 +2358,7 @@
         },
         {
           "id": "var-3",
-          "type": "default",
+          "type": "setVariable",
           "position": {
             "x": 900,
             "y": 200
@@ -2363,7 +2373,7 @@
         },
         {
           "id": "req-5",
-          "type": "default",
+          "type": "request",
           "position": {
             "x": 1200,
             "y": 200
@@ -2381,7 +2391,7 @@
         },
         {
           "id": "end-3",
-          "type": "default",
+          "type": "end",
           "position": {
             "x": 1500,
             "y": 200
@@ -2423,6 +2433,347 @@
         "x": 0,
         "y": 0,
         "zoom": 0.8
+      }
+    },
+    {
+      "name": "Retry & Error Handling",
+      "description": "Demonstrates retry logic with exponential backoff, response assertions, and graceful error routing. A comment node explains the flow.",
+      "nodes": [
+        {
+          "id": "s1",
+          "type": "start",
+          "position": {
+            "x": 60,
+            "y": 200
+          },
+          "data": {
+            "label": "Start",
+            "nodeType": "start"
+          }
+        },
+        {
+          "id": "c1",
+          "type": "comment",
+          "position": {
+            "x": 60,
+            "y": 360
+          },
+          "data": {
+            "label": "Retry Demo",
+            "nodeType": "comment",
+            "text": "This workflow retries on 429 and 5xx errors up to 3 times with exponential backoff. If all retries fail, the error edge routes to a logging step."
+          }
+        },
+        {
+          "id": "r1",
+          "type": "request",
+          "position": {
+            "x": 380,
+            "y": 200
+          },
+          "data": {
+            "label": "Resilient Request",
+            "nodeType": "request",
+            "method": "GET",
+            "url": "https://jsonplaceholder.typicode.com/posts/1",
+            "retryCount": 3,
+            "retryDelay": 500,
+            "retryBackoff": "exponential",
+            "retryOnStatus": [
+              429,
+              500,
+              502,
+              503
+            ],
+            "assertions": [
+              {
+                "id": "a1",
+                "type": "status",
+                "operator": "eq",
+                "value": "200"
+              },
+              {
+                "id": "a2",
+                "type": "body",
+                "operator": "exists",
+                "value": "$.id"
+              }
+            ]
+          }
+        },
+        {
+          "id": "sv1",
+          "type": "setVariable",
+          "position": {
+            "x": 700,
+            "y": 100
+          },
+          "data": {
+            "label": "Save Result",
+            "nodeType": "setVariable",
+            "varName": "postId",
+            "varValue": "{{$output.id}}",
+            "varScope": "env"
+          }
+        },
+        {
+          "id": "end1",
+          "type": "end",
+          "position": {
+            "x": 1020,
+            "y": 100
+          },
+          "data": {
+            "label": "Success",
+            "nodeType": "end"
+          }
+        },
+        {
+          "id": "sv2",
+          "type": "setVariable",
+          "position": {
+            "x": 700,
+            "y": 340
+          },
+          "data": {
+            "label": "Log Error",
+            "nodeType": "setVariable",
+            "varName": "lastError",
+            "varValue": "{{$error.message}}",
+            "varScope": "env"
+          }
+        },
+        {
+          "id": "end2",
+          "type": "end",
+          "position": {
+            "x": 1020,
+            "y": 340
+          },
+          "data": {
+            "label": "Failed",
+            "nodeType": "end"
+          }
+        }
+      ],
+      "edges": [
+        {
+          "id": "e1",
+          "source": "s1",
+          "target": "r1"
+        },
+        {
+          "id": "e2",
+          "source": "r1",
+          "target": "sv1"
+        },
+        {
+          "id": "e3",
+          "source": "r1",
+          "target": "sv2",
+          "sourceHandle": "onError",
+          "label": "on error"
+        },
+        {
+          "id": "e4",
+          "source": "sv1",
+          "target": "end1"
+        },
+        {
+          "id": "e5",
+          "source": "sv2",
+          "target": "end2"
+        }
+      ],
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "zoom": 0.9
+      }
+    },
+    {
+      "name": "CRUD Test Suite",
+      "description": "Creates a post, reads it back to verify, updates it, then deletes it. Uses response assertions and variable chaining between steps.",
+      "nodes": [
+        {
+          "id": "s1",
+          "type": "start",
+          "position": {
+            "x": 60,
+            "y": 200
+          },
+          "data": {
+            "label": "Start",
+            "nodeType": "start"
+          }
+        },
+        {
+          "id": "r1",
+          "type": "request",
+          "position": {
+            "x": 380,
+            "y": 200
+          },
+          "data": {
+            "label": "Create Post",
+            "nodeType": "request",
+            "method": "POST",
+            "url": "https://jsonplaceholder.typicode.com/posts",
+            "headers": {
+              "Content-Type": "application/json"
+            },
+            "body": "{\"title\":\"Rostyman Test\",\"body\":\"Created by workflow\",\"userId\":1}",
+            "assertions": [
+              {
+                "id": "a1",
+                "type": "status",
+                "operator": "eq",
+                "value": "201"
+              }
+            ]
+          }
+        },
+        {
+          "id": "t1",
+          "type": "transform",
+          "position": {
+            "x": 700,
+            "y": 200
+          },
+          "data": {
+            "label": "Get Post ID",
+            "nodeType": "transform",
+            "expression": "output.id",
+            "outputVar": "POST_ID"
+          }
+        },
+        {
+          "id": "r2",
+          "type": "request",
+          "position": {
+            "x": 1020,
+            "y": 200
+          },
+          "data": {
+            "label": "Read Post",
+            "nodeType": "request",
+            "method": "GET",
+            "url": "https://jsonplaceholder.typicode.com/posts/{{POST_ID}}",
+            "assertions": [
+              {
+                "id": "a2",
+                "type": "status",
+                "operator": "eq",
+                "value": "200"
+              },
+              {
+                "id": "a3",
+                "type": "body",
+                "operator": "eq",
+                "value": "1",
+                "value2": "$.userId"
+              }
+            ]
+          }
+        },
+        {
+          "id": "r3",
+          "type": "request",
+          "position": {
+            "x": 1340,
+            "y": 200
+          },
+          "data": {
+            "label": "Update Post",
+            "nodeType": "request",
+            "method": "PUT",
+            "url": "https://jsonplaceholder.typicode.com/posts/{{POST_ID}}",
+            "headers": {
+              "Content-Type": "application/json"
+            },
+            "body": "{\"title\":\"Updated by Rostyman\",\"body\":\"Workflow updated this\",\"userId\":1}",
+            "assertions": [
+              {
+                "id": "a4",
+                "type": "status",
+                "operator": "eq",
+                "value": "200"
+              }
+            ]
+          }
+        },
+        {
+          "id": "r4",
+          "type": "request",
+          "position": {
+            "x": 1660,
+            "y": 200
+          },
+          "data": {
+            "label": "Delete Post",
+            "nodeType": "request",
+            "method": "DELETE",
+            "url": "https://jsonplaceholder.typicode.com/posts/{{POST_ID}}",
+            "assertions": [
+              {
+                "id": "a5",
+                "type": "status",
+                "operator": "inRange",
+                "value": "200",
+                "value2": "299"
+              }
+            ]
+          }
+        },
+        {
+          "id": "end1",
+          "type": "end",
+          "position": {
+            "x": 1980,
+            "y": 200
+          },
+          "data": {
+            "label": "Done",
+            "nodeType": "end"
+          }
+        }
+      ],
+      "edges": [
+        {
+          "id": "e1",
+          "source": "s1",
+          "target": "r1"
+        },
+        {
+          "id": "e2",
+          "source": "r1",
+          "target": "t1"
+        },
+        {
+          "id": "e3",
+          "source": "t1",
+          "target": "r2"
+        },
+        {
+          "id": "e4",
+          "source": "r2",
+          "target": "r3"
+        },
+        {
+          "id": "e5",
+          "source": "r3",
+          "target": "r4"
+        },
+        {
+          "id": "e6",
+          "source": "r4",
+          "target": "end1"
+        }
+      ],
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "zoom": 0.7
       }
     }
   ],
