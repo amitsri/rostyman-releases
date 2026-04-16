@@ -4,7 +4,7 @@
 
 Rostyman runs entirely on your machine with no account required. Your APIs. Your machine. Your rules.
 
-![Rostyman](https://img.shields.io/badge/version-0.1.0--beta.14-blue) ![Platforms](https://img.shields.io/badge/platforms-Windows%20%7C%20macOS%20%7C%20Linux-green) ![Protocols](https://img.shields.io/badge/protocols-8-orange)
+![Rostyman](https://img.shields.io/badge/version-0.1.0--beta.15-blue) ![Platforms](https://img.shields.io/badge/platforms-Windows%20%7C%20macOS%20%7C%20Linux-green) ![Protocols](https://img.shields.io/badge/protocols-8-orange)
 
 ## Download
 
@@ -26,49 +26,43 @@ xattr -cr /Applications/Rostyman.app
 
 Then open Rostyman from Applications normally. You only need to do this once.
 
-## What's New in beta.14
+## What's New in beta.15
 
-### Workflow Editor Redesign
-- **Rich node cards** — each node shows its type icon, a live status badge (idle/running/passed/failed/skipped), and a step number during execution
-- **Layout direction picker** — switch between Left→Right, Top→Bottom, Right→Left, and Bottom→Top with a single click; **Auto-Layout** repositions all nodes instantly
-- **Undo / Redo** — full undo history (up to 50 steps) with Ctrl+Z / Ctrl+Y
-- **Zoom controls** — zoom slider in the toolbar plus a fit-to-view button
-- **Snap to grid** — nodes align to a 20 px dot grid by default; toggle between dot and line backgrounds
-- **Save canvas to image** — export the workflow diagram as PNG, SVG, or JSON from the toolbar
-- **Collapsible node palette** — drag nodes from a collapsible left panel; hover any node type to see a description popup
+### File Sharing — Groups Tab
+- **Members** — see all devices in the group with live online/offline status dots
+- **Messages** — a merged read-only timeline of all messages with group members: WhatsApp-style date separators (Today / Yesterday / date), emoji reactions (hover to react, click pill to toggle), and sender/recipient device names above each bubble
+- **Sent Files** — all files you have sent to any group member, with a Send Files button to send more
+- **Received Files** — all files received from group member devices
 
-### Retry Logic (Free)
-- Any HTTP Request node can automatically retry on failure — set retry count (up to 5), backoff strategy (Fixed, Linear, or Exponential), delay, and which status codes trigger a retry (e.g. `429, 500, 503`)
+### File Sharing — Stable Device Identity
+- Devices are now identified by a permanent hardware ID (BIOS UUID on Windows, IOPlatformUUID on macOS, machine-id on Linux) instead of just their IP address
+- Contacts, block lists, and device history stay intact even when a device changes IP, reconnects, or reinstalls the app
+- The hardware ID survives uninstalling and reinstalling Rostyman
 
-### Response Assertions (Free)
-- Add pass/fail checks to any request node without writing scripts — check status code, JSON body fields (JSONPath), response headers, or response time using operators like eq, contains, inRange, and more
+### File Sharing — Instant Offline
+- Toggle **Auto-Discovery** off and other devices see you go offline immediately — no waiting. Previously it could take up to two minutes to disappear from their list
 
-### Error Handling Edges (Free)
-- Every node now has an error handle. Connect it to any downstream node to route failures gracefully. `$error.message`, `$error.status`, and `$error.nodeId` are available on the error path
+### File Sharing — Emoji Reactions
+- Hover any message in the device chat to reveal the reaction bar and pick an emoji — 700+ emojis, 7 categories, searchable
+- Type `:shortcodes:` like `:thumbsup:` or `:rocket:` and they convert automatically before sending
+- Reactions sync in real time; click your own reaction pill to remove it
 
-### Run History (Free)
-- Every workflow execution is automatically saved. Open the History tab in the palette to replay any past run — full trace, timings, and variable snapshots
+### File Sharing — Message Delivery Status
+- Every sent message shows a delivery indicator: **Sent**, **Delivered**, **Pending** (queued while offline), or **Failed**
 
-### New Node Types (Free)
-- **Comment node** — sticky-note annotations for documenting workflows; does not affect execution
-- **Sub-Workflow node** — call another saved workflow as a single step; circular references are automatically blocked
+### File Sharing — Offline Message Queuing
+- Send a message even when the other device is offline — it queues and delivers automatically when they reconnect. Rostyman retries in the background for up to 24 hours
 
-### Auth Inheritance on Request Nodes (Free)
-- HTTP Request nodes can now inherit auth from a parent collection — choose Bearer, Basic, API Key, or Inherit
+### File Sharing — File Attachments in Chat
+- Files sent alongside a message appear as an attachment card inside the chat bubble on both sides as soon as the transfer completes. Click to open or reveal in the file manager
 
-### Import / Export Workflows (Free)
-- Export any workflow as a `.rostyman-workflow` file to share or back up; import restores all nodes, edges, and configuration
+### File Sharing — Device Tab Memory
+- The File Sharing panel remembers which tab (Chat, Files, Logs) you were last on for each device, across restarts
 
-### 5 Built-in Templates (Free)
-- Start a new workflow from a template: API Health Check, Data Pipeline, Auth Flow, CRUD Suite, or Retry Resilience
+### File Sharing — Stronger Block Enforcement
+- Blocked devices are identified by hardware ID, not IP — they cannot bypass a block by switching networks. Applies to messages, file transfers, and reactions
 
-### Pencil Edit Icon on All Tabs
-- Every tab title now shows a pencil icon on hover — click it to rename the tab inline with the cursor placed at the end
-
-### Protocol Translations
-- WebSocket, Socket.IO, MQTT, gRPC, and GraphQL status and system messages are now fully translated in all 18 languages
-
-See [full release notes](https://github.com/amitsri/rostyman-releases/releases/tag/v0.1.0-beta.14) for details.
+See [full release notes](https://github.com/amitsri/rostyman-releases/releases/tag/v0.1.0-beta.15) for details.
 
 ## Features
 
