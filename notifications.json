@@ -1,7 +1,7 @@
 {
-  "id": "beta14-release",
-  "version": "beta.14",
-  "message": "Rostyman v0.1.0-beta.14 — Workflow editor redesign, retry logic, response assertions, error handling edges, run history, comment nodes, sub-workflow, import/export, 5 templates.",
+  "id": "beta15-release",
+  "version": "beta.15",
+  "message": "Rostyman v0.1.0-beta.15 — Stable device identity, instant offline, emoji reactions, offline message queuing, file attachment cards, Groups tab improvements.",
   "type": "info",
   "url": "https://github.com/amitsri/rostyman-releases/releases"
 }
