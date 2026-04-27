@@ -4,7 +4,7 @@
 
 Rostyman runs entirely on your machine with no account required. Your APIs. Your machine. Your rules.
 
-![Rostyman](https://img.shields.io/badge/version-0.1.0--beta.17-blue) ![Platforms](https://img.shields.io/badge/platforms-Windows%20%7C%20macOS%20%7C%20Linux-green) ![Protocols](https://img.shields.io/badge/protocols-8-orange)
+![Rostyman](https://img.shields.io/badge/version-0.1.0--beta.15-blue) ![Platforms](https://img.shields.io/badge/platforms-Windows%20%7C%20macOS%20%7C%20Linux-green) ![Protocols](https://img.shields.io/badge/protocols-8-orange)
 
 ## Download
 
@@ -25,39 +25,6 @@ xattr -cr /Applications/Rostyman.app
 ```
 
 Then open Rostyman from Applications normally. You only need to do this once.
-
-## What's New in beta.17
-
-### Databases — ER Diagram
-- Open a visual entity-relationship diagram for any database schema as a tab inside the database panel
-- Relationships are detected automatically from column names (`user_id`, `order_fk`, etc.) and drawn as arrows
-- Drag nodes to rearrange; positions are remembered for the session
-- Export to PNG image or PDF document with one click
-- Reopens instantly from cache — only re-fetches on explicit refresh
-
-### Databases — Rich EXPLAIN Visualizer
-- PostgreSQL: indented tree with colour-coded node types, cost and actual-time badges, Planning/Execution time summary
-- MySQL/MariaDB: full EXPLAIN table with colour-coded type column and parsed Extra badges
-- SQLite: EXPLAIN QUERY PLAN parent-child tree with operation colours
-- Other drivers: keyword-highlighted plain text
-
-### Databases — AI Tools
-- **AI Query Assistant** — describe what you want in plain English; the AI writes the correct query for your database using your live schema
-- **AI Schema Analysis** — get specific recommendations for missing indexes, constraints, data-type issues, and design problems
-- **Stored Procedure Generator** — describe a stored procedure, function, trigger, or view in English; the AI generates the DDL
-
-### Databases — Generate CRUD API Collection
-- Click Generate API in the database panel toolbar to build a full Rostyman collection from your schema
-- One folder per table with List, Get by ID, Create, Update, and Delete requests
-- Collection opens in the sidebar immediately
-
-### Databases — Query History & Saved Queries
-- Every query is saved to a searchable per-connection history with duration, row count, and status
-- Save any query with a name, description, tags, and folder for quick access
-
-### Databases — MongoDB & Redis Native Views
-- MongoDB query results shown as expandable document cards with formatted JSON
-- Redis connections include a key browser panel with pattern filtering, type/TTL/value display, and per-key delete
 
 ## What's New in beta.15
 
