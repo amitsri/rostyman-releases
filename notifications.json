@@ -1,7 +1,7 @@
 {
-  "id": "beta15-release",
-  "version": "beta.15",
-  "message": "Rostyman v0.1.0-beta.15 — Stable device identity, instant offline, emoji reactions, offline message queuing, file attachment cards, Groups tab improvements.",
+  "id": "beta17-release",
+  "version": "beta.17",
+  "message": "Rostyman v0.1.0-beta.17 — M25 Databases complete: ER diagram, EXPLAIN visualizer, AI query assistant, schema analysis, query history, saved queries, MongoDB cards, Redis key browser.",
   "type": "info",
   "url": "https://github.com/amitsri/rostyman-releases/releases"
 }
