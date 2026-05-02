@@ -1,7 +1,7 @@
 {
-  "id": "beta15-release",
-  "version": "beta.15",
-  "message": "Rostyman v0.1.0-beta.15 — Stable device identity, instant offline, emoji reactions, offline message queuing, file attachment cards, Groups tab improvements.",
+  "id": "beta16-release",
+  "version": "beta.16",
+  "message": "Rostyman v0.1.0-beta.16 — Database clients (8 drivers), ER diagrams with vector PDF export, AI database tools, AI tool-use, Convert WEBM to MP4, Sidebar More popup, security hardening, and a major i18n pass.",
   "type": "info",
   "url": "https://github.com/amitsri/rostyman-releases/releases"
 }

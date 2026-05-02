@@ -4,7 +4,7 @@
 
 Rostyman runs entirely on your machine with no account required. Your APIs. Your machine. Your rules.
 
-![Rostyman](https://img.shields.io/badge/version-0.1.0--beta.15-blue) ![Platforms](https://img.shields.io/badge/platforms-Windows%20%7C%20macOS%20%7C%20Linux-green) ![Protocols](https://img.shields.io/badge/protocols-8-orange)
+![Rostyman](https://img.shields.io/badge/version-0.1.0--beta.16-blue) ![Platforms](https://img.shields.io/badge/platforms-Windows%20%7C%20macOS%20%7C%20Linux-green) ![Protocols](https://img.shields.io/badge/protocols-8-orange)
 
 ## Download
 
@@ -26,43 +26,65 @@ xattr -cr /Applications/Rostyman.app
 
 Then open Rostyman from Applications normally. You only need to do this once.
 
-## What's New in beta.15
+## What's New in beta.16
 
-### File Sharing — Groups Tab
-- **Members** — see all devices in the group with live online/offline status dots
-- **Messages** — a merged read-only timeline of all messages with group members: WhatsApp-style date separators (Today / Yesterday / date), emoji reactions (hover to react, click pill to toggle), and sender/recipient device names above each bubble
-- **Sent Files** — all files you have sent to any group member, with a Send Files button to send more
-- **Received Files** — all files received from group member devices
+### Databases — Headline Feature
+- **8 supported drivers** — SQLite, PostgreSQL, MySQL, MariaDB, Microsoft SQL Server, MongoDB, Redis, CockroachDB
+- **Connection wizard** with brand icons, password masking, friendly error classifier (refused / not found / timeout / auth failed / TLS / unknown), and connection-string URI support
+- **Schema browser** with resizable panel, Browse mode (paginated rows, multi-column sort, inline cell editing, one-click delete)
+- **Monaco-based query editor** with schema-aware autocomplete, dot-completion, SQL hover tooltips, multiple query tabs per connection (state persists across restarts)
+- **EXPLAIN visualizer** — color-coded execution plan tree per driver
+- **Variable resolution** for `{{tokens}}` from environment, globals, and vault
+- **Result formats** — JSON, CSV, INSERT, Markdown table
+- **Transactions, schema diff, destructive query safety, long-running query notifications, auto-reconnect**
+- **CSV / JSON data import**, environment-aware connections, SSH tunnel support
+- **DB Verify** tab on every HTTP request — run a SQL query after the response and assert the database changed as expected
 
-### File Sharing — Stable Device Identity
-- Devices are now identified by a permanent hardware ID (BIOS UUID on Windows, IOPlatformUUID on macOS, machine-id on Linux) instead of just their IP address
-- Contacts, block lists, and device history stay intact even when a device changes IP, reconnects, or reinstalls the app
-- The hardware ID survives uninstalling and reinstalling Rostyman
+### ER Diagram
+- **Visual entity-relationship diagram** with auto-detected foreign keys
+- **Drag tables** to organise the layout — positions persist per connection across restarts
+- **Reset Layout, Export / Import Layout JSON** (self-healing merge if tables changed)
+- **High-resolution PNG export** (3× pixel ratio)
+- **True vector PDF export** — text and shapes stay sharp at any zoom
+- **Smart refresh** — schema only re-fetched on demand
 
-### File Sharing — Instant Offline
-- Toggle **Auto-Discovery** off and other devices see you go offline immediately — no waiting. Previously it could take up to two minutes to disappear from their list
+### AI Database Tools
+- **Natural-language query assistant** — describe what you want; AI generates SQL or MongoDB matching your driver and schema
+- **Schema analysis** — one-click audit for missing indexes, missing constraints, and type mismatches with per-table recommendations
+- **Stored procedure / function / trigger / view generator** from English description
+- **Generate CRUD API Collection** — one click creates a full collection from your schema (List / Get by ID / Create / Update / Delete per table)
 
-### File Sharing — Emoji Reactions
-- Hover any message in the device chat to reveal the reaction bar and pick an emoji — 700+ emojis, 7 categories, searchable
-- Type `:shortcodes:` like `:thumbsup:` or `:rocket:` and they convert automatically before sending
-- Reactions sync in real time; click your own reaction pill to remove it
+### Query History, Saved Queries & Native Views
+- **Query history** auto-saved per connection — replay, see timing, row count, success state
+- **Saved queries** with name, description, tags, organised in folders
+- **MongoDB document cards** — expandable formatted JSON
+- **Redis key browser** — type-aware (STRING / HASH / LIST / SET / ZSET / JSON) with pattern filter
+- **DB Projects** — three-level hierarchy (Project → Group → Connection), drag-drop between groups, redesigned Assign-to-Group dialog with inline + New Group
 
-### File Sharing — Message Delivery Status
-- Every sent message shows a delivery indicator: **Sent**, **Delivered**, **Pending** (queued while offline), or **Failed**
+### Beyond Databases
+- **AI tool-use** — AI assistant can now create collections, folders, requests, and full visual workflows directly from chat
+- **Convert WEBM Recordings to MP4** — quality / resolution / audio presets via system FFmpeg, real FFmpeg errors surfaced on failure
+- **Universal Ctrl+S Save** across every protocol tab
+- **Sidebar More Popup** — Themes / Languages / Git / AI / Plugins / Cookies grouped in a flyout; Theme Manager and Language Manager finally reachable
+- **File Sharing — Device-Global** — devices, groups, and messages follow you across workspace switches
+- **Themed in-app dialogs** replace remaining native OS dialogs
+- **Live font changes** — interface and editor font apply across the whole app without restart
 
-### File Sharing — Offline Message Queuing
-- Send a message even when the other device is offline — it queues and delivers automatically when they reconnect. Rostyman retries in the background for up to 24 hours
+### Performance & Security
+- **Renderer bundle** reduced from 5 MB to 1.6 MB
+- **Bulk schema introspection** replaces N+1 patterns for PostgreSQL / MySQL / MSSQL
+- **Monaco tab-open lag** eliminated
+- **Git command-injection hardened** (array-form arguments)
+- **Auto-updater** follows redirects only to allowlisted GitHub release hosts
+- **Temporary files** moved to per-user temp directory (no more world-readable `/tmp`)
+- **Shell open scheme allowlist** (http / https / mailto only)
+- **MCP server CSP headers**; analytics secrets redactor
 
-### File Sharing — File Attachments in Chat
-- Files sent alongside a message appear as an attachment card inside the chat bubble on both sides as soon as the transfer completes. Click to open or reveal in the file manager
+### Internationalisation
+- All 18 languages now in full key-parity at **3,529 strings**
+- Major translation pass across 17 non-English languages — between 295 and 422 strings translated per language
 
-### File Sharing — Device Tab Memory
-- The File Sharing panel remembers which tab (Chat, Files, Logs) you were last on for each device, across restarts
-
-### File Sharing — Stronger Block Enforcement
-- Blocked devices are identified by hardware ID, not IP — they cannot bypass a block by switching networks. Applies to messages, file transfers, and reactions
-
-See [full release notes](https://github.com/amitsri/rostyman-releases/releases/tag/v0.1.0-beta.15) for details.
+See [full release notes](https://github.com/amitsri/rostyman-releases/releases/tag/v0.1.0-beta.16) for details.
 
 ## Features
 
