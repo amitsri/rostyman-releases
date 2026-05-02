@@ -4,7 +4,7 @@
 
 Rostyman runs entirely on your machine with no account required. Your APIs. Your machine. Your rules.
 
-![Rostyman](https://img.shields.io/badge/version-0.1.0--beta.16-blue) ![Platforms](https://img.shields.io/badge/platforms-Windows%20%7C%20macOS%20%7C%20Linux-green) ![Protocols](https://img.shields.io/badge/protocols-8-orange)
+![Rostyman](https://img.shields.io/badge/version-0.1.0--beta.16.1-blue) ![Platforms](https://img.shields.io/badge/platforms-Windows%20%7C%20macOS%20%7C%20Linux-green) ![Protocols](https://img.shields.io/badge/protocols-8-orange)
 
 ## Download
 
@@ -25,6 +25,35 @@ xattr -cr /Applications/Rostyman.app
 ```
 
 Then open Rostyman from Applications normally. You only need to do this once.
+
+## What's New in beta.16.1
+
+### Generate API Collection — Progress Dialog
+- Generating from your database schema now shows a dialog with the table count → request count stats and a live progress bar
+- Sidebar refreshes the moment generation completes — no more restart needed to see the new collection
+- Cancel and Escape blocked while writing so you cannot close mid-write
+
+### ER Diagram & Workflow — Canvas Navigation
+- **ER MiniMap** — built-in minimap in the bottom-right corner; drag the viewport rectangle to pan, scroll over it to zoom
+- **Zoom to Area** on both canvases — click the crop icon, drag a rectangle on the canvas, release to zoom into that area; Esc cancels
+
+### Workflow Tracer
+- Rows now show actual final status (✓ / ✗ / skipped) once a run completes or when replaying past runs — no more perpetual spinners
+- Delay rows show "waiting 5000ms…" while running and "waited 5000ms" once complete, so you can tell whether a wait is active
+- Stop button during a long Delay now interrupts immediately (was doing nothing)
+
+### Transform Node — Array Wildcards
+- Path expressions support `[*]` — `$[*].title` extracts an array of titles from a JSON array response
+- Previously returned null because only `$.field`, `$.a.b`, and `$.array[0]` were supported
+
+### Feature Guides — Reading Order
+- Every in-app feature guide reordered to strict left-to-right, top-to-bottom reading order
+- Spotlight popups no longer jump back across the screen — 11 guides reordered
+
+### PNG Export — Console Cleanup
+- Silenced the SecurityError flood from html-to-image trying to embed Monaco's cross-origin CDN stylesheet during ER and workflow PNG exports
+
+See [full release notes](https://github.com/amitsri/rostyman-releases/releases/tag/v0.1.0-beta.16.1) for details.
 
 ## What's New in beta.16
 

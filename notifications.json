@@ -1,7 +1,7 @@
 {
-  "id": "beta16-release",
-  "version": "beta.16",
-  "message": "Rostyman v0.1.0-beta.16 — Database clients (8 drivers), ER diagrams with vector PDF export, AI database tools, AI tool-use, Convert WEBM to MP4, Sidebar More popup, security hardening, and a major i18n pass.",
+  "id": "beta16-1-release",
+  "version": "beta.16.1",
+  "message": "Rostyman v0.1.0-beta.16.1 — Generate API Collection progress dialog, ER MiniMap + Zoom to Area on both canvases, workflow tracer fixes (real status icons, delay visibility, Stop button), Transform node array wildcards, feature guides reordered to reading order.",
   "type": "info",
   "url": "https://github.com/amitsri/rostyman-releases/releases"
 }
