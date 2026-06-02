@@ -309,7 +309,7 @@
           },
           "body": {
             "mode": "raw",
-            "raw": "{\n  \"title\": \"Rostyman is awesome\",\n  \"body\": \"A powerful Postman alternative that runs 100% offline.\",\n  \"userId\": 1\n}",
+            "raw": "{\n  \"title\": \"Rostyman is awesome\",\n  \"body\": \"A powerful Postman alternative that runs 100% local.\",\n  \"userId\": 1\n}",
             "language": "json"
           },
           "preScript": "",
