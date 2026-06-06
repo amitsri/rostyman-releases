@@ -69,7 +69,7 @@
     "body": {
       "type": "object",
       "properties": {
-        "mode": { "type": "string", "enum": ["none", "raw", "formdata", "urlencoded", "graphql"] },
+        "mode": { "type": "string", "enum": ["none", "raw", "formdata", "urlencoded", "graphql", "binary"] },
         "raw": { "type": "string" },
         "language": { "type": "string", "enum": ["json", "xml", "html", "text", "javascript", "graphql"] },
         "formdata": { "type": "array", "items": { "$ref": "#/$defs/kv" } },
