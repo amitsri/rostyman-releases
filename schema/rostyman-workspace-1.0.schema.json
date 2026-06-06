@@ -1,0 +1,142 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://docs.rostyman.com/schema/rostyman-workspace-1.0.schema.json",
+  "title": "Rostyman Workspace",
+  "description": "Native Rostyman workspace export format (.rostyman-workspace). Bundles multiple collections plus workspace-level assets: mock servers, workflows, scheduled jobs, global variables, vault secrets, browser tests, and database connections. Unknown fields are ignored by importers (forward-compatible).",
+  "type": "object",
+  "required": ["_type", "_version", "info", "collections"],
+  "properties": {
+    "_type": { "const": "rostyman_workspace" },
+    "_version": { "type": "string", "examples": ["1.0"] },
+    "info": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "exportedAt": { "type": "string", "description": "ISO 8601 timestamp" },
+        "exportedFrom": { "type": "string" }
+      }
+    },
+    "collections": {
+      "type": "array",
+      "description": "Each entry is a full Rostyman collection document.",
+      "items": { "$ref": "rostyman-collection-1.0.schema.json" }
+    },
+    "mockServers": { "type": "array", "items": { "$ref": "#/$defs/mockServer" } },
+    "workflows": { "type": "array", "items": { "$ref": "#/$defs/workflow" } },
+    "scheduledJobs": { "type": "array", "items": { "$ref": "#/$defs/scheduledJob" } },
+    "globalVariables": { "type": "array", "items": { "$ref": "#/$defs/globalVar" } },
+    "vaultSecrets": { "type": "array", "items": { "$ref": "#/$defs/vaultSecret" } },
+    "browserTests": { "type": "array", "items": { "$ref": "#/$defs/browserTest" } },
+    "dbConnections": { "type": "array", "items": { "$ref": "#/$defs/dbConnection" } }
+  },
+  "$defs": {
+    "mockServer": {
+      "type": "object",
+      "required": ["name", "port", "routes"],
+      "properties": {
+        "name": { "type": "string" },
+        "port": { "type": "integer" },
+        "routes": { "type": "array", "items": { "type": "object" }, "description": "Mock route definitions (method, path, status, body, headers, delay)" },
+        "variables": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "key": { "type": "string" },
+              "initialValue": { "type": "string" },
+              "currentValue": { "type": "string" },
+              "type": { "type": "string" },
+              "enabled": { "type": "boolean" },
+              "description": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "workflow": {
+      "type": "object",
+      "required": ["name", "nodes", "edges"],
+      "properties": {
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "nodes": { "type": "array", "items": { "type": "object" }, "description": "Workflow graph nodes (id, type, data, position)" },
+        "edges": { "type": "array", "items": { "type": "object" }, "description": "Edges (id, source, target, sourceHandle)" },
+        "viewport": { "type": "object", "description": "Editor pan/zoom; cosmetic" }
+      }
+    },
+    "scheduledJob": {
+      "type": "object",
+      "required": ["name", "targetType", "cronExpression"],
+      "properties": {
+        "name": { "type": "string" },
+        "targetType": { "type": "string", "description": "e.g. collection, request, workflow, browser_test" },
+        "targetId": { "type": "string", "description": "Name/identifier of the target within this export" },
+        "cronExpression": { "type": "string" },
+        "timezone": { "type": "string", "default": "UTC" },
+        "enabled": { "type": "boolean" },
+        "maxRetries": { "type": "integer" },
+        "timeoutMs": { "type": "integer" }
+      }
+    },
+    "globalVar": {
+      "type": "object",
+      "required": ["key"],
+      "properties": {
+        "key": { "type": "string" },
+        "initialValue": { "type": "string" },
+        "currentValue": { "type": "string" },
+        "type": { "type": "string" },
+        "enabled": { "type": "boolean" },
+        "description": { "type": "string" },
+        "isSensitive": { "type": "boolean" }
+      }
+    },
+    "vaultSecret": {
+      "type": "object",
+      "required": ["key"],
+      "properties": {
+        "key": { "type": "string" },
+        "value": { "type": "string" },
+        "description": { "type": "string" },
+        "enabled": { "type": "boolean" }
+      }
+    },
+    "browserTest": {
+      "type": "object",
+      "required": ["name", "steps"],
+      "properties": {
+        "name": { "type": "string" },
+        "steps": { "type": "array", "items": { "type": "object" }, "description": "Recorded steps (type, selector, url, value, …)" },
+        "tags": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "dbConnection": {
+      "type": "object",
+      "required": ["name", "plugin_id", "config"],
+      "properties": {
+        "name": { "type": "string" },
+        "plugin_id": { "type": "string", "description": "Driver id, e.g. sqlite, postgres, mysql, mariadb, mssql, mongodb, redis, cockroachdb" },
+        "config": { "type": "object", "description": "Driver-specific connection config. Credentials (passwords, connection strings, SSH keys, tokens) are REDACTED on export and must be re-entered on import." },
+        "color": { "type": "string" },
+        "read_only": { "type": "boolean" },
+        "env_tag": { "type": ["string", "null"] },
+        "savedQueries": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "query"],
+            "properties": {
+              "name": { "type": "string" },
+              "query": { "type": "string" },
+              "description": { "type": "string" }
+            }
+          }
+        },
+        "fileName": { "type": "string", "description": "Demo-only: basename for a SQLite file seeded on import" },
+        "seedSql": { "type": "string", "description": "Demo-only: SQL executed once on import to create a pristine SQLite file" }
+      }
+    }
+  }
+}

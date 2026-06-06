@@ -1,0 +1,220 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://docs.rostyman.com/schema/rostyman-collection-1.0.schema.json",
+  "title": "Rostyman Collection",
+  "description": "Native Rostyman collection export format (.rostyman). A single self-contained JSON file holding requests, folders, variables, environments, auth, scripts, and saved examples. Unknown fields are ignored by importers (forward-compatible), so additionalProperties is intentionally not restricted.",
+  "type": "object",
+  "required": ["_type", "_version", "info", "items"],
+  "properties": {
+    "_type": { "const": "rostyman_collection" },
+    "_version": { "type": "string", "examples": ["1.0"] },
+    "info": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "exportedAt": { "type": "string", "description": "ISO 8601 timestamp" },
+        "exportedFrom": { "type": "string", "description": "App + version that produced the file" }
+      }
+    },
+    "auth": { "$ref": "#/$defs/auth" },
+    "preScript": { "type": "string" },
+    "testScript": { "type": "string" },
+    "variables": { "type": "array", "items": { "$ref": "#/$defs/variable" } },
+    "environments": { "type": "array", "items": { "$ref": "#/$defs/environment" } },
+    "items": { "type": "array", "items": { "$ref": "#/$defs/item" } }
+  },
+  "$defs": {
+    "kv": {
+      "type": "object",
+      "required": ["key", "value"],
+      "properties": {
+        "key": { "type": "string" },
+        "value": { "type": "string" },
+        "enabled": { "type": "boolean", "default": true },
+        "description": { "type": "string" }
+      }
+    },
+    "variable": {
+      "type": "object",
+      "required": ["key", "value"],
+      "properties": {
+        "key": { "type": "string" },
+        "value": { "type": "string" },
+        "type": { "type": "string", "enum": ["text", "secret"], "default": "text" },
+        "enabled": { "type": "boolean", "default": true },
+        "description": { "type": "string" }
+      }
+    },
+    "environment": {
+      "type": "object",
+      "required": ["name", "variables"],
+      "properties": {
+        "name": { "type": "string" },
+        "variables": { "type": "array", "items": { "$ref": "#/$defs/variable" } }
+      }
+    },
+    "auth": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["none", "inherit", "bearer", "basic", "api-key", "oauth2", "oauth1", "digest", "aws", "ntlm", "hawk", "jwt", "edgegrid", "asap"]
+        }
+      },
+      "description": "Auth blocks carry one nested object keyed by the auth type (e.g. \"bearer\": { \"token\": \"…\" }). See the prose spec for each type's fields."
+    },
+    "body": {
+      "type": "object",
+      "properties": {
+        "mode": { "type": "string", "enum": ["none", "raw", "formdata", "urlencoded", "graphql"] },
+        "raw": { "type": "string" },
+        "language": { "type": "string", "enum": ["json", "xml", "html", "text", "javascript", "graphql"] },
+        "formdata": { "type": "array", "items": { "$ref": "#/$defs/kv" } },
+        "urlencoded": { "type": "array", "items": { "$ref": "#/$defs/kv" } },
+        "graphql": {
+          "type": "object",
+          "properties": {
+            "query": { "type": "string" },
+            "variables": { "type": "string", "description": "JSON string of GraphQL variables" }
+          }
+        }
+      }
+    },
+    "example": {
+      "type": "object",
+      "required": ["name", "statusCode"],
+      "properties": {
+        "name": { "type": "string" },
+        "statusCode": { "type": "integer" },
+        "statusText": { "type": "string" },
+        "headers": { "type": "object", "additionalProperties": { "type": "string" } },
+        "body": { "type": "string" }
+      }
+    },
+    "item": {
+      "oneOf": [
+        { "$ref": "#/$defs/folderItem" },
+        { "$ref": "#/$defs/requestItem" },
+        { "$ref": "#/$defs/sseItem" },
+        { "$ref": "#/$defs/websocketItem" },
+        { "$ref": "#/$defs/socketioItem" },
+        { "$ref": "#/$defs/mqttItem" },
+        { "$ref": "#/$defs/grpcItem" },
+        { "$ref": "#/$defs/mcpItem" }
+      ]
+    },
+    "folderItem": {
+      "type": "object",
+      "required": ["type", "name", "items"],
+      "properties": {
+        "type": { "const": "folder" },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "items": { "type": "array", "items": { "$ref": "#/$defs/item" } }
+      }
+    },
+    "requestItem": {
+      "type": "object",
+      "required": ["type", "name", "method", "url"],
+      "properties": {
+        "type": { "const": "request" },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "method": { "type": "string", "enum": ["GET", "POST", "PUT", "PATCH", "DELETE", "HEAD", "OPTIONS"] },
+        "url": { "type": "string" },
+        "params": { "type": "array", "items": { "$ref": "#/$defs/kv" } },
+        "headers": { "type": "array", "items": { "$ref": "#/$defs/kv" } },
+        "body": { "$ref": "#/$defs/body" },
+        "auth": { "$ref": "#/$defs/auth" },
+        "preScript": { "type": "string" },
+        "testScript": { "type": "string" },
+        "examples": { "type": "array", "items": { "$ref": "#/$defs/example" } }
+      }
+    },
+    "sseItem": {
+      "type": "object",
+      "required": ["type", "name", "method", "url"],
+      "properties": {
+        "type": { "const": "sse" },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "method": { "type": "string", "enum": ["GET", "POST"] },
+        "url": { "type": "string" },
+        "params": { "type": "array", "items": { "$ref": "#/$defs/kv" } },
+        "headers": { "type": "array", "items": { "$ref": "#/$defs/kv" } },
+        "body": { "type": "string", "description": "Request body, POST only" },
+        "bodyLanguage": { "type": "string", "default": "json" }
+      }
+    },
+    "websocketItem": {
+      "type": "object",
+      "required": ["type", "name", "url"],
+      "properties": {
+        "type": { "const": "websocket" },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "url": { "type": "string" },
+        "params": { "type": "array", "items": { "$ref": "#/$defs/kv" } },
+        "headers": { "type": "array", "items": { "$ref": "#/$defs/kv" } }
+      }
+    },
+    "socketioItem": {
+      "type": "object",
+      "required": ["type", "name", "url"],
+      "properties": {
+        "type": { "const": "socketio" },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "url": { "type": "string" }
+      }
+    },
+    "mqttItem": {
+      "type": "object",
+      "required": ["type", "name", "url"],
+      "properties": {
+        "type": { "const": "mqtt" },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "url": { "type": "string" }
+      }
+    },
+    "grpcItem": {
+      "type": "object",
+      "required": ["type", "name", "url"],
+      "properties": {
+        "type": { "const": "grpc" },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "url": { "type": "string", "description": "gRPC server URL" }
+      }
+    },
+    "mcpItem": {
+      "type": "object",
+      "required": ["type", "name", "transport", "input"],
+      "properties": {
+        "type": { "const": "mcp" },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "transport": { "type": "string", "enum": ["stdio", "sse"] },
+        "input": { "type": "string", "description": "stdio command line, or the server URL for sse transport" },
+        "authToken": { "type": "string" },
+        "envVars": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["key", "value"],
+            "properties": {
+              "key": { "type": "string" },
+              "value": { "type": "string" },
+              "enabled": { "type": "boolean", "default": true }
+            }
+          }
+        },
+        "timeout": { "type": "integer", "description": "Milliseconds; 0 = no timeout" }
+      }
+    }
+  }
+}
