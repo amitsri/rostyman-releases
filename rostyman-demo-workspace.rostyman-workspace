@@ -964,10 +964,10 @@
                 },
                 {
                   "type": "request",
-                  "name": "GIF — HTTP Status Cat",
-                  "description": "Returns a cat image for any HTTP status code. Try changing the number in the URL (200, 404, 500, 418, 301).",
+                  "name": "GIF — Animated",
+                  "description": "Returns an animated GIF. Rostyman plays animated GIFs inline.",
                   "method": "GET",
-                  "url": "https://http.cat/200",
+                  "url": "https://cdn.pixabay.com/animation/2025/06/03/06/08/06-08-25-602_512.gif",
                   "params": [],
                   "headers": [],
                   "auth": {
@@ -977,7 +977,7 @@
                     "mode": "none"
                   },
                   "preScript": "",
-                  "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});"
+                  "testScript": "rm.test('Status is 200', () => {\n  rm.expect(rm.response.code).to.equal(200);\n});\n\nrm.test('Content-Type is GIF', () => {\n  rm.expect(rm.response.headers['content-type']).to.include('image/gif');\n});"
                 }
               ]
             },
