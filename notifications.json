@@ -1,6 +1,6 @@
 {
-  "id": "rc3-update-2026-06-08",
-  "message": "🚀 Rostyman 1.0.0-rc.3 is available — download the update (back up your data first).",
-  "type": "info",
+  "id": "rc3-update-2026-06-08b",
+  "message": "⚠️ Rostyman 1.0.0-rc.3 is available. Updating from an older build can erase your current data — back it up first.",
+  "type": "warning",
   "url": "https://rostyman.com/update"
 }
