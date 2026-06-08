@@ -1,7 +1,7 @@
 {
-  "id": "beta16-1-release",
-  "version": "beta.16.1",
-  "message": "Rostyman v0.1.0-beta.16.1 — Generate API Collection progress dialog, ER MiniMap + Zoom to Area on both canvases, workflow tracer fixes (real status icons, delay visibility, Stop button), Transform node array wildcards, feature guides reordered to reading order.",
-  "type": "info",
-  "url": "https://github.com/amitsri/rostyman-releases/releases"
+  "id": "update-backup-restore-2026-06",
+  "version": "1.0.0-rc.4",
+  "message": "A new version of Rostyman is ready. Because you're on an older version, updating can clear your local data — please back up first, then update and restore. Our quick guide walks you through each step.",
+  "type": "warning",
+  "url": "https://rostyman.com/update"
 }
