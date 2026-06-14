@@ -1,7 +1,7 @@
 {
-  "id": "update-backup-restore-2026-06",
-  "version": "1.0.0-rc.4",
-  "message": "A new version of Rostyman is ready. Because you're on an older version, updating can clear your local data — please back up first, then update and restore. Our quick guide walks you through each step.",
-  "type": "warning",
-  "url": "https://rostyman.com/update"
+  "id": "rc5-arm64-rpm-codeimport-2026-06",
+  "type": "info",
+  "version": "1.0.0-rc.5",
+  "message": "Rostyman 1.0.0-rc.5 is out — native ARM64 builds (Windows + Linux), .rpm packages, and Create Request from Code. Get it at rostyman.com/download (or Settings → About → Updates).",
+  "url": "https://rostyman.com/download"
 }
